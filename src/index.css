@@ -41,3 +41,12 @@ button:focus {
 .animate-slide-up {
   animation: slideUp 0.5s ease-out forwards;
 }
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-bounce-down {
+  animation: bounceDown 1.5s ease-in-out infinite;
+}

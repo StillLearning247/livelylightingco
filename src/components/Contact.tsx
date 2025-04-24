@@ -4,7 +4,9 @@ import { supabase } from '../lib/supabase';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
-export const Contact = () => {
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+const Contact = () => {
   const [formState, setFormState] = useState({
     first_name: '',
     last_name: '',
@@ -26,6 +28,13 @@ export const Contact = () => {
     e.preventDefault();
     setStatus('submitting');
     setErrorMessage('');
+
+    // Validate email format
+    if (!EMAIL_REGEX.test(formState.email)) {
+      setStatus('error');
+      setErrorMessage('Please enter a valid email address');
+      return;
+    }
 
     try {
       // First save to Supabase clients table
@@ -69,6 +78,39 @@ export const Contact = () => {
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Home?</h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Choose the best booking option for your location
+          </p>
+          <div className="flex flex-col gap-4 items-center">
+            <a 
+              href="https://live.vcita.com/site/duplzj70p474cj96/activity/dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-all w-full max-w-md flex items-center justify-center"
+            >
+              Book Now (Greater Austin Area)
+            </a>
+            <a
+              href="https://widget.zenbooker.com/book/1724689463359x510699585134110500"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-indigo-600 border-2 border-indigo-600 px-8 py-4 rounded-lg text-lg hover:bg-indigo-50 transition-all w-full max-w-md flex items-center justify-center"
+            >
+              <ArrowRight className="mr-2 h-5 w-5" />
+              I'm Outside Central Texas
+            </a>
+          </div>
+        </div>
+
+        <div className="text-center mb-16">
+          <p className="text-xl text-gray-600">
+            Need more info before booking?{' '}
+            <span className="inline-block animate-bounce-down text-2xl">↓</span>
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Get Your Free Consultation</h2>
@@ -99,8 +141,8 @@ export const Contact = () => {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Email</h3>
                   <p className="text-gray-600">
-                    <a href="mailto:info@livelylightingco.com" className="hover:text-indigo-600 transition-colors">
-                      info@livelylightingco.com
+                    <a href="mailto:contact@livelylightingco.com" className="hover:text-indigo-600 transition-colors">
+                      contact@livelylightingco.com
                     </a>
                   </p>
                 </div>
@@ -161,7 +203,7 @@ export const Contact = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Request a Free Quote</h3>
+                <h3 id="contact-form" className="text-xl font-semibold text-gray-900 mb-4">Request a Free Quote</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -206,10 +248,16 @@ export const Contact = () => {
                       type="email"
                       id="email"
                       name="email"
+                      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                      title="Please enter a valid email address"
                       required
                       value={formState.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
+                        status === 'error' && errorMessage.includes('email') 
+                          ? 'border-red-500 bg-red-50' 
+                          : 'border-gray-300'
+                      }`}
                       disabled={status === 'submitting'}
                     />
                   </div>
@@ -283,3 +331,7 @@ export const Contact = () => {
     </section>
   );
 };
+
+export default Contact;
+
+export { Contact }
