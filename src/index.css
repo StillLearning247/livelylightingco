@@ -1,0 +1,43 @@
+/* Ensure Tailwind directives are at the very top */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles below */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animation-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Custom styling for form elements */
+input, textarea {
+  @apply transition-all duration-200;
+}
+
+input:focus, textarea:focus {
+  @apply outline-none;
+}
+
+/* Custom styling for buttons */
+button:focus {
+  @apply outline-none;
+}
+
+/* Add animation to features when visible */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
