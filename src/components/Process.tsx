@@ -1,63 +1,7 @@
 import React from 'react';
-import { Phone, Ruler, Sparkles, Star, ArrowLeftRight } from 'lucide-react';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { Phone, Ruler, Sparkles, Star } from 'lucide-react';
 
 export const Process = () => {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const lastTouchX = useRef<number | null>(null);
-
-  const handleMove = useCallback((clientX: number) => {
-    if (!isDragging.current || !containerRef.current) return;
-    
-    const container = containerRef.current;
-    const rect = container.getBoundingClientRect();
-    const position = ((clientX - rect.left) / rect.width) * 100;
-    const clampedPosition = Math.min(Math.max(position, 0), 100);
-    
-    // Use requestAnimationFrame for smoother updates
-    requestAnimationFrame(() => {
-      setSliderPosition(clampedPosition);
-    });
-  }, []);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    handleMove(e.clientX);
-  }, [handleMove]);
-
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    e.preventDefault(); // Prevent scrolling while dragging
-    const touch = e.touches[0];
-    lastTouchX.current = touch.clientX;
-    handleMove(touch.clientX);
-  }, [handleMove]);
-
-  const handleMouseDown = () => {
-    isDragging.current = true;
-  };
-
-  const handleEnd = useCallback(() => {
-    isDragging.current = false;
-    lastTouchX.current = null;
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseup', handleEnd);
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleEnd);
-    document.addEventListener('touchcancel', handleEnd);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleEnd);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleEnd);
-      document.removeEventListener('touchcancel', handleEnd);
-    };
-  }, [handleMouseMove, handleTouchMove, handleEnd]);
-
   const steps = [
     {
       icon: <Phone className="h-10 w-10 text-white" />,
@@ -122,74 +66,25 @@ export const Process = () => {
         </div>
 
         <div className="mt-16 max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">See the Difference</h3>
-          <p className="text-gray-600 mb-6">Drag the slider to compare DIY vs Professional installation</p>
-          
-          <div 
-            ref={containerRef}
-            className="relative h-[400px] rounded-xl overflow-hidden cursor-ew-resize shadow-xl"
-            onMouseDown={(e) => {
-              e.preventDefault();
-              handleMouseDown();
-            }}
-            onTouchStart={(e) => {
-              e.preventDefault();
-              handleMouseDown();
-            }}
-          >
-            {/* After image (full width) */}
-            <img
-              src="/images/After pic.jpg"
-              alt="Professional Installation"
-              className="absolute inset-0 w-full h-full object-cover select-none"
-              loading="lazy"
-              draggable="false"
-            />
-            
-            {/* Before image (clipped) */}
-            <div
-              className="absolute inset-0 overflow-hidden transition-[width] duration-75 ease-out"
-              style={{ width: `${sliderPosition}%` }}
-            >
-              <img
-                src="/images/Before pic.jpg"
-                alt="DIY Installation"
-                className="absolute inset-0 w-full h-full object-cover select-none"
-                loading="lazy"
-                draggable="false"
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Before-After Comparison</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <img 
+                src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Home during day with visible light strips and cables" 
+                className="w-full h-48 object-cover rounded-lg mb-2"
               />
-              
-              {/* Gradient overlay for before image */}
-              <div className="absolute inset-0 bg-red-500/10"></div>
-            </div>
-            
-            {/* Slider handle */}
-            <div
-              className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize transition-[left] duration-75 ease-out"
-              style={{ left: `${sliderPosition}%` }}
-            >
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
-                <ArrowLeftRight className="w-6 h-6 text-indigo-600" />
-              </div>
-            </div>
-            
-            {/* Labels */}
-            <div className="absolute top-4 left-4 bg-red-500/80 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Before
-            </div>
-            <div className="absolute top-4 right-4 bg-green-500/80 text-white px-3 py-1 rounded-full text-sm font-medium">
-              After
-            </div>
-          </div>
-          
-          <div className="mt-6 grid grid-cols-2 gap-4 text-center">
-            <div>
-              <p className="font-medium text-red-600">DIY Installation</p>
-              <p className="text-gray-500 text-sm">Visible wires and mounts</p>
+              <p className="text-center text-gray-700 font-medium">DIY Installation</p>
+              <p className="text-center text-gray-500 text-sm">Visible wires and mounts during day</p>
             </div>
             <div>
-              <p className="font-medium text-green-600">Professional Installation</p>
-              <p className="text-gray-500 text-sm">Clean, seamless look</p>
+              <img 
+                src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Home during day with clean, professional installation" 
+                className="w-full h-48 object-cover rounded-lg mb-2"
+              />
+              <p className="text-center text-gray-700 font-medium">Professional Installation</p>
+              <p className="text-center text-gray-500 text-sm">Clean look with hidden wires</p>
             </div>
           </div>
         </div>

@@ -8,21 +8,21 @@ export const Testimonials = () => {
       location: "Austin, TX",
       quote: "LivelyLightingCo transformed our home! The install was quick and professional – and we love controlling the lights with our phone. Our neighbors keep asking where we got our lights done.",
       rating: 5,
-      image: "/images/Headshot4.jpg",
+      image: "/images/testimonials/home1.jpg"
     },
     {
       name: "Michael T.",
       location: "Round Rock, TX",
       quote: "Jakob and his team were fantastic from start to finish. No more climbing ladders for holidays! The lights look clean and professional during the day and absolutely stunning at night.",
       rating: 5,
-      image: "/images/Headshot2.jpg",
+      image: "/images/testimonials/home2.jpg"
     },
     {
       name: "Sarah & David",
       location: "Cedar Park, TX",
       quote: "We tried installing Govee lights ourselves first and it was a disaster. LivelyLightingCo fixed everything and installed them properly with their track system. Worth every penny!",
       rating: 5,
-      image: "/images/Headshot.jpg",
+      image: "/images/testimonials/home3.jpg"
     }
   ];
 
