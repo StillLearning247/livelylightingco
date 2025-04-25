@@ -9,7 +9,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-indigo-900/70 z-10"></div>
         <img 
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
           src="/images/House4.jpg"
           alt="Beautiful home with outdoor lighting" 
           className="w-full h-full object-cover object-center"
@@ -44,11 +44,13 @@ export const Hero = () => {
       </div>
 
       {/* Animated scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-white flex justify-center pt-2">
-          <div className="w-1 h-3 bg-white rounded-full animate-pulse"></div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-3">
+        <span className="text-white/70 text-sm font-medium tracking-wide">Scroll down to explore</span>
+        <div className="h-12 w-[2px] bg-white/30 rounded-full relative overflow-hidden">
+          <div className="h-1/2 w-full bg-white absolute top-0 animate-scroll-down"></div>
         </div>
       </div>
     </div>
   );
+};
 };

@@ -1,4 +1,3 @@
-/* Ensure Tailwind directives are at the very top */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,12 +5,19 @@
 /* Custom styles below */
 html {
   scroll-behavior: smooth;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animation-fade-in {
@@ -19,11 +25,13 @@ html {
 }
 
 /* Custom styling for form elements */
-input, textarea {
+input,
+textarea {
   @apply transition-all duration-200;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   @apply outline-none;
 }
 
@@ -34,8 +42,14 @@ button:focus {
 
 /* Add animation to features when visible */
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-slide-up {
@@ -43,10 +57,28 @@ button:focus {
 }
 
 @keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
 }
 
 .animate-bounce-down {
   animation: bounceDown 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.animate-scroll-down {
+  animation: scrollDown 1.5s ease-in-out infinite;
 }
