@@ -7,11 +7,10 @@ export const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <img 
-              src="/images/lively-logo.jpg" 
-              alt="LivelyLightingCo Logo" 
-              className="h-12 w-auto mb-4"
-            />
+            <div className="flex items-center mb-4">
+              <Lightbulb className="h-8 w-8 text-indigo-400" />
+              <span className="ml-2 text-xl font-bold">LivelyLightingCo</span>
+            </div>
             <p className="text-gray-400 mb-6">
               Professional permanent lighting installation for homes in the greater Austin area.
             </p>

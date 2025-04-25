@@ -50,25 +50,3 @@ button:focus {
 .animate-bounce-down {
   animation: bounceDown 1.5s ease-in-out infinite;
 }
-
-@keyframes scrollGradient {
-  0% { transform: translateY(-100%); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
-}
-
-.animate-scroll-gradient {
-  position: relative;
-  overflow: hidden;
-}
-
-.animate-scroll-gradient::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent, white, transparent);
-  animation: scrollGradient 2s ease-in-out infinite;
-}
