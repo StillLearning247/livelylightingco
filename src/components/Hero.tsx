@@ -3,13 +3,13 @@ import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-indigo-900/70 z-10"></div>
         <img
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
           src="/images/House4.jpg"
           alt="Beautiful home with outdoor lighting"
           className="w-full h-full object-cover object-center"
