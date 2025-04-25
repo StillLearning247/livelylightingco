@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lightbulb, Facebook, Instagram, Youtube, Mail } from 'lucide-react';
+import { AdminLogin } from './AdminLogin';
 
 export const Footer = () => {
   return (
@@ -7,10 +8,11 @@ export const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center mb-4">
-              <Lightbulb className="h-8 w-8 text-indigo-400" />
-              <span className="ml-2 text-xl font-bold">LivelyLightingCo</span>
-            </div>
+            <img 
+              src="/images/lively-logo.jpg" 
+              alt="LivelyLightingCo Logo" 
+              className="h-12 w-auto mb-4"
+            />
             <p className="text-gray-400 mb-6">
               Professional permanent lighting installation for homes in the greater Austin area.
             </p>
@@ -57,10 +59,10 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2">
               <li className="text-gray-400">
-                <strong className="text-white">Phone:</strong> (512) 555-1234
+                <strong className="text-white">Phone:</strong> (512)-809-7323
               </li>
               <li className="text-gray-400">
-                <strong className="text-white">Email:</strong> info@livelylightingco.com
+                <strong className="text-white">Email:</strong> contact@livelylightingco.com
               </li>
               <li className="text-gray-400">
                 <strong className="text-white">Hours:</strong> Mon-Fri: 9am-6pm
@@ -79,6 +81,7 @@ export const Footer = () => {
           <div className="flex space-x-6">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+            <AdminLogin />
           </div>
         </div>
       </div>
