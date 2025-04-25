@@ -9,7 +9,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-indigo-900/70 z-10"></div>
         <img 
           loading="eager"
-          fetchPriority="high"
+          fetchpriority="high"
           src="/images/House4.jpg"
           alt="Beautiful home with outdoor lighting" 
           className="w-full h-full object-cover object-center"
@@ -52,5 +52,4 @@ export const Hero = () => {
       </div>
     </div>
   );
-};
 };

@@ -70,7 +70,7 @@ export const Process = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <img 
-                src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src="/images/Before pic.jpg"
                 alt="Home during day with visible light strips and cables" 
                 className="w-full h-48 object-cover rounded-lg mb-2"
               />
@@ -79,7 +79,7 @@ export const Process = () => {
             </div>
             <div>
               <img 
-                src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src="/images/After pic.jpg"
                 alt="Home during day with clean, professional installation" 
                 className="w-full h-48 object-cover rounded-lg mb-2"
               />
