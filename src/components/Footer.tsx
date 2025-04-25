@@ -7,24 +7,25 @@ export const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center mb-4">
-              <Lightbulb className="h-8 w-8 text-indigo-400" />
-              <span className="ml-2 text-xl font-bold">LivelyLightingCo</span>
-            </div>
+            <img 
+              src="/images/lively-logo.jpg" 
+              alt="LivelyLightingCo Logo" 
+              className="h-12 w-auto mb-4"
+            />
             <p className="text-gray-400 mb-6">
               Professional permanent lighting installation for homes in the greater Austin area.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://facebook.com/livelylightingco" aria-label="Visit our Facebook page" rel="noopener noreferrer" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://instagram.com/livelylightingco" aria-label="Follow us on Instagram" rel="noopener noreferrer" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://youtube.com/@livelylightingco" aria-label="Subscribe to our YouTube channel" rel="noopener noreferrer" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="mailto:info@livelylightingco.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:contact@livelylightingco.com" aria-label="Email us" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

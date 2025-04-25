@@ -1,31 +1,57 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { useState } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const TRANSITION_DURATION = 500;
 
 export const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   
   const galleryImages = [
     {
       url: "/images/House1.jpg",
-      title: "Holiday Themed with Multi-Color Display"
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House2.jpg",
-      title: "Contemporary Home with RGB Accents"
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House3.jpg",
-      title: "Modern Home with Bright White"
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House4.jpg",
-      title: "Mediterranean Style with Subtle Lighting"
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House5.jpg",
-      title: "Ranch Home with Vibrant Perimeter Lighting"
+      title: "Govee permanent outdoor lights PRO with permtrack",
+    },
+    {
+      url: "/images/Ryan Blank Daytime.jpg",
+      title: "Govee permanent outdoor lights PRO with permtrack",
+    },
+    {
+      url: "/images/Daytime_Browntrack.jpg",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     }
   ];
+
+  const nextImage = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+    setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION);
+  };
+
+  const prevImage = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION);
+  };
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -37,43 +63,100 @@ export const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((image, index) => (
-            <div 
-              key={index} 
-              className="group relative aspect-video cursor-pointer overflow-hidden rounded-xl bg-gray-100 shadow-md transition-all duration-300 hover:shadow-xl"
-              onClick={() => setSelectedImage(image.url)}
-            >
-              <img
-                src={image.url}
-                alt={image.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <h3 className="text-white font-medium">{image.title}</h3>
-              </div>
+        <div className="relative max-w-5xl mx-auto">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gray-100 shadow-xl">
+            <div className="absolute inset-0 flex transition-transform duration-500 ease-in-out"
+                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {galleryImages.map((image, index) => (
+                <div key={index} className="flex-shrink-0 w-full h-full">
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-full object-contain bg-black"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
+            
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 className="text-2xl font-medium mb-2 transition-opacity duration-300">
+                {galleryImages[currentIndex].title}
+              </h3>
+              <p className="text-gray-200 transition-opacity duration-300">
+                Click to view full size
+              </p>
+            </div>
+
+            {/* Overlay button for full screen */}
+            <button
+              className="absolute inset-0 w-full h-full cursor-pointer"
+              onClick={() => setSelectedImage(galleryImages[currentIndex].url)}
+              aria-label="View full size image"
+            />
+
+            {/* Navigation buttons */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110"
+              aria-label="Previous image"
+              disabled={isTransitioning}
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110"
+              aria-label="Next image"
+              disabled={isTransitioning}
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </div>
+
+          {/* Thumbnail navigation */}
+          <div className="flex justify-center mt-6 gap-4">
+            {galleryImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-16 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-indigo-600 scale-110 shadow-lg' 
+                    : 'bg-gray-300 hover:bg-gray-400 hover:scale-105'
+                }`}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Modal for fullsize image view */}
         {selectedImage && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={() => setSelectedImage(null)}>
             <div className="relative max-w-7xl max-h-full">
-              <button 
-                className="absolute -top-12 right-0 bg-white rounded-full p-2 shadow-lg"
+              <button
+                className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage(null);
                 }}
               >
-                <X className="h-6 w-6 text-gray-800" />
+                <X className="h-6 w-6 text-white" />
               </button>
               <img 
                 src={selectedImage} 
                 alt="Enlarged view" 
-                className="max-h-[85vh] max-w-full rounded-lg"
+                loading="lazy"
+                className="max-h-[85vh] max-w-full rounded-lg shadow-2xl object-contain bg-black"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
