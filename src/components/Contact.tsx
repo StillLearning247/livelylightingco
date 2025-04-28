@@ -101,7 +101,7 @@ const Contact = () => {
                 <span className="font-bold">$500 off your Install</span>
               </p>
               <div className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">
-                Limited Time Offer - Book Now
+                - Limited Time Offer! -
               </div>
             </div>
           </div>
