@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 export const Testimonials = () => {
@@ -50,8 +50,7 @@ export const Testimonials = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          {/* Desktop version with control buttons on sides */}
-          <div className="hidden md:flex items-center">
+          <div className="relative flex items-center">
             <button
               className="absolute left-0 -ml-8 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
               onClick={prevTestimonial}
@@ -59,61 +58,7 @@ export const Testimonials = () => {
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            <div className="flex-1 bg-indigo-800 rounded-2xl shadow-xl overflow-hidden">
-              <div className="grid grid-cols-2">
-                <div className="p-10">
-                  <div className="flex mb-4">
-                    {[...Array(testimonials[currentIndex].rating)].map(
-                      (_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-yellow-400"
-                        />
-                      )
-                    )}
-                  </div>
-                  <p className="text-lg italic mb-6">
-                    "{testimonials[currentIndex].quote}"
-                  </p>
-                  <div>
-                    <p className="font-semibold">
-                      {testimonials[currentIndex].name}
-                    </p>
-                    <p className="text-indigo-300">
-                      {testimonials[currentIndex].location}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative h-full">
-                  <img
-                    src={testimonials[currentIndex].image}
-                    alt={`Home of ${testimonials[currentIndex].name}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-800/30 to-transparent"></div>
-                </div>
-              </div>
-            </div>
-
-            <button
-              className="absolute right-0 -mr-8 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
-              onClick={nextTestimonial}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
-
-          {/* Mobile version with stacked layout */}
-          <div className="md:hidden bg-indigo-800 rounded-2xl shadow-xl overflow-hidden">
-            <div className="h-64 relative">
-              <img
-                src={testimonials[currentIndex].image}
-                alt={`Home of ${testimonials[currentIndex].name}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-900 to-transparent"></div>
-            </div>
-            <div className="p-6">
+            <div className="flex-1 bg-indigo-800 rounded-2xl shadow-xl p-10">
               <div className="flex mb-4">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <Star
@@ -125,7 +70,7 @@ export const Testimonials = () => {
               <p className="text-lg italic mb-6">
                 "{testimonials[currentIndex].quote}"
               </p>
-              <div className="mb-4">
+              <div>
                 <p className="font-semibold">
                   {testimonials[currentIndex].name}
                 </p>
@@ -133,21 +78,14 @@ export const Testimonials = () => {
                   {testimonials[currentIndex].location}
                 </p>
               </div>
-              <div className="flex justify-between">
-                <button
-                  className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
-                  onClick={prevTestimonial}
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
-                  onClick={nextTestimonial}
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
             </div>
+
+            <button
+              className="absolute right-0 -mr-8 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
+              onClick={nextTestimonial}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
 
           {/* Pagination indicators */}
