@@ -85,9 +85,28 @@ const Contact = () => {
     }
   };
 
+  //------------------------------------------------------------//
+  //------------------------PROMO SECTION-----------------------//
+  //------------------------------------------------------------//
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-6">
+        <div className="mb-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl overflow-hidden shadow-xl">
+          <div className="px-8 py-12 bg-white/5 backdrop-blur-sm">
+            <div className="max-w-3xl mx-auto text-center text-white">
+              <h2 className="text-3xl font-bold mb-4">🎉 Early Bird Special</h2>
+              <p className="text-xl mb-6">
+                Book your installation between August-October and receive{" "}
+                <span className="font-bold">$500 off your Install</span>
+              </p>
+              <div className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">
+                Limited Time Offer - Book Now
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Ready to Transform Your Home?
