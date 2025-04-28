@@ -1,8 +1,35 @@
+import React from "react";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
   return (
     <div className="relative h-screen flex items-center overflow-hidden">
+      {/* Promo Banner */}
+      <div className="absolute top-20 left-0 right-0 z-20">
+        <div className="container mx-auto px-6">
+          <div className="bg-gradient-to-r from-indigo-600/90 to-purple-600/90 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg">
+            <div
+              className="px-6 py-4 cursor-pointer hover:bg-white/5 transition-all"
+              onClick={() => {
+                const promoSection = document.querySelector(
+                  "#contact .bg-gradient-to-r"
+                );
+                promoSection?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-1">
+                  <span className="text-white text-lg font-semibold">
+                    🎉 Early Bird Special: $500 OFF
+                  </span>
+                </div>
+                <div className="text-white/80 text-sm">Click to learn more</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-indigo-900/70 z-10"></div>
