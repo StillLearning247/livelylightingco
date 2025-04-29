@@ -38,13 +38,13 @@ export const Hero = () => {
             >
               Book My Free Consultation
             </Link>
-            <Link
-              to="/#difference"
+            <a
+              href="#difference"
               className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group"
             >
               Why Choose Us
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>
