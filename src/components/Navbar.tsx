@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
@@ -6,6 +6,7 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -25,7 +26,9 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+        isHomePage && !isScrolled
+          ? "bg-transparent py-4"
+          : "bg-white shadow-md py-2"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -42,10 +45,10 @@ export const Navbar = () => {
             to="/"
             className={`text-sm font-medium transition-colors ${
               isActive("/")
-                ? "text-indigo-600"
-                : isScrolled
-                ? "text-gray-700"
-                : "text-white"
+                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
+                : isHomePage && !isScrolled
+                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
+                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
             } hover:text-indigo-500`}
           >
             Home
@@ -54,10 +57,10 @@ export const Navbar = () => {
             to="/about"
             className={`text-sm font-medium transition-colors ${
               isActive("/about")
-                ? "text-indigo-600"
-                : isScrolled
-                ? "text-gray-700"
-                : "text-white"
+                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
+                : isHomePage && !isScrolled
+                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
+                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
             } hover:text-indigo-500`}
           >
             About
@@ -66,10 +69,10 @@ export const Navbar = () => {
             to="/gallery"
             className={`text-sm font-medium transition-colors ${
               isActive("/gallery")
-                ? "text-indigo-600"
-                : isScrolled
-                ? "text-gray-700"
-                : "text-white"
+                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
+                : isHomePage && !isScrolled
+                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
+                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
             } hover:text-indigo-500`}
           >
             Gallery
@@ -89,13 +92,13 @@ export const Navbar = () => {
           {isMenuOpen ? (
             <X
               className={`h-6 w-6 ${
-                isScrolled ? "text-gray-700" : "text-white"
+                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
               }`}
             />
           ) : (
             <Menu
               className={`h-6 w-6 ${
-                isScrolled ? "text-gray-700" : "text-white"
+                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
               }`}
             />
           )}
@@ -108,8 +111,10 @@ export const Navbar = () => {
           <div className="px-6 py-4 space-y-3">
             <Link
               to="/"
-              className={`block text-gray-700 hover:text-indigo-500 transition-colors ${
-                isActive("/") && "text-indigo-600"
+              className={`block transition-colors ${
+                isActive("/")
+                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
+                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -117,8 +122,10 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/about"
-              className={`block text-gray-700 hover:text-indigo-500 transition-colors ${
-                isActive("/about") && "text-indigo-600"
+              className={`block transition-colors ${
+                isActive("/about")
+                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
+                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -126,8 +133,10 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/gallery"
-              className={`block text-gray-700 hover:text-indigo-500 transition-colors ${
-                isActive("/gallery") && "text-indigo-600"
+              className={`block transition-colors ${
+                isActive("/gallery")
+                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
+                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
