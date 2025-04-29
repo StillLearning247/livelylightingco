@@ -11,23 +11,23 @@ export const Gallery = () => {
   const galleryImages = [
     {
       url: "/images/House1.jpg",
-      title: "Holiday Themed with Multi-Color Display",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House2.jpg",
-      title: "Contemporary Home with RGB Accents",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House3.jpg",
-      title: "Modern Home with Bright White",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House4.jpg",
-      title: "Mediterranean Style with Subtle Lighting",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/House5.jpg",
-      title: "Ranch Home with Vibrant Perimeter Lighting",
+      title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
       url: "/images/Ryan Blank Daytime.jpg",
