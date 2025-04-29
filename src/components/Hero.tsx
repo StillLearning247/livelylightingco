@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
@@ -21,7 +22,7 @@ export const Hero = () => {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
             aria-label="Beautiful Permanent Outdoor Lighting For Your Home"
           >
-            Govee Permanent Outdoor Lighting. Expertly Installed.
+            Govee Permanent Outdoor Lighting. Expertly Installed
           </h1>
           <p
             className="text-xl text-gray-200 mb-8"
@@ -31,19 +32,19 @@ export const Hero = () => {
             from your phone. Installed by Govee lighting experts.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition-colors shadow-lg transform hover:scale-105 transition-transform duration-200"
             >
-              Book a Free Consultation
-            </a>
-            <a
-              href="#difference"
+              Book My Free Consultation
+            </Link>
+            <Link
+              to="/#difference"
               className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group"
             >
               Why Choose Us
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

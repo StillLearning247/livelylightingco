@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Facebook, Instagram, Youtube, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import { AdminLogin } from "./AdminLogin";
 import { PrivacyPolicy } from "./PrivacyPolicy"; // <-- your corrected PrivacyPolicy that accepts props
 
@@ -55,52 +56,36 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#home"
+                <Link
+                  to="/"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#features"
+                <Link
+                  to="/about"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Features
-                </a>
+                  About
+                </Link>
               </li>
               <li>
-                <a
-                  href="#difference"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Why Choose Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#process"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Our Process
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#gallery"
+                <Link
+                  to="/gallery"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Gallery
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#contact"
+                <Link
+                  to="/contact"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

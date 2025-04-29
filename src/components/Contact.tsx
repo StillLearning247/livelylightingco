@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Check, ArrowRight, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { PrivacyPolicy } from "./PrivacyPolicy";
 
@@ -100,9 +101,16 @@ const Contact = () => {
                 Book your installation between August-October and receive{" "}
                 <span className="font-bold">$500 off your Install</span>
               </p>
-              <div className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">
-                - Limited Time Offer! -
-              </div>
+              <button
+                onClick={() => {
+                  const bookingSection =
+                    document.querySelector(".booking-section");
+                  bookingSection?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors cursor-pointer"
+              >
+                Limited Time Offer - Book Now
+              </button>
             </div>
           </div>
         </div>
@@ -114,15 +122,15 @@ const Contact = () => {
           <p className="text-xl text-gray-600 mb-8">
             Choose the best booking option for your location
           </p>
-          <div className="flex flex-col gap-4 items-center">
-            <a
-              href="https://live.vcita.com/site/duplzj70p474cj96/activity/dashboard"
+          <div className="flex flex-col gap-4 items-center booking-section">
+            <Link
+              to="/contact#contact-form"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-all w-full max-w-md flex items-center justify-center"
             >
               Book Now (Greater Austin Area)
-            </a>
+            </Link>
             <a
               href="https://widget.zenbooker.com/book/1724689463359x510699585134110500"
               target="_blank"
