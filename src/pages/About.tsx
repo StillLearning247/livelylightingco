@@ -1,4 +1,3 @@
-import React from "react";
 import { Users, Award, PenTool as Tool } from "lucide-react";
 
 const About = () => {
