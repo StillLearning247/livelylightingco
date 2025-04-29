@@ -10,8 +10,8 @@ export const Hero = () => {
         <img
           loading="eager"
           fetchPriority="high"
-          src="/images/House4.jpg"
-          alt="Beautiful home with outdoor lighting"
+          src="/images/House1.jpg"
+          alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
         />
       </div>
