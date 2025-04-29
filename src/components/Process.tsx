@@ -146,36 +146,82 @@ export const Process = () => {
         </div>
 
         {/* Before-After comparison section */}
-        <div className="mt-16 max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
-            Before-After Comparison
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <img
-                src="/images/Before pic.jpg"
-                alt="Home during day with visible light strips and cables"
-                className="w-full h-48 object-cover rounded-lg mb-2"
-              />
-              <p className="text-center text-gray-700 font-medium">
-                DIY Installation
-              </p>
-              <p className="text-center text-gray-500 text-sm">
-                Visible wires and mounts during day
-              </p>
+        <div className="mt-20 max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              The Professional Difference
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              See how our professional installation compares to typical DIY
+              attempts
+            </p>
+          </div>
+
+          <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="relative p-8 bg-gradient-to-br from-red-50 to-white">
+                <div className="absolute top-4 left-4 px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-medium">
+                  DIY Installation
+                </div>
+                <img
+                  src="/images/Before pic.jpg"
+                  alt="DIY installation showing visible wires and mounts"
+                  className="w-full aspect-[4/3] object-cover rounded-lg shadow-md mb-6"
+                />
+                <div className="space-y-4">
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    Common DIY Issues
+                  </h4>
+                  <ul className="space-y-2 text-gray-600">
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                      Visible wires during daytime
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                      Loose or sagging mounts
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                      Poor weatherproofing
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="relative p-8 bg-gradient-to-br from-green-50 to-white">
+                <div className="absolute top-4 left-4 px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm font-medium">
+                  Professional Installation
+                </div>
+                <img
+                  src="/images/After pic.jpg"
+                  alt="Professional installation with clean finish"
+                  className="w-full aspect-[4/3] object-cover rounded-lg shadow-md mb-6"
+                />
+                <div className="space-y-4">
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    Our Professional Results
+                  </h4>
+                  <ul className="space-y-2 text-gray-600">
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                      Clean, hidden wiring system
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                      Secure, permanent mounting
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                      Professional weatherproofing
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div>
-              <img
-                src="/images/After pic.jpg"
-                alt="Home during day with clean, professional installation"
-                className="w-full h-48 object-cover rounded-lg mb-2"
-              />
-              <p className="text-center text-gray-700 font-medium">
-                Professional Installation
-              </p>
-              <p className="text-center text-gray-500 text-sm">
-                Clean look with hidden wires
-              </p>
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
             </div>
           </div>
         </div>
