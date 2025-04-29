@@ -93,57 +93,127 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-6">
-        <div className="mb-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl overflow-hidden shadow-xl">
-          <div className="px-8 py-12 bg-white/5 backdrop-blur-sm">
-            <div className="max-w-3xl mx-auto text-center text-white">
-              <h2 className="text-3xl font-bold mb-4">🎉 Early Bird Special</h2>
-              <p className="text-xl mb-6">
-                Book your installation between August-October and receive{" "}
-                <span className="font-bold">$500 off your Install</span>
-              </p>
-              <button
-                onClick={() => {
-                  const bookingSection =
-                    document.querySelector(".booking-section");
-                  bookingSection?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors cursor-pointer"
-              >
-                Limited Time Offer - Book Now
-              </button>
+        <div className="relative mb-16 overflow-hidden">
+          {/* Background pattern */}
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 2px, transparent 0)`,
+                backgroundSize: "40px 40px",
+              }}
+            ></div>
+          </div>
+
+          {/* Content container */}
+          <div className="relative rounded-2xl overflow-hidden">
+            <div className="px-8 py-16 bg-gradient-to-b from-black/20 to-black/5 backdrop-blur-sm">
+              <div className="max-w-3xl mx-auto text-center">
+                {/* Animated sparkles */}
+                <div className="relative inline-block">
+                  <span className="absolute -left-6 -top-6 animate-pulse">
+                    ✨
+                  </span>
+                  <span
+                    className="absolute -right-6 -top-6 animate-pulse"
+                    style={{ animationDelay: "0.5s" }}
+                  >
+                    ✨
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 [text-shadow:_0_2px_10px_rgb(0_0_0_/_20%)]">
+                    Early Bird Special
+                  </h2>
+                  <span
+                    className="absolute -left-4 -bottom-4 animate-pulse"
+                    style={{ animationDelay: "0.75s" }}
+                  >
+                    ✨
+                  </span>
+                  <span
+                    className="absolute -right-4 -bottom-4 animate-pulse"
+                    style={{ animationDelay: "0.25s" }}
+                  >
+                    ✨
+                  </span>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8">
+                  <p className="text-2xl text-white mb-2">
+                    Book your installation between August-October
+                  </p>
+                  <p className="text-3xl md:text-4xl font-bold text-white [text-shadow:_0_2px_10px_rgb(0_0_0_/_20%)]">
+                    Save <span className="text-yellow-300">$500</span> on Your
+                    Install
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => {
+                    const bookingSection =
+                      document.querySelector(".booking-section");
+                    bookingSection?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-opacity-95 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity"></span>
+                  Limited Time Offer - Book Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to Transform Your Home?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Choose the best booking option for your location
-          </p>
-          <div className="flex flex-col gap-4 items-center booking-section">
-            <Link
-              to="/contact#contact-form"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-all w-full max-w-md flex items-center justify-center"
-            >
-              Book Now (Greater Austin Area)
-            </Link>
-            <a
-              href="https://widget.zenbooker.com/book/1724689463359x510699585134110500"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-indigo-600 border-2 border-indigo-600 px-8 py-4 rounded-lg text-lg hover:bg-indigo-50 transition-all w-full max-w-md flex items-center justify-center"
-            >
-              <ArrowRight className="mr-2 h-5 w-5" />
-              I'm Outside Central Texas
-            </a>
+        <div className="mb-20">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl overflow-hidden shadow-xl">
+            <div className="p-8 md:p-12">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-white mb-4">
+                  Ready to Transform Your Home?
+                </h2>
+                <p className="text-xl text-indigo-100">
+                  Choose the best booking option for your location
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto booking-section">
+                <div className="bg-white rounded-xl p-6 text-center">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    Greater Austin Area
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Professional installation by our local expert team
+                  </p>
+                  <Link
+                    to="/contact#contact-form"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all w-full"
+                  >
+                    Book Installation
+                  </Link>
+                </div>
+
+                <div className="bg-white rounded-xl p-6 text-center">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    Outside Central Texas
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Connect with a certified installer in your area
+                  </p>
+                  <a
+                    href="https://widget.zenbooker.com/book/1724689463359x510699585134110500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 border-2 border-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all w-full"
+                  >
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Find Installer
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 pt-8">
           <p className="text-xl text-gray-600">
             Need more info before booking?{" "}
             <span className="inline-block animate-bounce-down text-2xl">↓</span>
