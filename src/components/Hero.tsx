@@ -21,7 +21,7 @@ export const Hero = () => {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
             aria-label="Beautiful Permanent Outdoor Lighting For Your Home"
           >
-            Beautiful Permanent Outdoor Lighting For Your Home
+            Govee Permanent Outdoor Lighting. Expertly Installed.
           </h1>
           <p
             className="text-xl text-gray-200 mb-8"
