@@ -1,33 +1,33 @@
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const TRANSITION_DURATION = 500;
 
 export const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const galleryImages = [
     {
       url: "/images/House1.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "Holiday Themed with Multi-Color Display",
     },
     {
       url: "/images/House2.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "Contemporary Home with RGB Accents",
     },
     {
       url: "/images/House3.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "Modern Home with Bright White",
     },
     {
       url: "/images/House4.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "Mediterranean Style with Subtle Lighting",
     },
     {
       url: "/images/House5.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "Ranch Home with Vibrant Perimeter Lighting",
     },
     {
       url: "/images/Ryan Blank Daytime.jpg",
@@ -39,21 +39,9 @@ export const Gallery = () => {
     },
   ];
 
-  const nextImage = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
-    setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION);
-  };
-
-  const prevImage = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex(
-      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
-    );
-    setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION);
-  };
+  function setCurrentIndex(_index: number): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -67,66 +55,39 @@ export const Gallery = () => {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gray-100 shadow-xl">
-            <div
-              className="absolute inset-0 flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          <div className="relative overflow-hidden rounded-xl bg-gray-100 shadow-xl">
+            <Carousel
+              showArrows={true}
+              showStatus={false}
+              showThumbs={true}
+              infiniteLoop={true}
+              autoPlay={true}
+              interval={5000}
+              transitionTime={TRANSITION_DURATION}
+              stopOnHover={true}
+              swipeable={true}
+              emulateTouch={true}
+              dynamicHeight={false}
+              className="carousel-container"
             >
               {galleryImages.map((image, index) => (
-                <div key={index} className="flex-shrink-0 w-full h-full">
+                <div key={index} className="relative aspect-[16/9]">
                   <img
                     src={image.url}
                     alt={image.title}
                     className="w-full h-full object-cover"
                     loading={index === 0 ? "eager" : "lazy"}
+                    onClick={() => setSelectedImage(image.url)}
                   />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-left bg-gradient-to-t from-black/60 to-transparent">
+                    <p className="text-white text-xl font-medium">
+                      {image.title}
+                    </p>
+                  </div>
                 </div>
               ))}
-            </div>
-
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
-
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-2xl font-medium mb-2 transition-opacity duration-300">
-                {galleryImages[currentIndex].title}
-              </h3>
-              <p className="text-gray-200 transition-opacity duration-300">
-                Click to view full size
-              </p>
-            </div>
-
-            {/* Overlay button for full screen */}
-            <button
-              className="absolute inset-0 w-full h-full cursor-pointer"
-              onClick={() => setSelectedImage(galleryImages[currentIndex].url)}
-              aria-label="View full size image"
-            />
-
-            {/* Navigation buttons */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevImage();
-              }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110"
-              aria-label="Previous image"
-              disabled={isTransitioning}
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextImage();
-              }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110"
-              aria-label="Next image"
-              disabled={isTransitioning}
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
+            </Carousel>
           </div>
-
           {/* Thumbnail navigation */}
           <div className="flex justify-center mt-6 gap-4">
             {galleryImages.map((_, index) => (
@@ -134,7 +95,7 @@ export const Gallery = () => {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-16 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
+                  index === 0
                     ? "bg-indigo-600 scale-110 shadow-lg"
                     : "bg-gray-300 hover:bg-gray-400 hover:scale-105"
                 }`}

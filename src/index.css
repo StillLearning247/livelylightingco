@@ -114,3 +114,37 @@ button:focus {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
+
+/* Carousel customization */
+.carousel-container {
+  @apply relative;
+}
+
+.carousel-container .carousel .control-arrow {
+  @apply opacity-0 transition-opacity duration-300 bg-black/20 hover:bg-black/40 backdrop-blur-sm;
+}
+
+.carousel-container:hover .carousel .control-arrow {
+  @apply opacity-100;
+}
+
+.carousel-container .carousel .control-dots {
+  @apply bottom-4;
+}
+
+.carousel-container .carousel .control-dots .dot {
+  @apply bg-white/70 hover:bg-white transition-colors;
+}
+
+.carousel-container .carousel .thumb {
+  @apply border-2 border-transparent transition-colors;
+}
+
+.carousel-container .carousel .thumb.selected,
+.carousel-container .carousel .thumb:hover {
+  @apply border-indigo-500;
+}
+
+.carousel-container .carousel .thumbs-wrapper {
+  @apply mx-2 mt-4;
+}
