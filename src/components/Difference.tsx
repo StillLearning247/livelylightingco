@@ -1,10 +1,10 @@
+import { useState } from "react";
 import {
   CheckCircle2,
   XCircle,
   AlertTriangle,
   ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Difference = () => {
@@ -89,8 +89,7 @@ export const Difference = () => {
               </div>
               <div className="px-8 py-4 bg-indigo-50 border-t border-indigo-100">
                 <p className="text-indigo-800 font-medium">
-                  Get the stunning look of professional permanent lighting
-                  without the $8k price tag
+                  Professional installation by certified Govee lighting experts
                 </p>
               </div>
             </div>
@@ -99,7 +98,7 @@ export const Difference = () => {
           <div className="relative">
             <button
               onClick={() => setShowPainPoints(!showPainPoints)}
-              className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-4 flex items-center justify-between"
+              className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition-all p-4 flex items-center justify-between group"
             >
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-6 w-6 text-amber-500" />
@@ -108,14 +107,14 @@ export const Difference = () => {
                 </span>
               </div>
               <ChevronDown
-                className={`h-5 w-5 text-gray-500 transition-transform ${
+                className={`h-5 w-5 text-gray-500 transition-transform duration-300 group-hover:text-gray-700 ${
                   showPainPoints ? "rotate-180" : ""
                 }`}
               />
             </button>
 
             {showPainPoints && (
-              <div className="mt-4 bg-white rounded-xl shadow-lg overflow-hidden">
+              <div className="mt-4 bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in">
                 <div className="p-8">
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
