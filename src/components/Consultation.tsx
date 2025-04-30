@@ -14,6 +14,7 @@ export const Consultation = () => {
     phone: "",
     address: "",
     message: "",
+    website: "", // honeypot field
   });
 
   const [status, setStatus] = useState<
@@ -33,6 +34,22 @@ export const Consultation = () => {
     e.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
+
+    // Check if honeypot field is filled (bot detected)
+    if (formState.website) {
+      // Silently prevent submission but show success message
+      setStatus("success");
+      setFormState({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        address: "",
+        message: "",
+        website: "",
+      });
+      return;
+    }
 
     if (!EMAIL_REGEX.test(formState.email)) {
       setStatus("error");
@@ -69,6 +86,7 @@ export const Consultation = () => {
         phone: "",
         address: "",
         message: "",
+        website: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -315,6 +333,20 @@ export const Consultation = () => {
                   </div>
                 </div>
 
+                {/* Honeypot field - hidden from real users */}
+                <div className="absolute opacity-0 -z-10 select-none pointer-events-none">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    value={formState.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 {status === "error" && (
                   <div className="text-red-600 text-sm">{errorMessage}</div>
                 )}
@@ -331,7 +363,7 @@ export const Consultation = () => {
                     </>
                   ) : (
                     <>
-                      Request Free Consultation
+                      Submit
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
