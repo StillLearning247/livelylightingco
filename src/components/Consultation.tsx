@@ -207,8 +207,8 @@ export const Consultation = () => {
                   Thank You!
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Your consultation request has been submitted. We'll be in
-                  touch within 24 hours to schedule your free consultation.
+                  We've received your request! Please check your inbox shortly
+                  for confirmation details and next steps.
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
@@ -378,7 +378,6 @@ export const Consultation = () => {
                   >
                     Privacy Policy
                   </button>
-                  . We'll contact you within 24 hours.
                 </p>
               </form>
             )}
