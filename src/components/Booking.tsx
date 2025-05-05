@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 export const Booking = () => {
   return (
-    <div id="booking" className="mb-20">
+    <div id="booking" className="mb-2">
       <div className="max-w-4xl mx-auto bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl overflow-hidden shadow-xl">
         <div className="p-8 md:p-12">
           <div className="text-center mb-2">
