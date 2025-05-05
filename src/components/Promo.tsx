@@ -54,7 +54,7 @@ export const Promo = () => {
                     Book your installation between August-October
                   </p>
                   <p className="text-3xl md:text-4xl font-bold text-white [text-shadow:_0_2px_10px_rgb(0_0_0_/_20%)]">
-                    Save <span className="text-yellow-300">$500</span> on Your
+                    Save <span className="text-yellow-300">$300</span> on Your
                     Install
                   </p>
                 </div>
