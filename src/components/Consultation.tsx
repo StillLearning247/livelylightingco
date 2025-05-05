@@ -100,7 +100,7 @@ export const Consultation = () => {
   };
 
   return (
-    <section id="consultation" className="pb-8 bg-gray-50">
+    <section id="consultation" className="py-12 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
