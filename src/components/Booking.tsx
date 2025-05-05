@@ -5,7 +5,7 @@ export const Booking = () => {
     <div id="booking" className="mb-20">
       <div className="max-w-4xl mx-auto bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl overflow-hidden shadow-xl">
         <div className="p-8 md:p-12">
-          <div className="text-center mb-8">
+          <div className="text-center mb-2">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Transform Your Home?
             </h2>
