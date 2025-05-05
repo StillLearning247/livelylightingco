@@ -19,8 +19,7 @@ export const Footer = () => {
               className="h-12 w-auto mb-4"
             />
             <p className="text-gray-400 mb-6">
-              Professional permanent lighting installation for homes in the
-              greater Austin area.
+              Experience Govee Light Installations at an Affordable Price.
             </p>
             <div className="flex space-x-4">
               <a
