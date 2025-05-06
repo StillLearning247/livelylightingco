@@ -81,7 +81,7 @@ export const Navbar = () => {
             to="/contact"
             className="px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg"
           >
-            Book Now
+            Get Free Quote
           </Link>
         </div>
 
