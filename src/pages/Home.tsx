@@ -11,12 +11,12 @@ const Home = () => {
 
       <section className="relative">
         <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
-        <Difference />
+        <Testimonials />
       </section>
 
       <section className="relative">
         <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
-        <Testimonials />
+        <Difference />
       </section>
     </main>
   );
