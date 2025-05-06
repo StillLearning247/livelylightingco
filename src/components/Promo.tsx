@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import { Booking } from "./Booking";
-
 export const Promo = () => {
   return (
     <section id="promo" className="py-20 bg-white">
@@ -57,20 +54,14 @@ export const Promo = () => {
                     Save <span className="text-yellow-300">$300</span> on Your
                     Install
                   </p>
+                  <p className="text-xl text-white/90 mt-4">
+                    -Limited Time Offer-
+                  </p>
                 </div>
-
-                <Link
-                  to="#booking"
-                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-opacity-95 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity"></span>
-                  Limited Time Offer - Book Now
-                </Link>
               </div>
             </div>
           </div>
         </div>
-        <Booking />
       </div>
     </section>
   );
