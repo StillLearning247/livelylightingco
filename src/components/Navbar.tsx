@@ -147,7 +147,7 @@ export const Navbar = () => {
               className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              Get Free Quote
+              Free Quote
             </Link>
           </div>
         </div>
