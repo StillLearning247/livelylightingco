@@ -10,7 +10,7 @@ export const Hero = () => {
         <img
           loading="eager"
           fetchPriority="low"
-          src="/images/House6_WebP.webp"
+          src="/images/House6.jpg"
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
         />
