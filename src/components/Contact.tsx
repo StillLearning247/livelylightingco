@@ -1,10 +1,10 @@
-import { Promo } from "../components/Promo";
+// import { Promo } from "../components/Promo";
 import { Consultation } from "../components/Consultation";
 
 const Contact = () => {
   return (
     <>
-      <Promo />
+      {/* <Promo /> */}
       <Consultation />
     </>
   );
