@@ -9,7 +9,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
         <img
           loading="eager"
-          fetchPriority="high"
+          fetchPriority="low"
           src="/images/House6_WebP.webp"
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
