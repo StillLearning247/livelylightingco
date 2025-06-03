@@ -18,7 +18,7 @@ export const Hero = () => {
             sizes="(max-width: 768px) 100vw, 100vw"
           />
           <img
-            src="/images/House6_WebP-1200.webp"
+            src="https://res.cloudinary.com/dydz0lw6e/image/upload/House6_WebP-1920_vy2krb.webp"
             alt="Govee permanent outdoor lights PRO with permtrack"
             className="w-full h-full object-cover object-center"
             fetchPriority="high"
