@@ -66,18 +66,6 @@ export const Navbar = () => {
             About
           </Link>
           <Link
-            to="/gallery"
-            className={`text-sm font-medium transition-colors ${
-              isActive("/gallery")
-                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
-                : isHomePage && !isScrolled
-                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
-                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
-            } hover:text-indigo-500`}
-          >
-            Gallery
-          </Link>
-          <Link
             to="/contact"
             className="px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg"
           >
@@ -130,17 +118,6 @@ export const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               About
-            </Link>
-            <Link
-              to="/gallery"
-              className={`block transition-colors ${
-                isActive("/gallery")
-                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
-                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Gallery
             </Link>
             <Link
               to="/contact"

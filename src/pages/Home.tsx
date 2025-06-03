@@ -1,4 +1,5 @@
 import { Hero } from "../components/Hero";
+import { Gallery } from "../components/Gallery";
 import { Difference } from "../components/Difference";
 import { Testimonials } from "../components/Testimonials";
 
@@ -7,6 +8,10 @@ const Home = () => {
     <main>
       <section>
         <Hero />
+      </section>
+
+      <section>
+        <Gallery />
       </section>
 
       <section className="relative">
