@@ -6,6 +6,9 @@
   ],
   "compilerOptions": {
     "lib": ["esnext"],
-    "types": ["deno.ns"]
+    "types": ["deno.ns"],
+    "paths": {
+      "*": ["*", "src/@types/*"]
+    }
   }
 }

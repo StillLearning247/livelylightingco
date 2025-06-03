@@ -1,20 +1,59 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {
+  StackedCarousel,
+  ResponsiveContainer,
+} from "react-stacked-center-carousel";
 
-const TRANSITION_DURATION = 500;
+// Optional type definition for gallery images
+interface GalleryImage {
+  url: string;
+  title: string;
+}
+
+const Slide = ({
+  data,
+  dataIndex,
+  setSelectedImage,
+}: {
+  data: GalleryImage[];
+  dataIndex: number;
+  setSelectedImage: (url: string) => void;
+}) => {
+  const { url, title } = data[dataIndex];
+  return (
+    <div
+      className="relative w-full h-full bg-gray-100 flex items-center justify-center cursor-pointer"
+      onClick={() => setSelectedImage(url)}
+    >
+      <div className="relative w-full h-full aspect-[16/9]">
+        <img
+          src={url}
+          alt={title}
+          className="w-full h-full object-cover rounded-lg transition-transform duration-300"
+          draggable={false}
+        />
+        <div className="absolute bottom-0 inset-x-0 p-6 text-left bg-gradient-to-t from-black/60 to-transparent">
+          <p className="text-white text-base md:text-xl font-medium">{title}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [centerSlideIndex, setCenterSlideIndex] = useState(0);
+  const ref = React.useRef<any>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const galleryImages = [
+  const galleryImages: GalleryImage[] = [
     {
       url: "/images/House1.jpg",
       title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
-      url: "/images/House2.jpg",
+      url: "/images/House6.jpg",
       title: "Govee permanent outdoor lights PRO with permtrack",
     },
     {
@@ -39,13 +78,9 @@ export const Gallery = () => {
     },
   ];
 
-  function setCurrentIndex(_index: number): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
-    <section id="gallery" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-12 bg-white overflow-hidden">
+      <div className="px-0 md:px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Work</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -54,54 +89,46 @@ export const Gallery = () => {
           </p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          <div className="relative overflow-hidden rounded-xl bg-gray-100 shadow-xl">
-            <Carousel
-              showArrows={true}
-              showStatus={false}
-              showThumbs={true}
-              infiniteLoop={true}
-              autoPlay={true}
-              interval={5000}
-              transitionTime={TRANSITION_DURATION}
-              stopOnHover={true}
-              swipeable={true}
-              emulateTouch={true}
-              dynamicHeight={false}
-              className="carousel-container"
+        <div className="relative w-full">
+          <div className="relative bg-gray-100">
+            <ResponsiveContainer
+              carouselRef={ref}
+              render={(width: number, carouselRef: React.Ref<any>) => (
+                <StackedCarousel
+                  ref={carouselRef}
+                  slideComponent={(props: {
+                    data: any[];
+                    dataIndex: number;
+                  }) => (
+                    <Slide {...props} setSelectedImage={setSelectedImage} />
+                  )}
+                  slideWidth={600}
+                  carouselWidth={width}
+                  data={galleryImages}
+                  maxVisibleSlide={5}
+                  swipeThreshold={0}
+                  transitionSpeed={8}
+                  onDragStart={() => setIsDragging(true)}
+                  onDragEnd={() => setIsDragging(false)}
+                  customScales={[1, 0.9, 0.8, 0.7]}
+                  transitionTime={450}
+                  onActiveSlideChange={setCenterSlideIndex}
+                />
+              )}
+            />
+
+            <button
+              onClick={() => ref.current?.goBack()}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/40 hover:bg-black/60 rounded-full transition-all duration-200"
             >
-              {galleryImages.map((image, index) => (
-                <div key={index} className="relative aspect-[16/9]">
-                  <img
-                    src={image.url}
-                    alt={image.title}
-                    className="w-full h-full object-cover"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    onClick={() => setSelectedImage(image.url)}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-left bg-gradient-to-t from-black/60 to-transparent">
-                    <p className="text-white text-xl font-medium">
-                      {image.title}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </Carousel>
-          </div>
-          {/* Thumbnail navigation */}
-          <div className="flex justify-center mt-6 gap-4">
-            {galleryImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-16 h-2 rounded-full transition-all duration-300 ${
-                  index === 0
-                    ? "bg-indigo-600 scale-110 shadow-lg"
-                    : "bg-gray-300 hover:bg-gray-400 hover:scale-105"
-                }`}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={() => ref.current?.goNext()}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/40 hover:bg-black/60 rounded-full transition-all duration-200"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
           </div>
         </div>
 
@@ -125,7 +152,7 @@ export const Gallery = () => {
                 src={selectedImage}
                 alt="Enlarged view"
                 loading="lazy"
-                className="max-h-[85vh] max-w-full rounded-lg shadow-2xl"
+                className={`max-h-[85vh] w-full object-contain rounded-lg shadow-2xl`}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
