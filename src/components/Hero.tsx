@@ -9,16 +9,19 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
         <picture>
           <source
-            srcSet="/images/House6_WebP-1920.webp 1920w,
-                    /images/House6_WebP-1280.webp 1280w,
-                    /images/House6_WebP-640.webp 640w"
+            srcSet="
+              /images/House6_WebP-800.webp 800w,
+              /images/House6_WebP-1200.webp 1200w,
+              /images/House6_WebP-1600.webp 1600w
+            "
             type="image/webp"
+            sizes="(max-width: 768px) 100vw, 100vw"
           />
           <img
-            src="/images/House6_WebP-1920.webp"
+            src="/images/House6_WebP-1200.webp"
             alt="Govee permanent outdoor lights PRO with permtrack"
             className="w-full h-full object-cover object-center"
-            sizes="100vw"
+            fetchPriority="high"
           />
         </picture>
       </div>
