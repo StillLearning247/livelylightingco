@@ -50,31 +50,31 @@ export const Gallery = () => {
   const galleryImages: GalleryImage[] = [
     {
       url: "/images/House1.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/House6.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/House3.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/House4.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/House5.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/Ryan Blank Daytime.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
     {
       url: "/images/Daytime_Browntrack.jpg",
-      title: "Govee permanent outdoor lights PRO with permtrack",
+      title: "",
     },
   ];
 
