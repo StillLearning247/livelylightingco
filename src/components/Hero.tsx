@@ -8,7 +8,7 @@ export const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
         <img
-          loading="eager"
+          loading="lazy"
           fetchPriority="low"
           src="/images/House6.jpg"
           alt="Govee permanent outdoor lights PRO with permtrack"
@@ -31,16 +31,16 @@ export const Hero = () => {
             Year-round custom lighting. No hassle or ugly wires. All controlled
             from your phone. Installed by Govee lighting experts.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:max-w-md">
             <Link
               to="/contact"
-              className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full sm:w-auto"
+              className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full"
             >
               Free Quote/Contact
             </Link>
             <a
               href="#difference"
-              className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group w-full sm:w-auto"
+              className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group w-full"
             >
               Why Choose Us
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -49,7 +49,7 @@ export const Hero = () => {
               href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-lg bg-red-600/80 backdrop-blur-sm text-white text-center font-semibold hover:bg-red-700/80 transition-colors flex items-center justify-center group w-full sm:w-auto"
+              className="px-8 py-4 rounded-lg bg-red-600/80 backdrop-blur-sm text-white text-center font-semibold hover:bg-red-700/80 transition-colors flex items-center justify-center group w-full"
             >
               <Youtube className="mr-2 h-4 w-4" />
               As Seen on YouTube
