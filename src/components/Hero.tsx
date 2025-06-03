@@ -18,8 +18,6 @@ export const Hero = () => {
             src="/images/House6_WebP-1920.webp"
             alt="Govee permanent outdoor lights PRO with permtrack"
             className="w-full h-full object-cover object-center"
-            loading="lazy"
-            fetchPriority="low"
             sizes="100vw"
           />
         </picture>
