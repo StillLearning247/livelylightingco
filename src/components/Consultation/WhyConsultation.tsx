@@ -11,7 +11,7 @@ export const WhyConsultation = () => {
         the form for a free consultation or reach out directly.
       </p>
 
-      <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
+      <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-100 mb-12">
         <h3 className="text-lg font-medium text-gray-900 mb-3">
           Why Get a Consultation?
         </h3>
