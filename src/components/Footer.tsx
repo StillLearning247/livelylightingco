@@ -115,12 +115,6 @@ export const Footer = () => {
               onOpen={() => setIsPrivacyOpen(true)}
               onClose={() => setIsPrivacyOpen(false)}
             />
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white text-sm transition-colors"
-            >
-              Terms of Service
-            </a>
             <AdminLogin />
           </div>
         </div>
