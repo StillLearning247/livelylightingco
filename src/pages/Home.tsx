@@ -6,11 +6,8 @@ import { Testimonials } from "../components/Testimonials";
 const Home = () => {
   return (
     <main>
-      <section>
+      <section id="home">
         <Hero />
-      </section>
-
-      <section>
         <Gallery />
       </section>
 
