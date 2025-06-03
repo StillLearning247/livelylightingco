@@ -4,10 +4,12 @@ import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <Routes>
