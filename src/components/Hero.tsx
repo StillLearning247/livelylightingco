@@ -25,7 +25,7 @@ export const Hero = () => {
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"
-          loading="Eager"
+          loading="lazy"
         />
       </div>
 
