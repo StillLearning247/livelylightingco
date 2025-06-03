@@ -1,29 +1,27 @@
 import { ArrowRight, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AdvancedImage } from "@cloudinary/react";
+import cld from "../lib/cloudinary"; // Adjust the import path as needed
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 export const Hero = () => {
+  // Configure the Cloudinary image
+  const heroImage = cld.image("House6_WebP-1920_vy2krb.webp"); // Replace with your Cloudinary public ID
+  heroImage
+    .format("auto") // Use WebP format for better performance
+    .resize(fill().width(1920).height(1080)); // Adjust as needed
+
   return (
     <div className="relative h-screen flex items-center overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
-        <picture>
-          <source
-            srcSet="
-              /images/House6_WebP-800.webp 800w,
-              /images/House6_WebP-1200.webp 1200w,
-              /images/House6_WebP-1600.webp 1600w
-            "
-            type="image/webp"
-            sizes="(max-width: 768px) 100vw, 100vw"
-          />
-          <img
-            src="https://res.cloudinary.com/dydz0lw6e/image/upload/House6_WebP-1920_vy2krb.webp"
-            alt="Govee permanent outdoor lights PRO with permtrack"
-            className="w-full h-full object-cover object-center"
-            fetchPriority="high"
-          />
-        </picture>
+        <AdvancedImage
+          cldImg={heroImage}
+          alt="Govee permanent outdoor lights PRO with permtrack"
+          className="w-full h-full object-cover object-center"
+          fetchPriority="high"
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-20">
