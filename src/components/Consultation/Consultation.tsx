@@ -80,21 +80,22 @@ export const Consultation = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <ContactInfo />
-            <WhyConsultation />
+            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+              {status === "success" ? (
+                <SuccessMessage onReset={() => setStatus("idle")} />
+              ) : (
+                <ConsultationForm
+                  onSubmit={handleSubmit}
+                  status={status}
+                  errorMessage={errorMessage}
+                  onPrivacyClick={() => setIsPrivacyOpen(true)}
+                />
+              )}
+            </div>
           </div>
-
-          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-            {status === "success" ? (
-              <SuccessMessage onReset={() => setStatus("idle")} />
-            ) : (
-              <ConsultationForm
-                onSubmit={handleSubmit}
-                status={status}
-                errorMessage={errorMessage}
-                onPrivacyClick={() => setIsPrivacyOpen(true)}
-              />
-            )}
+          <div>
+            <WhyConsultation />
+            <ContactInfo />
           </div>
         </div>
       </div>
