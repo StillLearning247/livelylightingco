@@ -7,8 +7,9 @@
   "compilerOptions": {
     "lib": ["esnext"],
     "types": ["deno.ns"],
+    "baseUrl": ".",
     "paths": {
-      "*": ["*", "src/@types/*"]
+      "@types/*": ["./src/@types/*"]
     }
   }
 }

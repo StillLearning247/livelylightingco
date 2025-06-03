@@ -3,7 +3,7 @@ import { supabase } from "../../lib/supabase";
 import { ContactInfo } from "./ContactInfo";
 import { WhyConsultation } from "./WhyConsultation";
 import { SuccessMessage } from "./SuccessMessage";
-import { ConsultationForm } from "./ConsultationForm.tsx";
+import { ConsultationForm } from "./ConsultationForm";
 import { PrivacyPolicy } from "../PrivacyPolicy";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -80,14 +80,6 @@ export const Consultation = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Get Your Free Consultation
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Ready to transform your home with stunning, permanent lighting?
-              Fill out the form for a free consultation or reach out directly.
-            </p>
-
             <ContactInfo />
             <WhyConsultation />
           </div>
