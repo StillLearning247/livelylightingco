@@ -1,15 +1,18 @@
 import { ArrowRight, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
-import { AdvancedImage } from "@cloudinary/react";
+import { AdvancedImage, responsive, lazyload } from "@cloudinary/react";
 import cld from "../lib/cloudinary"; // Adjust the import path as needed
 import { fill } from "@cloudinary/url-gen/actions/resize";
+import { quality } from "@cloudinary/url-gen/actions/delivery";
 
 export const Hero = () => {
   // Configure the Cloudinary image
-  const heroImage = cld.image("House6_WebP-1920_vy2krb.webp"); // Replace with your Cloudinary public ID
+  const heroImage = cld.image("House6_WebP-1920_vy2krb"); // Replace with your Cloudinary public ID
+
   heroImage
-    .format("auto") // Use WebP format for better performance
-    .resize(fill().width(1920).height(1080)); // Adjust as needed
+    .format("auto") // Use WebP/AVIF automatically
+    .delivery(quality("auto")) // Automatically optimize quality
+    .resize(fill().width(1920).height(1080)); // Adjust dimensions as needed
 
   return (
     <div className="relative h-screen flex items-center overflow-hidden">
@@ -18,6 +21,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
         <AdvancedImage
           cldImg={heroImage}
+          plugins={[responsive(), lazyload()]}
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"
