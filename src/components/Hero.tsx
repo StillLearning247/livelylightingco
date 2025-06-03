@@ -36,7 +36,7 @@ export const Hero = () => {
               to="/contact"
               className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200"
             >
-              Free Quote/Contact
+              Get Free Quote
             </Link>
             <a
               href="#difference"
@@ -55,14 +55,14 @@ export const Hero = () => {
           href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 active:scale-95"
+          className="group flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 active:scale-95 mb-4 sm:mb-6"
         >
-          <Youtube className="w-5 h-5 text-red-500" />
-          <span className="text-white text-sm font-medium">
+          <Youtube className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
+          <span className="text-white text-xs sm:text-sm font-medium whitespace-nowrap">
             As Seen on YouTube
           </span>
         </a>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 mt-2 sm:mt-4">
           <span className="text-white/70 text-sm font-medium tracking-wide">
             Scroll down to explore
           </span>
