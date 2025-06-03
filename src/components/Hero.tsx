@@ -36,7 +36,7 @@ export const Hero = () => {
               to="/contact"
               className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full sm:w-auto"
             >
-              Get Free Quote
+              Free Quote/Contact
             </Link>
             <a
               href="#difference"
