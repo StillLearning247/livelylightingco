@@ -17,7 +17,7 @@ export const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-20">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl relative">
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
             aria-label="Beautiful Permanent Outdoor Lighting For Your Home"
@@ -54,18 +54,6 @@ export const Hero = () => {
               <Youtube className="mr-2 h-4 w-4" />
               As Seen on YouTube
             </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Animated scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-3">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-white/70 text-sm font-medium tracking-wide">
-            Scroll down to explore
-          </span>
-          <div className="h-12 w-[2px] bg-white/30 rounded-full relative overflow-hidden">
-            <div className="h-1/2 w-full bg-white absolute top-0 animate-scroll-down"></div>
           </div>
         </div>
       </div>
