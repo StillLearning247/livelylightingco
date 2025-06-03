@@ -7,13 +7,22 @@ export const Hero = () => {
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
-        <img
-          loading="lazy"
-          fetchPriority="low"
-          src="/images/House6_WebP.webp"
-          alt="Govee permanent outdoor lights PRO with permtrack"
-          className="w-full h-full object-cover object-center"
-        />
+        <picture>
+          <source
+            srcSet="/images/House6_WebP-1920.webp 1920w,
+                    /images/House6_WebP-1280.webp 1280w,
+                    /images/House6_WebP-640.webp 640w"
+            type="image/webp"
+          />
+          <img
+            src="/images/House6_WebP-1920.webp"
+            alt="Govee permanent outdoor lights PRO with permtrack"
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+            fetchPriority="low"
+            sizes="100vw"
+          />
+        </picture>
       </div>
 
       <div className="container mx-auto px-6 relative z-20">
