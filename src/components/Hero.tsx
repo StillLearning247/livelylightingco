@@ -12,7 +12,7 @@ export const Hero = () => {
   heroImage
     .format("auto") // Use WebP/AVIF automatically
     .delivery(quality("auto")) // Automatically optimize quality
-    .resize(fill().width(1920).height(1080)); // Adjust dimensions as needed
+    .resize(fill().width("auto").height("auto")); // Adjust dimensions as needed
 
   return (
     <div className="relative h-screen flex items-center overflow-hidden">
@@ -25,6 +25,7 @@ export const Hero = () => {
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"
+          loading="lazy"
         />
       </div>
 

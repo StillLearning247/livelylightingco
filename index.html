@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
     <meta
       name="description"
       content="Professional Govee lighting installation in Austin, TX. Beautiful permanent outdoor lighting installed by experts. Transform your home with smart, customizable LED lighting."
@@ -25,17 +27,36 @@
     <meta property="og:url" content="https://livelylightingco.com" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://livelylightingco.com" />
+
+    <!-- Title -->
     <title>LivelyLightingCo - Premium Permanent Outdoor Lighting</title>
-    <meta
-      name="description"
-      content="Professional Govee lighting installation for your home. Beautiful permanent outdoor lighting installed by experts in Austin, TX."
-    />
+
+    <!-- Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts Preload & Styles -->
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      as="style"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -48,12 +69,7 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-9XWBGKJ25W");
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
