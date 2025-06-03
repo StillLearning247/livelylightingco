@@ -65,11 +65,19 @@ export const Navbar = () => {
           >
             About
           </Link>
+          <a
+            href="https://goveelightinstallers.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+          >
+            Book Online
+          </a>
           <Link
             to="/contact"
             className="px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg"
           >
-            Free Quote/Contact
+            Get Free Quote
           </Link>
         </div>
 
@@ -119,6 +127,15 @@ export const Navbar = () => {
             >
               About
             </Link>
+            <a
+              href="https://goveelightinstallers.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Book Online
+            </a>
             <Link
               to="/contact"
               className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
