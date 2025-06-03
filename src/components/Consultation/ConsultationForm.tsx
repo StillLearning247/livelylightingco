@@ -1,0 +1,220 @@
+import { useState, FormEvent, ChangeEvent } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
+
+interface FormState {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  address: string;
+  message: string;
+  website: string;
+}
+
+interface ConsultationFormProps {
+  onSubmit: (formData: FormState) => Promise<void>;
+  status: "idle" | "submitting" | "success" | "error";
+  errorMessage: string;
+  onPrivacyClick: () => void;
+}
+
+export const ConsultationForm = ({
+  onSubmit,
+  status,
+  errorMessage,
+  onPrivacyClick,
+}: ConsultationFormProps) => {
+  // 🟢 Correctly use useState INSIDE the component
+  const [formState, setFormState] = useState<FormState>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    address: "",
+    message: "",
+    website: "",
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await onSubmit(formState);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <h3
+        id="contact-form"
+        className="text-xl font-semibold text-gray-900 mb-4"
+      >
+        Request a Free Quote
+      </h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* First Name */}
+        <div>
+          <label
+            htmlFor="first_name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            First Name *
+          </label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            required
+            value={formState.first_name}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            disabled={status === "submitting"}
+          />
+        </div>
+
+        {/* Last Name */}
+        <div>
+          <label
+            htmlFor="last_name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Last Name *
+          </label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            required
+            value={formState.last_name}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            disabled={status === "submitting"}
+          />
+        </div>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Email Address *
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          title="Please enter a valid email address"
+          required
+          value={formState.email}
+          onChange={handleChange}
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
+            status === "error" && errorMessage.includes("email")
+              ? "border-red-500 bg-red-50"
+              : "border-gray-300"
+          }`}
+          disabled={status === "submitting"}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Phone */}
+        <div>
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Phone Number *
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            value={formState.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            disabled={status === "submitting"}
+          />
+        </div>
+
+        {/* Address */}
+        <div>
+          <label
+            htmlFor="address"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Address
+          </label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={formState.address}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="City/neighborhood is fine"
+            disabled={status === "submitting"}
+          />
+        </div>
+      </div>
+
+      {/* Honeypot field - hidden from real users */}
+      <div className="absolute opacity-0 -z-10 select-none pointer-events-none">
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          value={formState.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
+      {/* Error */}
+      {status === "error" && (
+        <div className="text-red-600 text-sm">{errorMessage}</div>
+      )}
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="w-full px-6 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg flex items-center justify-center group disabled:opacity-70 disabled:cursor-not-allowed"
+      >
+        {status === "submitting" ? (
+          <>
+            <Loader2 className="animate-spin h-5 w-5 mr-2" />
+            Submitting...
+          </>
+        ) : (
+          <>
+            Submit
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </>
+        )}
+      </button>
+
+      {/* Privacy Policy */}
+      <p className="text-sm text-gray-500 mt-4">
+        By submitting, you agree to our{" "}
+        <button
+          type="button"
+          onClick={onPrivacyClick}
+          className="text-indigo-600 hover:underline cursor-pointer"
+        >
+          Privacy Policy
+        </button>
+      </p>
+    </form>
+  );
+};
