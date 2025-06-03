@@ -34,16 +34,25 @@ export const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               to="/contact"
-              className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200"
+              className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full sm:w-auto"
             >
               Get Free Quote
             </Link>
             <a
               href="#difference"
-              className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group"
+              className="px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white text-center font-semibold hover:bg-white/20 transition-colors flex items-center justify-center group w-full sm:w-auto"
             >
               Why Choose Us
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-lg bg-red-600/80 backdrop-blur-sm text-white text-center font-semibold hover:bg-red-700/80 transition-colors flex items-center justify-center group w-full sm:w-auto"
+            >
+              <Youtube className="mr-2 h-4 w-4" />
+              As Seen on YouTube
             </a>
           </div>
         </div>
@@ -51,18 +60,7 @@ export const Hero = () => {
 
       {/* Animated scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-3">
-        <a
-          href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 active:scale-95 mb-4 sm:mb-6"
-        >
-          <Youtube className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
-          <span className="text-white text-xs sm:text-sm font-medium whitespace-nowrap">
-            As Seen on YouTube
-          </span>
-        </a>
-        <div className="flex flex-col items-center gap-2 mt-2 sm:mt-4">
+        <div className="flex flex-col items-center gap-2">
           <span className="text-white/70 text-sm font-medium tracking-wide">
             Scroll down to explore
           </span>
