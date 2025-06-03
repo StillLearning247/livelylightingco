@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Hero = () => {
@@ -51,11 +51,24 @@ export const Hero = () => {
 
       {/* Animated scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-3">
-        <span className="text-white/70 text-sm font-medium tracking-wide">
-          Scroll down to explore
-        </span>
-        <div className="h-12 w-[2px] bg-white/30 rounded-full relative overflow-hidden">
-          <div className="h-1/2 w-full bg-white absolute top-0 animate-scroll-down"></div>
+        <a
+          href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 active:scale-95"
+        >
+          <Youtube className="w-5 h-5 text-red-500" />
+          <span className="text-white text-sm font-medium">
+            As Seen on YouTube
+          </span>
+        </a>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-white/70 text-sm font-medium tracking-wide">
+            Scroll down to explore
+          </span>
+          <div className="h-12 w-[2px] bg-white/30 rounded-full relative overflow-hidden">
+            <div className="h-1/2 w-full bg-white absolute top-0 animate-scroll-down"></div>
+          </div>
         </div>
       </div>
     </div>
