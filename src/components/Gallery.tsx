@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   StackedCarousel,
@@ -46,6 +46,16 @@ export const Gallery = () => {
   const [centerSlideIndex, setCenterSlideIndex] = useState(0);
   const ref = React.useRef<any>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize(); // Set initially
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const galleryImages: GalleryImage[] = [
     {
@@ -107,6 +117,7 @@ export const Gallery = () => {
                   data={galleryImages}
                   maxVisibleSlide={5}
                   swipeThreshold={0}
+                  disableSwipe={isMobile} /* 👈 disables swipe on mobile */
                   transitionSpeed={8}
                   onDragStart={() => setIsDragging(true)}
                   onDragEnd={() => setIsDragging(false)}
