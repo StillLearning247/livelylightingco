@@ -26,7 +26,7 @@ const Slide = ({
       className="relative w-full h-full bg-gray-100 flex items-center justify-center cursor-pointer"
       onClick={() => setSelectedImage(url)}
     >
-      <div className="relative w-full h-[60vh] md:aspect-[16/9]">
+      <div className="relative w-full h-full aspect-[16/9]">
         <img
           src={url}
           alt={title}
