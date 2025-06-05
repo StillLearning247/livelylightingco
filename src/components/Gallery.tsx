@@ -159,7 +159,7 @@ export const Gallery = () => {
                 src={selectedImage}
                 alt="Enlarged view"
                 loading="lazy"
-                className={`max-h-[85vh] w-full object-contain rounded-lg shadow-2xl`}
+                className={`max-h-auto w-full object-contain rounded-lg shadow-2xl`}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
