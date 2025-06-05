@@ -59,31 +59,27 @@ export const Gallery = () => {
 
   const galleryImages: GalleryImage[] = [
     {
-      url: "/images/House1.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
     {
-      url: "/images/House6.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
     {
-      url: "/images/House3.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
     {
-      url: "/images/House4.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
     {
-      url: "/images/House5.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
     {
-      url: "/images/Ryan Blank Daytime.jpg",
-      title: "",
-    },
-    {
-      url: "/images/Daytime_Browntrack.jpg",
+      url: "/images/House6_png800.png",
       title: "",
     },
   ];
