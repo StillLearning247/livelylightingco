@@ -8,6 +8,7 @@ import {
 // Optional type definition for gallery images
 interface GalleryImage {
   url: string;
+  hiResUrl: string;
   title: string;
 }
 
@@ -20,15 +21,15 @@ const Slide = ({
   dataIndex: number;
   setSelectedImage: (url: string) => void;
 }) => {
-  const { url, title } = data[dataIndex];
+  const { title, hiResUrl } = data[dataIndex];
   return (
     <div
       className="relative w-full h-full bg-gray-100 flex items-center justify-center cursor-pointer"
-      onClick={() => setSelectedImage(url)}
+      onClick={() => setSelectedImage(hiResUrl)}
     >
       <div className="relative w-full h-full aspect-[16/9]">
         <img
-          src={url}
+          src={hiResUrl}
           alt={title}
           className="w-full h-full object-cover rounded-lg transition-transform duration-300"
           draggable={false}
@@ -59,26 +60,32 @@ export const Gallery = () => {
 
   const galleryImages: GalleryImage[] = [
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
     {
+      hiResUrl: "/images/House6.jpg",
       url: "/images/House6_png800.png",
       title: "",
     },
@@ -145,7 +152,7 @@ export const Gallery = () => {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
             onClick={() => setSelectedImage(null)}
           >
-            <div className="relative max-w-7xl max-h-full">
+            <div className="relative max-w-full max-h-full">
               <button
                 className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
                 onClick={(e) => {
@@ -159,7 +166,7 @@ export const Gallery = () => {
                 src={selectedImage}
                 alt="Enlarged view"
                 loading="lazy"
-                className={`max-h-auto w-full object-contain rounded-lg shadow-2xl`}
+                className={`max-h-full max-w-full object-contain rounded-lg shadow-2xl`}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
