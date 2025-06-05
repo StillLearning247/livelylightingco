@@ -32,6 +32,7 @@ const Slide = ({
           src={hiResUrl}
           alt={title}
           className="w-full h-full object-cover rounded-lg transition-transform duration-300"
+          loading="lazy"
           draggable={false}
         />
         <div className="absolute bottom-0 inset-x-0 p-6 text-left bg-gradient-to-t from-black/60 to-transparent">
