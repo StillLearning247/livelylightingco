@@ -7,7 +7,7 @@ import { quality } from "@cloudinary/url-gen/actions/delivery";
 
 export const Hero = () => {
   // Configure the Cloudinary image
-  const heroImage = cld.image("House6_WebP_g9jtmj"); // Replace with your Cloudinary public ID
+  const heroImage = cld.image("House6_kmwq4e"); // Replace with your Cloudinary public ID
 
   heroImage
     .format("auto") // Use WebP/AVIF automatically
