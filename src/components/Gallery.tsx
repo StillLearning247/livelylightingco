@@ -4,11 +4,14 @@ import {
   StackedCarousel,
   ResponsiveContainer,
 } from "react-stacked-center-carousel";
+import { AdvancedImage } from "@cloudinary/react";
+import cld from "../lib/cloudinary";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { quality } from "@cloudinary/url-gen/actions/delivery";
 
-// Optional type definition for gallery images
+// Define the type for gallery images
 interface GalleryImage {
-  url: string;
-  hiResUrl: string;
+  publicId: string;
   title: string;
 }
 
@@ -21,15 +24,27 @@ const Slide = ({
   dataIndex: number;
   setSelectedImage: (url: string) => void;
 }) => {
-  const { title, hiResUrl } = data[dataIndex];
+  const { publicId, title } = data[dataIndex];
+  const img = cld.image(publicId);
+  img
+    .format("auto")
+    .delivery(quality("auto"))
+    .resize(fill().width(800).height(450));
+
+  const hiResImg = cld.image(publicId);
+  hiResImg
+    .format("auto")
+    .delivery(quality("auto"))
+    .resize(fill().width(1600).height(900));
+
   return (
     <div
       className="relative w-full h-full bg-gray-100 flex items-center justify-center cursor-pointer"
-      onClick={() => setSelectedImage(hiResUrl)}
+      onClick={() => setSelectedImage(hiResImg.toURL())}
     >
       <div className="relative w-full h-full aspect-[16/9]">
-        <img
-          src={hiResUrl}
+        <AdvancedImage
+          cldImg={img}
           alt={title}
           className="w-full h-full object-cover rounded-lg transition-transform duration-300"
           loading="lazy"
@@ -49,6 +64,7 @@ export const Gallery = () => {
   const ref = React.useRef<any>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,33 +77,35 @@ export const Gallery = () => {
 
   const galleryImages: GalleryImage[] = [
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "House1_upqaeq",
       title: "",
     },
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "House3_800_zjggld",
       title: "",
     },
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "House4_800_wrgrqf",
       title: "",
     },
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "House5_ltz96r",
       title: "",
     },
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "House6_800_kdubrl",
       title: "",
     },
     {
-      hiResUrl: "/images/House6.jpg",
-      url: "/images/House6_png800.png",
+      publicId: "Daytime_Browntrack_850_jad2il",
+      title: "",
+    },
+    {
+      publicId: "Daytime_Govee_with_tracks_1000_msetko",
+      title: "",
+    },
+    {
+      publicId: "uplcose_tracks_1000_ierp3c",
       title: "",
     },
   ];
@@ -166,7 +184,6 @@ export const Gallery = () => {
               <img
                 src={selectedImage}
                 alt="Enlarged view"
-                loading="lazy"
                 className={`max-h-full max-w-full object-contain rounded-lg shadow-2xl`}
                 onClick={(e) => e.stopPropagation()}
               />
