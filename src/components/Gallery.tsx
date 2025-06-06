@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import {
   StackedCarousel,
   ResponsiveContainer,
@@ -13,6 +13,7 @@ import { quality } from "@cloudinary/url-gen/actions/delivery";
 interface GalleryImage {
   publicId: string;
   title: string;
+  hiResUrl: string; // Optional: if you want to store high-res URLs
 }
 
 const Slide = ({
@@ -24,18 +25,17 @@ const Slide = ({
   dataIndex: number;
   setSelectedImage: (url: string) => void;
 }) => {
-  const { publicId, title } = data[dataIndex];
+  const { publicId, title, hiResUrl } = data[dataIndex];
   const img = cld.image(publicId);
   img
     .format("auto")
     .delivery(quality("auto"))
     .resize(fill().width(800).height(450));
 
-  const hiResImg = cld.image(publicId);
-  hiResImg
-    .format("auto")
-    .delivery(quality("auto"))
-    .resize(fill().width(1600).height(900));
+  // Use hiResUrl for the full-size image
+  const hiResImg = cld.image(hiResUrl);
+  hiResImg.format("auto").delivery(quality("auto"));
+  hiResImg.resize(fill().width(2400).height(1350));
 
   return (
     <div
@@ -64,7 +64,7 @@ export const Gallery = () => {
   const ref = React.useRef<any>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,34 +79,42 @@ export const Gallery = () => {
     {
       publicId: "House1_upqaeq",
       title: "",
+      hiResUrl: "House6_kmwq4e",
     },
     {
       publicId: "House3_800_zjggld",
       title: "",
+      hiResUrl: "House3_oeyopl",
     },
     {
       publicId: "House4_800_wrgrqf",
       title: "",
+      hiResUrl: "House4_wt2d0m",
     },
     {
       publicId: "House5_ltz96r",
       title: "",
+      hiResUrl: "House5_2400_v7p3an",
     },
     {
       publicId: "House6_800_kdubrl",
       title: "",
+      hiResUrl: "House6_kmwq4e",
     },
     {
       publicId: "Daytime_Browntrack_850_jad2il",
       title: "",
+      hiResUrl: "Daytime_Browntrack_vr2o7q",
     },
     {
       publicId: "Daytime_Govee_with_tracks_1000_msetko",
       title: "",
+      hiResUrl: "Daytime_Govee_with_tracks_hjzvd0",
     },
     {
       publicId: "uplcose_tracks_1000_ierp3c",
       title: "",
+      hiResUrl: "Uplcose_Tracks_HIFI_qto8wx",
     },
   ];
 
@@ -169,7 +177,10 @@ export const Gallery = () => {
         {selectedImage && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => {
+              setSelectedImage(null);
+              setImageLoading(true);
+            }}
           >
             <div className="relative max-w-full max-h-full">
               <button
@@ -177,15 +188,25 @@ export const Gallery = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage(null);
+                  setImageLoading(true);
                 }}
               >
                 <X className="h-6 w-6 text-white" />
               </button>
+
+              {imageLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Loader2 className="h-10 w-10 text-white animate-spin" />
+                </div>
+              )}
+
               <img
                 src={selectedImage}
                 alt="Enlarged view"
-                className={`max-h-full max-w-full object-contain rounded-lg shadow-2xl`}
+                className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
+                onLoad={() => setImageLoading(false)}
+                onError={() => setImageLoading(false)}
               />
             </div>
           </div>
