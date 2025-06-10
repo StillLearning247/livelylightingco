@@ -65,6 +65,20 @@ export const Navbar = () => {
           >
             About
           </Link>
+          <button
+            onClick={() => {
+              const element = document.getElementById("gallery");
+              element?.scrollIntoView({ behavior: "smooth" });
+              setIsMenuOpen(false);
+            }}
+            className={`text-sm font-medium transition-colors ${
+              isHomePage && !isScrolled
+                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
+                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
+            } hover:text-indigo-500`}
+          >
+            Gallery
+          </button>
           <a
             href="https://goveelightinstallers.com"
             target="_blank"
@@ -127,6 +141,16 @@ export const Navbar = () => {
             >
               About
             </Link>
+            <button
+              onClick={() => {
+                const element = document.getElementById("gallery");
+                element?.scrollIntoView({ behavior: "smooth" });
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
+            >
+              Gallery
+            </button>
             <a
               href="https://goveelightinstallers.com"
               target="_blank"
