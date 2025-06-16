@@ -1,4 +1,4 @@
-import { Consultation } from "../components/Consultation";
+import { Consultation } from "../components/Consultation/Consultation";
 
 const Contact = () => {
   return (
