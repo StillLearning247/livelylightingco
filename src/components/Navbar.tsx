@@ -65,10 +65,15 @@ export const Navbar = () => {
           >
             About
           </Link>
-          <button
-            onClick={() => {
-              const element = document.getElementById("gallery");
-              element?.scrollIntoView({ behavior: "smooth" });
+          <Link
+            to="/"
+            state={{ scrollToGallery: true }}
+            onClick={(e) => {
+              if (isHomePage) {
+                e.preventDefault();
+                const element = document.getElementById("gallery");
+                element?.scrollIntoView({ behavior: "smooth" });
+              }
               setIsMenuOpen(false);
             }}
             className={`text-sm font-medium transition-colors ${
@@ -78,7 +83,7 @@ export const Navbar = () => {
             } hover:text-indigo-500`}
           >
             Gallery
-          </button>
+          </Link>
           <a
             href="https://goveelightinstallers.com"
             target="_blank"
@@ -141,16 +146,21 @@ export const Navbar = () => {
             >
               About
             </Link>
-            <button
-              onClick={() => {
-                const element = document.getElementById("gallery");
-                element?.scrollIntoView({ behavior: "smooth" });
+            <Link
+              to="/"
+              state={{ scrollToGallery: true }}
+              onClick={(e) => {
+                if (isHomePage) {
+                  e.preventDefault();
+                  const element = document.getElementById("gallery");
+                  element?.scrollIntoView({ behavior: "smooth" });
+                }
                 setIsMenuOpen(false);
               }}
               className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
             >
               Gallery
-            </button>
+            </Link>
             <a
               href="https://goveelightinstallers.com"
               target="_blank"

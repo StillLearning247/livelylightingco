@@ -2,19 +2,42 @@ import { Hero } from "../components/Hero";
 import { Gallery } from "../components/Gallery";
 import { Difference } from "../components/Difference";
 import { Testimonials } from "../components/Testimonials";
-// import React from "react";
-import React, { lazy, Suspense } from "react";
+import { useEffect } from "react";
+import { Suspense } from "react";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    const scrollToGallery = () => {
+      const element = document.getElementById('gallery');
+      if (element) {
+        // Small timeout to ensure the DOM is fully rendered
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    };
+
+    // Check if we need to scroll to gallery (from navigation state or hash)
+    if (location.state?.scrollToGallery || window.location.hash === '#gallery') {
+      scrollToGallery();
+      // Clear the state to prevent scrolling again on re-renders
+      window.history.replaceState({ ...location.state, scrollToGallery: false }, '');
+    }
+  }, [location]);
   return (
     <main>
       <section id="home">
         <Hero />
-        <Suspense
-          fallback={<div className="text-center py-12">Loading...</div>}
-        >
-          <Gallery />
-        </Suspense>
+        <div id="gallery">
+          <Suspense
+            fallback={<div className="text-center py-12">Loading...</div>}
+          >
+            <Gallery />
+          </Suspense>
+        </div>
       </section>
 
       <section className="relative">
