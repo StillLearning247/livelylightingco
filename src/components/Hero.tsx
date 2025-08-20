@@ -16,7 +16,7 @@ export const Hero = () => {
     .resize(fill().width("1920").height("1080")); // Adjust dimensions as needed
 
   return (
-    <div className="relative h-screen flex items-center overflow-hidden">
+    <div className="relative min-h-screen flex items-start overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
