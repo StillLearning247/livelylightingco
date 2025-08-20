@@ -35,7 +35,7 @@ const Home = () => {
     }
   }, [location]);
   return (
-    <main>
+    <main className="pt-28 sm:pt-32">
       <FloatingBanner
         message="*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria)."
         variant="marquee"
@@ -44,7 +44,7 @@ const Home = () => {
         stickyTop="top-20 sm:top-24"
         className="z-40"
       />
-      <section id="home">
+      <section id="home" className="scroll-mt-28 sm:scroll-mt-32">
         <Hero />
         <div id="gallery">
           <Suspense
