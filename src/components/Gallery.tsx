@@ -130,7 +130,7 @@ export const Gallery = () => {
         </div>
 
         <div className="relative w-full">
-          <div className="relative bg-gray-100">
+          <div className="relative bg-gray-100 group">
             <ResponsiveContainer
               carouselRef={ref}
               render={(width: number, carouselRef: React.Ref<any>) => (
@@ -158,59 +158,98 @@ export const Gallery = () => {
               )}
             />
 
-            <button
-              onClick={() => ref.current?.goBack()}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/40 hover:bg-black/60 rounded-full transition-all duration-200"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-            <button
-              onClick={() => ref.current?.goNext()}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/40 hover:bg-black/60 rounded-full transition-all duration-200"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-          </div>
-        </div>
-
-        {/* Modal for fullsize image view */}
-        {selectedImage && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-            onClick={() => {
-              setSelectedImage(null);
-              setImageLoading(true);
-            }}
-          >
-            <div className="relative max-w-full max-h-full">
+            {/* Edge paddles */}
+            <div className="pointer-events-none absolute inset-0 z-20">
+              {/* Left paddle */}
               <button
-                className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(null);
-                  setImageLoading(true);
-                }}
+                onClick={() => ref.current?.goBack()}
+                aria-label="Previous"
+                className="
+                pointer-events-auto absolute inset-y-0 left-0 w-20 md:w-24
+                flex items-center justify-start pl-3
+                bg-gradient-to-r from-black/30 to-transparent
+                opacity-100 md:opacity-0 md:group-hover:opacity-100
+                transition-opacity duration-300
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70
+              "
               >
-                <X className="h-6 w-6 text-white" />
+                <span
+                  className="
+                  inline-flex h-10 w-10 items-center justify-center rounded-full
+                  bg-white/80 backdrop-blur ring-1 ring-black/10
+                  text-gray-900 transition-transform group-hover:-translate-x-0.5
+                "
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </span>
               </button>
 
-              {imageLoading && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Loader2 className="h-10 w-10 text-white animate-spin" />
-                </div>
-              )}
-
-              <img
-                src={selectedImage}
-                alt="Enlarged view"
-                className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-                onLoad={() => setImageLoading(false)}
-                onError={() => setImageLoading(false)}
-              />
+              {/* Right paddle */}
+              <button
+                onClick={() => ref.current?.goNext()}
+                aria-label="Next"
+                className="
+                pointer-events-auto absolute inset-y-0 right-0 w-20 md:w-24
+                flex items-center justify-end pr-3
+                bg-gradient-to-l from-black/30 to-transparent
+                opacity-100 md:opacity-0 md:group-hover:opacity-100
+                transition-opacity duration-300
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70
+              "
+              >
+                <span
+                  className="
+                  inline-flex h-10 w-10 items-center justify-center rounded-full
+                  bg-white/80 backdrop-blur ring-1 ring-black/10
+                  text-gray-900 transition-transform group-hover:translate-x-0.5
+                "
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </span>
+              </button>
             </div>
           </div>
-        )}
+
+          {/* Modal for fullsize image view */}
+          {selectedImage && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+              onClick={() => {
+                setSelectedImage(null);
+                setImageLoading(true);
+              }}
+            >
+              <div className="relative max-w-full max-h-full">
+                <button
+                  className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImage(null);
+                    setImageLoading(true);
+                  }}
+                >
+                  <X className="h-6 w-6 text-white" />
+                </button>
+
+                {imageLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Loader2 className="h-10 w-10 text-white animate-spin" />
+                  </div>
+                )}
+
+                <img
+                  src={selectedImage}
+                  alt="Enlarged view"
+                  className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  onLoad={() => setImageLoading(false)}
+                  onError={() => setImageLoading(false)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Close px-0 md:px-4 wrapper */}
       </div>
     </section>
   );
