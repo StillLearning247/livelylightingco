@@ -18,21 +18,6 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-# Enable gzip and brotli compression
-[[plugins]]
-  package = "@netlify/plugin-gzip"
-
-# Enable HTTP/2 server push
-[[plugins]]
-  package = "@netlify/plugin-csp-header"
-  [plugins.inputs]
-    scriptSrc = "'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com"
-    styleSrc = "'self' 'unsafe-inline' https://fonts.googleapis.com"
-    fontSrc = "'self' https://fonts.gstatic.com"
-    imgSrc = "'self' data: https://www.google-analytics.com"
-    connectSrc = "'self' https://www.google-analytics.com"
-
-[[plugins]]
-  package = "@netlify/plugin-csp-nonce"
-  # optional inputs can go here per the README
+    # Optional: CSP header (edit for your actual sources)
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://res.cloudinary.com https://i.ytimg.com https://img.youtube.com https://www.google-analytics.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://*.supabase.co"
+    
