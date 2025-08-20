@@ -159,7 +159,7 @@ export const Gallery = () => {
             />
 
             {/* Edge paddles */}
-            <div className="pointer-events-none absolute inset-0 z-20">
+            <div className="pointer-events-none absolute inset-0 z-60">
               {/* Left paddle */}
               <button
                 onClick={() => ref.current?.goBack()}
