@@ -46,7 +46,10 @@ const Home = () => {
         stickyTop="top-20 sm:top-24"
         className="z-40"
       />
-      <section id="home" className="scroll-mt-28 sm:scroll-mt-32">
+      <section
+        id="home"
+        className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40 xl:scroll-mt-44"
+      >
         <Hero />
         <div id="gallery">
           <Suspense
