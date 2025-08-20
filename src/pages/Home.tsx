@@ -45,6 +45,8 @@ const Home = () => {
         duration={60000}
         stickyTop="top-20 sm:top-24"
         className="z-40"
+        reserveSpace
+        reserveGapPx={8}
       />
       <section
         id="home"
