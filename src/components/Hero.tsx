@@ -44,7 +44,7 @@ export const Hero = () => {
             Year-round custom lighting. No hassle or ugly wires. All controlled
             from your phone. Installed by Govee lighting experts.
           </p>
-          <div className="flex flex-col gap-4 sm:max-w-md">
+          <div className="flex flex-col gap-4 sm:max-w-md sm:pb-28 pb-[env(safe-area-inset-bottom)]">
             <Link
               to="/contact"
               className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full"
@@ -72,7 +72,7 @@ export const Hero = () => {
             <YouTubeLite
               id="Q-BZ2rjHZgE"
               title="Lively Lighting Co — Featured Install"
-              className="mt-2"
+              className="mt-2 mb-16 sm:mb-24"
             />
           </div>
         </div>
