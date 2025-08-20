@@ -35,7 +35,9 @@ const Home = () => {
     }
   }, [location]);
   return (
-    <main className="pt-28 sm:pt-32">
+    <main className="bg-neutral-950">
+      {" "}
+      {/* optional, keeps any tiny gaps dark */}
       <FloatingBanner
         message="*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria)."
         variant="marquee"
@@ -54,7 +56,6 @@ const Home = () => {
           </Suspense>
         </div>
       </section>
-
       <section className="relative">
         <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
         <Suspense
@@ -63,7 +64,6 @@ const Home = () => {
           <Testimonials />
         </Suspense>
       </section>
-
       <section className="relative">
         <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
         <Suspense
