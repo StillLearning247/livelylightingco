@@ -41,6 +41,8 @@ const Home = () => {
         variant="marquee"
         tone="brand"
         duration={60000}
+        stickyTop="top-20 sm:top-24"
+        className="z-40"
       />
       <section id="home">
         <Hero />
