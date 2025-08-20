@@ -11,21 +11,20 @@ export const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock page scroll when menu is open (nice UX for overlays)
+  useEffect(() => {
+    document.documentElement.classList.toggle("overflow-hidden", isMenuOpen);
+    return () => document.documentElement.classList.remove("overflow-hidden");
+  }, [isMenuOpen]);
+
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-[80] transition-all duration-300 ${
         isHomePage && !isScrolled
           ? "bg-transparent py-4"
           : "bg-white shadow-md py-2"
@@ -71,8 +70,9 @@ export const Navbar = () => {
             onClick={(e) => {
               if (isHomePage) {
                 e.preventDefault();
-                const element = document.getElementById("gallery");
-                element?.scrollIntoView({ behavior: "smooth" });
+                document
+                  .getElementById("gallery")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }
               setIsMenuOpen(false);
             }}
@@ -120,65 +120,80 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu (overlay + panel) */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md">
-          <div className="px-6 py-4 space-y-3">
-            <Link
-              to="/"
-              className={`block transition-colors ${
-                isActive("/")
-                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
-                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className={`block transition-colors ${
-                isActive("/about")
-                  ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
-                  : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              to="/"
-              state={{ scrollToGallery: true }}
-              onClick={(e) => {
-                if (isHomePage) {
-                  e.preventDefault();
-                  const element = document.getElementById("gallery");
-                  element?.scrollIntoView({ behavior: "smooth" });
-                }
-                setIsMenuOpen(false);
-              }}
-              className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
-            >
-              Gallery
-            </Link>
-            <a
-              href="https://goveelightinstallers.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Book Online
-            </a>
-            <Link
-              to="/contact"
-              className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Free Quote/Contact
-            </Link>
+        <>
+          {/* Backdrop to dim page + banner; click to close */}
+          <button
+            aria-hidden
+            onClick={() => setIsMenuOpen(false)}
+            className="md:hidden fixed inset-0 z-[75] bg-black/40 backdrop-blur-sm"
+          />
+
+          {/* Panel sits below the navbar (adjust top-* if your navbar is taller) */}
+          <div className="md:hidden fixed top-16 left-0 right-0 z-[80] bg-white shadow-xl rounded-b-xl">
+            <div className="px-6 py-4 space-y-3">
+              <Link
+                to="/"
+                className={`block transition-colors ${
+                  isActive("/")
+                    ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
+                    : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+
+              <Link
+                to="/about"
+                className={`block transition-colors ${
+                  isActive("/about")
+                    ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
+                    : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+
+              <Link
+                to="/"
+                state={{ scrollToGallery: true }}
+                onClick={(e) => {
+                  if (isHomePage) {
+                    e.preventDefault();
+                    document
+                      .getElementById("gallery")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
+              >
+                Gallery
+              </Link>
+
+              <a
+                href="https://goveelightinstallers.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Book Online
+              </a>
+
+              <Link
+                to="/contact"
+                className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Free Quote/Contact
+              </Link>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );
