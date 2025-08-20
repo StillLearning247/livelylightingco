@@ -29,7 +29,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-20 pt-20 sm:pt-24 lg:pt-28">
+      <div className="container mx-auto px-6 relative z-20 pt-28 sm:pt-32 lg:pt-40 xl:pt-44">
         <div className="max-w-2xl relative">
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
