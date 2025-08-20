@@ -5,30 +5,43 @@ import { Testimonials } from "../components/Testimonials";
 import { useEffect } from "react";
 import { Suspense } from "react";
 import { useLocation } from "react-router-dom";
+import FloatingBanner from "../components/FloatingBanner";
 
 const Home = () => {
   const location = useLocation();
-  
+
   useEffect(() => {
     const scrollToGallery = () => {
-      const element = document.getElementById('gallery');
+      const element = document.getElementById("gallery");
       if (element) {
         // Small timeout to ensure the DOM is fully rendered
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }
     };
 
     // Check if we need to scroll to gallery (from navigation state or hash)
-    if (location.state?.scrollToGallery || window.location.hash === '#gallery') {
+    if (
+      location.state?.scrollToGallery ||
+      window.location.hash === "#gallery"
+    ) {
       scrollToGallery();
       // Clear the state to prevent scrolling again on re-renders
-      window.history.replaceState({ ...location.state, scrollToGallery: false }, '');
+      window.history.replaceState(
+        { ...location.state, scrollToGallery: false },
+        ""
+      );
     }
   }, [location]);
   return (
     <main>
+      <FloatingBanner
+        message="*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria)."
+        variant="marquee"
+        tone="brand"
+        duration={60000}
+      />
       <section id="home">
         <Hero />
         <div id="gallery">
