@@ -1,9 +1,10 @@
 import { ArrowRight, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
-import { AdvancedImage, responsive, lazyload } from "@cloudinary/react";
+import { AdvancedImage, responsive } from "@cloudinary/react";
 import cld from "../lib/cloudinary"; // Adjust the import path as needed
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
+import YouTubeLite from "./YouTubeLite";
 
 export const Hero = () => {
   // Configure the Cloudinary image
@@ -21,11 +22,10 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gray-900/30 z-10"></div>
         <AdvancedImage
           cldImg={heroImage}
-          plugins={[responsive(), lazyload()]}
+          plugins={[responsive()]}
           alt="Govee permanent outdoor lights PRO with permtrack"
           className="w-full h-full object-cover object-center"
-          fetchPriority="high"
-          loading="lazy"
+          fetchPriority="eager"
         />
       </div>
 
@@ -67,6 +67,13 @@ export const Hero = () => {
               <Youtube className="mr-2 h-4 w-4" />
               As Seen on YouTube
             </a>
+
+            {/* Embedded video under the button */}
+            <YouTubeLite
+              id="Q-BZ2rjHZgE"
+              title="Lively Lighting Co — Featured Install"
+              className="mt-2"
+            />
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ const Slide = ({
 
 export const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [centerSlideIndex, setCenterSlideIndex] = useState(0);
+  const [setCenterSlideIndex] = useState(0);
   const ref = React.useRef<any>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
