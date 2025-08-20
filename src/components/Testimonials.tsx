@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const Testimonials = () => {
   const testimonials = [
@@ -26,16 +27,49 @@ export const Testimonials = () => {
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  const goTo = (i: number, dir: 1 | -1 = 1) => {
+    setDirection(dir);
+    const len = testimonials.length;
+    setIndex(((i % len) + len) % len); // safe modulo
   };
 
-  const prevTestimonial = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
-    );
+  const next = () => goTo(index + 1, 1);
+  const prev = () => goTo(index - 1, -1);
+
+  // Keyboard nav: ← / →
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index]); // eslint-disable-line
+
+  // Simple swipe for mobile
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    const threshold = 40; // px
+    if (delta > threshold) prev();
+    if (delta < -threshold) next();
+    touchStartX.current = null;
+  };
+
+  const active = testimonials[index];
+
+  // Framer Motion variants for slide/fade
+  const variants = {
+    enter: (dir: 1 | -1) => ({ x: dir > 0 ? 24 : -24, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: 1 | -1) => ({ x: dir > 0 ? -24 : 24, opacity: 0 }),
   };
 
   return (
@@ -49,57 +83,82 @@ export const Testimonials = () => {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative flex items-center">
+        <div
+          className="max-w-4xl mx-auto"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Card with animated content */}
+          <div className="relative bg-indigo-800 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={index}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.28, ease: "easeOut" }}
+              >
+                <div className="flex mb-4">
+                  {[...Array(active.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                    />
+                  ))}
+                </div>
+
+                <p className="text-lg italic mb-6">"{active.quote}"</p>
+
+                <div>
+                  <p className="font-semibold">{active.name}</p>
+                  <p className="text-indigo-300">{active.location}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Control bar: chevrons + dots (like gallery) */}
+          <div className="mt-6 flex w-full items-center justify-center gap-4">
             <button
-              className="absolute left-0 -ml-8 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
-              onClick={prevTestimonial}
+              type="button"
+              aria-label="Previous testimonial"
+              onClick={prev}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 text-white bg-white/10 hover:bg-white/15 hover:ring-white/50 transition"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
 
-            <div className="flex-1 bg-indigo-800 rounded-2xl shadow-xl p-10">
-              <div className="flex mb-4">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, i) => {
+                const isActive = i === index;
+                return (
+                  <button
                     key={i}
-                    className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                    type="button"
+                    aria-label={`Go to testimonial ${i + 1}`}
+                    aria-current={isActive ? "true" : undefined}
+                    onClick={() => goTo(i, i > index ? 1 : -1)}
+                    className={[
+                      "h-2.5 rounded-full transition-all",
+                      isActive
+                        ? "w-6 bg-white"
+                        : "w-2.5 bg-white/30 hover:bg-white/50",
+                    ].join(" ")}
                   />
-                ))}
-              </div>
-              <p className="text-lg italic mb-6">
-                "{testimonials[currentIndex].quote}"
-              </p>
-              <div>
-                <p className="font-semibold">
-                  {testimonials[currentIndex].name}
-                </p>
-                <p className="text-indigo-300">
-                  {testimonials[currentIndex].location}
-                </p>
-              </div>
+                );
+              })}
             </div>
 
             <button
-              className="absolute right-0 -mr-8 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus:outline-none"
-              onClick={nextTestimonial}
+              type="button"
+              aria-label="Next testimonial"
+              onClick={next}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 text-white bg-white/10 hover:bg-white/15 hover:ring-white/50 transition"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="h-5 w-5" />
             </button>
-          </div>
-
-          {/* Pagination indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full ${
-                  currentIndex === index ? "bg-white" : "bg-white/30"
-                } transition-colors`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              ></button>
-            ))}
           </div>
         </div>
       </div>
