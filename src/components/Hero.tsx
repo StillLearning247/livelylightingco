@@ -75,13 +75,14 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Wider video row (separate, centered, grows up to ~1280px or 92vw) */}
+        {/* Wider video row (separate, centered) */}
         <div className="w-full mx-auto mt-6 sm:mt-8 flex justify-center">
           <div className="w-full max-w-[min(1280px,92vw)]">
             <YouTubeLite
               id="Q-BZ2rjHZgE"
               title="Lively Lighting Co — Featured Install"
-              className="w-full mt-2 mb-16 sm:mb-24"
+              ratio="16 / 8.5" // ← taller than 16:9 so it doesn't feel skinny
+              className="w-full mt-2 mb-10 sm:mb-12" // ← reduced bottom margin
             />
           </div>
         </div>
