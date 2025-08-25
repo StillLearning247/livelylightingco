@@ -8,6 +8,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import cld from "../lib/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
+import ModalPortal from "./ModalPortal";
 
 // Define the type for gallery images
 interface GalleryImage {
@@ -85,7 +86,7 @@ export const Gallery = () => {
   }, []);
 
   const galleryImages: GalleryImage[] = [
-    { publicId: "House1_upqaeq", title: "", hiResUrl: "House6_kmwq4e" },
+    { publicId: "House1_upqaeq", title: "", hiResUrl: "House1_phnaes" },
     { publicId: "House3_800_zjggld", title: "", hiResUrl: "House3_oeyopl" },
     { publicId: "House4_800_wrgrqf", title: "", hiResUrl: "House4_wt2d0m" },
     { publicId: "House5_ltz96r", title: "", hiResUrl: "House5_2400_v7p3an" },
@@ -191,43 +192,48 @@ export const Gallery = () => {
           </div>
         </div>
 
-        {/* Modal for fullsize image view */}
         {selectedImage && (
-          <div
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4"
-            onClick={() => {
-              setSelectedImage(null);
-              setImageLoading(true);
-            }}
-          >
-            <div className="relative max-w-full max-h-full">
-              <button
-                className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(null);
-                  setImageLoading(true);
-                }}
-              >
-                <X className="h-6 w-6 text-white" />
-              </button>
-
-              {imageLoading && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Loader2 className="h-10 w-10 text-white animate-spin" />
-                </div>
-              )}
-
-              <img
-                src={selectedImage}
-                alt="Enlarged view"
-                className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
+          <ModalPortal>
+            <div
+              role="dialog"
+              aria-modal="true"
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4"
+              onClick={() => {
+                setSelectedImage(null);
+                setImageLoading(true);
+              }}
+            >
+              <div
+                className="relative max-w-full max-h-full"
                 onClick={(e) => e.stopPropagation()}
-                onLoad={() => setImageLoading(false)}
-                onError={() => setImageLoading(false)}
-              />
+              >
+                <button
+                  className="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110"
+                  onClick={() => {
+                    setSelectedImage(null);
+                    setImageLoading(true);
+                  }}
+                  aria-label="Close image"
+                >
+                  <X className="h-6 w-6 text-white" />
+                </button>
+
+                {imageLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Loader2 className="h-10 w-10 text-white animate-spin" />
+                  </div>
+                )}
+
+                <img
+                  src={selectedImage}
+                  alt="Enlarged view"
+                  className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
+                  onLoad={() => setImageLoading(false)}
+                  onError={() => setImageLoading(false)}
+                />
+              </div>
             </div>
-          </div>
+          </ModalPortal>
         )}
       </div>
     </section>
