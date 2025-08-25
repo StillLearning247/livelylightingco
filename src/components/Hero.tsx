@@ -81,8 +81,8 @@ export const Hero = () => {
             <YouTubeLite
               id="Q-BZ2rjHZgE"
               title="Lively Lighting Co — Featured Install"
-              ratio="16 / 8.5" // ← taller than 16:9 so it doesn't feel skinny
-              className="w-full mt-2 mb-10 sm:mb-12" // ← reduced bottom margin
+              ratio="21 / 9" // ← taller than 16:9 so it doesn't feel skinny
+              className="w-full mt-1 mb-8" // ← reduced bottom margin
             />
           </div>
         </div>
