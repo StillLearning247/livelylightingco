@@ -12,7 +12,7 @@ const YouTubeLite: React.FC<YouTubeLiteProps> = ({
   id,
   title = "YouTube video",
   className = "",
-  ratio = "21 / 9",
+  ratio = "16 / 9",
   start = 0,
 }) => {
   const [playing, setPlaying] = useState(false);
