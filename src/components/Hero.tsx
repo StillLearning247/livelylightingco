@@ -14,7 +14,7 @@ export const Hero = () => {
     .resize(fill().width("1920").height("1080"));
 
   return (
-    // NOTE: center vertically on large screens
+    // Center vertically on large screens; keep top-aligned on small
     <div className="relative min-h-screen flex lg:items-center items-start overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
@@ -28,9 +28,9 @@ export const Hero = () => {
         />
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-6 relative z-20 pt-28 sm:pt-32 lg:pt-40 xl:pt-44 flex justify-center">
-        {/* Center the column horizontally; add text-center if desired */}
+      {/* Content container */}
+      <div className="container mx-auto px-6 relative z-20 pt-28 sm:pt-32 lg:pt-40 xl:pt-44">
+        {/* Text + buttons (narrow, centered) */}
         <div className="w-full max-w-2xl mx-auto text-center">
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
@@ -47,8 +47,7 @@ export const Hero = () => {
             from your phone. Installed by Govee lighting experts.
           </p>
 
-          {/* Center this block too */}
-          <div className="flex flex-col gap-4 sm:max-w-md w-full mx-auto sm:pb-28 pb-[env(safe-area-inset-bottom)]">
+          <div className="flex flex-col gap-4 sm:max-w-md w-full mx-auto sm:pb-6">
             <Link
               to="/contact"
               className="px-8 py-4 rounded-lg bg-indigo-600 text-white text-center font-semibold hover:bg-indigo-700 transition shadow-lg transform hover:scale-105 duration-200 w-full"
@@ -73,11 +72,16 @@ export const Hero = () => {
               <Youtube className="mr-2 h-4 w-4" />
               As Seen on YouTube
             </a>
+          </div>
+        </div>
 
+        {/* Wider video row (separate, centered, grows up to ~1280px or 92vw) */}
+        <div className="w-full mx-auto mt-6 sm:mt-8 flex justify-center">
+          <div className="w-full max-w-[min(1280px,92vw)]">
             <YouTubeLite
               id="Q-BZ2rjHZgE"
               title="Lively Lighting Co — Featured Install"
-              className="mt-2 mb-16 sm:mb-24 mx-auto"
+              className="w-full mt-2 mb-16 sm:mb-24"
             />
           </div>
         </div>
