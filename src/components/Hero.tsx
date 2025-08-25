@@ -77,7 +77,7 @@ export const Hero = () => {
 
         {/* Wider video row (separate, centered) */}
         <div className="w-full mx-auto mt-6 sm:mt-8 flex justify-center">
-          <div className="w-full max-w-[min(1280px,92vw)]">
+          <div className="w-full max-w-[min(960px,90vw)]">
             <YouTubeLite
               id="Q-BZ2rjHZgE"
               title="Lively Lighting Co — Featured Install"
