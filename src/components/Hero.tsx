@@ -6,7 +6,13 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
 import YouTubeLite from "./YouTubeLite";
 
-export const Hero = () => {
+type HeroProps = {
+  adminMode?: boolean;
+};
+
+export const Hero: React.FC<HeroProps> = ({
+  adminMode: _adminMode = false,
+}) => {
   const heroImage = cld.image("House6_kmwq4e");
   heroImage
     .format("auto")

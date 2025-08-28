@@ -10,6 +10,11 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
 import ModalPortal from "./ModalPortal";
 
+type GalleryProps = {
+  /** Enables admin-only UI in the gallery (optional) */
+  adminMode?: boolean;
+};
+
 // Define the type for gallery images
 interface GalleryImage {
   publicId: string;
@@ -60,7 +65,9 @@ const Slide = ({
   );
 };
 
-export const Gallery = () => {
+export const Gallery: React.FC<GalleryProps> = ({
+  adminMode: _adminMode = false,
+}) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [centerIndex, setCenterIndex] = useState(0); // ← track active slide
   const ref = React.useRef<any>(null);
