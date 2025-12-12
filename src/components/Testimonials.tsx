@@ -1,31 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTestimonials } from "../hooks/useTestimonials";
+import { usePageContent } from "../hooks/useContent";
+import { EditableArea, contentEditPath } from "./EditableArea";
 
 export const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Jennifer S.",
-      location: "Austin, TX",
-      quote:
-        "LivelyLightingCo transformed our home! The install was quick and professional – and we love controlling the lights with our phone. Our neighbors keep asking where we got our lights done.",
-      rating: 5,
-    },
-    {
-      name: "Michael T.",
-      location: "Round Rock, TX",
-      quote:
-        "Jakob and his team were fantastic from start to finish. No more climbing ladders for holidays! The lights look clean and professional during the day and absolutely stunning at night.",
-      rating: 5,
-    },
-    {
-      name: "Sarah & David",
-      location: "Cedar Park, TX",
-      quote:
-        "We tried installing Govee lights ourselves first and it was a disaster. LivelyLightingCo fixed everything and installed them properly with their track system. Worth every penny!",
-      rating: 5,
-    },
-  ];
+  // Fetch testimonials and content from database
+  const { testimonials, loading: testimonialsLoading } = useTestimonials();
+  const { content, loading: contentLoading } = usePageContent("home");
 
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -63,7 +46,9 @@ export const Testimonials = () => {
     touchStartX.current = null;
   };
 
-  const active = testimonials[index];
+  // Get content from database with fallbacks
+  const testimonialsTitle = content.testimonials_title || "What Our Customers Say";
+  const testimonialsDescription = content.testimonials_description || "Don't just take our word for it. Here's what homeowners think about our service.";
 
   // Framer Motion variants for slide/fade
   const variants = {
@@ -72,24 +57,47 @@ export const Testimonials = () => {
     exit: (dir: 1 | -1) => ({ x: dir > 0 ? -24 : 24, opacity: 0 }),
   };
 
+  // Show loading state while fetching
+  if (testimonialsLoading || contentLoading || testimonials.length === 0) {
+    return (
+      <section className="py-20 bg-indigo-900 text-white">
+        <div className="text-center py-20">
+          <Loader2 className="h-10 w-10 text-indigo-300 animate-spin mx-auto" />
+        </div>
+      </section>
+    );
+  }
+
+  const active = testimonials[index];
+
   return (
     <section className="py-20 bg-indigo-900 text-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
-          <p className="text-xl text-indigo-200 max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what homeowners think about
-            our service.
-          </p>
+          <EditableArea
+            editPath={contentEditPath("home", "testimonials_title")}
+            label="Testimonials Title"
+          >
+            <h2 className="text-3xl font-bold mb-4">{testimonialsTitle}</h2>
+          </EditableArea>
+          <EditableArea
+            editPath={contentEditPath("home", "testimonials_description")}
+            label="Testimonials Description"
+          >
+            <p className="text-xl text-indigo-200 max-w-3xl mx-auto">
+              {testimonialsDescription}
+            </p>
+          </EditableArea>
         </div>
 
-        <div
-          className="max-w-4xl mx-auto"
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
-          {/* Card with animated content */}
-          <div className="relative bg-indigo-800 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
+        <EditableArea editPath="/admin/testimonials" label="Testimonials">
+          <div
+            className="max-w-4xl mx-auto"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
+            {/* Card with animated content */}
+            <div className="relative bg-indigo-800 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={index}
@@ -103,7 +111,7 @@ export const Testimonials = () => {
                 <div className="flex mb-4">
                   {[...Array(active.rating)].map((_, i) => (
                     <Star
-                      key={i}
+                      key={`star-${i}`}
                       className="w-5 h-5 text-yellow-400 fill-yellow-400"
                     />
                   ))}
@@ -135,7 +143,7 @@ export const Testimonials = () => {
                 const isActive = i === index;
                 return (
                   <button
-                    key={i}
+                    key={`testimonial-dot-${i}`}
                     type="button"
                     aria-label={`Go to testimonial ${i + 1}`}
                     aria-current={isActive ? "true" : undefined}
@@ -160,7 +168,8 @@ export const Testimonials = () => {
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
-        </div>
+          </div>
+        </EditableArea>
       </div>
     </section>
   );

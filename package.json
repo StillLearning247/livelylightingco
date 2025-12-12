@@ -12,7 +12,13 @@
   "dependencies": {
     "@cloudinary/react": "^1.14.3",
     "@cloudinary/url-gen": "^1.21.0",
+    "@playwright/test": "^1.57.0",
     "@supabase/supabase-js": "^2.39.7",
+    "@tiptap/extension-link": "^3.13.0",
+    "@tiptap/extension-placeholder": "^3.13.0",
+    "@tiptap/pm": "^3.13.0",
+    "@tiptap/react": "^3.13.0",
+    "@tiptap/starter-kit": "^3.13.0",
     "cross-spawn": "^7.0.5",
     "lucide-react": "^0.344.0",
     "motion": "^12.23.12",

@@ -46,51 +46,45 @@ export const AdminLogin = () => {
     setLoading(true);
 
     try {
-      // 1) sign in
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      // Set up a one-time auth state listener to detect successful login
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_IN" && session) {
+          subscription.unsubscribe();
+          setEmail("");
+          setPassword("");
+          setIsOpen(false);
+          setLoading(false);
+          navigate("/admin", { replace: true });
+        }
+      });
+
+      // Fire and forget - don't await the promise since it can hang
+      supabase.auth.signInWithPassword({
         email,
         password,
+      }).then(result => {
+        if (result.error) {
+          subscription.unsubscribe();
+          setError("Invalid email or password.");
+          setLoading(false);
+        }
+      }).catch(() => {
+        subscription.unsubscribe();
+        setError("Invalid email or password.");
+        setLoading(false);
       });
-      if (signInError) throw signInError;
 
-      // 2) optional: verify this user is actually an admin
-      //    (requires RLS policy like: `auth.uid() = id` on public.admins)
-      const { data: userRes } = await supabase.auth.getUser();
-      const uid = userRes?.user?.id;
+      // Set a timeout to clean up if nothing happens
+      setTimeout(() => {
+        subscription.unsubscribe();
+        if (loading) {
+          setError("Login timed out. Please try again.");
+          setLoading(false);
+        }
+      }, 15000);
 
-      if (!uid) {
-        throw new Error("No user session after login");
-      }
-
-      const { data: adminRow, error: adminErr } = await supabase
-        .from("admins")
-        .select("id")
-        .eq("id", uid)
-        .maybeSingle();
-
-      if (adminErr) {
-        // Don’t leak details to end users, but log for yourself
-        // eslint-disable-next-line no-console
-        console.error("[admin check error]", adminErr);
-      }
-
-      if (!adminRow) {
-        // not an admin — sign out and show generic error
-        await supabase.auth.signOut();
-        throw new Error("Unauthorized");
-      }
-
-      // 3) success → clear + close + redirect
-      setEmail("");
-      setPassword("");
-      setIsOpen(false);
-      navigate("/admin", { replace: true });
-    } catch (err) {
-      // Generic message to avoid user enumeration
-      // eslint-disable-next-line no-console
-      console.error("[login error]", err);
+    } catch {
       setError("Invalid email or password.");
-    } finally {
       setLoading(false);
     }
   };

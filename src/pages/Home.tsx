@@ -6,9 +6,15 @@ import { useEffect } from "react";
 import { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import FloatingBanner from "../components/FloatingBanner";
+import { usePageContent } from "../hooks/useContent";
+import { EditableArea, contentEditPath } from "../components/EditableArea";
 
 const Home = () => {
   const location = useLocation();
+  const { content } = usePageContent("home");
+
+  // Get floating banner content from database with fallback
+  const bannerMessage = content.floating_banner || "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).";
 
   useEffect(() => {
     const scrollToGallery = () => {
@@ -38,16 +44,21 @@ const Home = () => {
     <main className="bg-neutral-950">
       {" "}
       {/* optional, keeps any tiny gaps dark */}
-      <FloatingBanner
-        message="*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria)."
-        variant="marquee"
-        tone="brand"
-        duration={60000}
-        stickyTop="top-20 sm:top-24"
-        className="z-40"
-        reserveSpace
-        reserveGapPx={8}
-      />
+      <EditableArea
+        editPath={contentEditPath("home", "floating_banner")}
+        label="Banner Text"
+      >
+        <FloatingBanner
+          message={bannerMessage}
+          variant="marquee"
+          tone="brand"
+          duration={60000}
+          stickyTop="top-20 sm:top-24"
+          className="z-40"
+          reserveSpace
+          reserveGapPx={8}
+        />
+      </EditableArea>
       <section
         id="home"
         className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40 xl:scroll-mt-44"

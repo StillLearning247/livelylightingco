@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Settings } from "lucide-react";
+import { useAdmin } from "./AdminProvider";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isAdminPage = location.pathname.startsWith("/admin");
+  const { admin } = useAdmin();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -21,6 +24,9 @@ export const Navbar = () => {
     document.documentElement.classList.toggle("overflow-hidden", isMenuOpen);
     return () => document.documentElement.classList.remove("overflow-hidden");
   }, [isMenuOpen]);
+
+  // Hide navbar on admin pages (admin has its own layout)
+  if (isAdminPage) return null;
 
   return (
     <nav
@@ -65,17 +71,8 @@ export const Navbar = () => {
             About
           </Link>
           <Link
-            to="/"
-            state={{ scrollToGallery: true }}
-            onClick={(e) => {
-              if (isHomePage) {
-                e.preventDefault();
-                document
-                  .getElementById("gallery")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }
-              setIsMenuOpen(false);
-            }}
+            to="/#gallery"
+            onClick={() => setIsMenuOpen(false)}
             className={`text-sm font-medium transition-colors ${
               isHomePage && !isScrolled
                 ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
@@ -98,6 +95,15 @@ export const Navbar = () => {
           >
             Get Free Quote
           </Link>
+          {admin && (
+            <Link
+              to="/admin"
+              className="p-2.5 rounded-lg bg-slate-700 text-white hover:bg-slate-800 transition-colors shadow-md"
+              title="Admin Panel"
+            >
+              <Settings className="h-5 w-5" />
+            </Link>
+          )}
         </div>
 
         <button
@@ -158,17 +164,8 @@ export const Navbar = () => {
               </Link>
 
               <Link
-                to="/"
-                state={{ scrollToGallery: true }}
-                onClick={(e) => {
-                  if (isHomePage) {
-                    e.preventDefault();
-                    document
-                      .getElementById("gallery")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }
-                  setIsMenuOpen(false);
-                }}
+                to="/#gallery"
+                onClick={() => setIsMenuOpen(false)}
                 className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
               >
                 Gallery
@@ -191,6 +188,16 @@ export const Navbar = () => {
               >
                 Free Quote/Contact
               </Link>
+              {admin && (
+                <Link
+                  to="/admin"
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg bg-slate-700 text-white hover:bg-slate-800 transition-colors shadow-md w-full"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Settings className="h-4 w-4" />
+                  Admin Panel
+                </Link>
+              )}
             </div>
           </div>
         </>

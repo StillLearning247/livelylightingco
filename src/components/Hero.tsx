@@ -5,6 +5,8 @@ import cld from "../lib/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
 import YouTubeLite from "./YouTubeLite";
+import { usePageContent } from "../hooks/useContent";
+import { EditableArea, contentEditPath } from "./EditableArea";
 
 type HeroProps = {
   adminMode?: boolean;
@@ -13,6 +15,12 @@ type HeroProps = {
 export const Hero: React.FC<HeroProps> = ({
   adminMode: _adminMode = false,
 }) => {
+  // Fetch content from database
+  const { content } = usePageContent("home");
+
+  // Get content from database with fallbacks
+  const heroTitle = content.hero_title || "Govee Permanent Outdoor Lighting. Expertly Installed";
+  const heroSubtitle = content.hero_subtitle || "Year-round custom lighting. No hassle or ugly wires. All controlled from your phone. Installed by Govee lighting experts.";
   const heroImage = cld.image("House6_kmwq4e");
   heroImage
     .format("auto")
@@ -38,20 +46,29 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="container mx-auto px-6 relative z-20 pt-28 sm:pt-32 lg:pt-40 xl:pt-44">
         {/* Text + buttons (narrow, centered) */}
         <div className="w-full max-w-2xl mx-auto text-center">
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
-            aria-label="Beautiful Permanent Outdoor Lighting For Your Home"
+          <EditableArea
+            editPath={contentEditPath("home", "hero_title")}
+            label="Hero Title"
           >
-            Govee Permanent Outdoor Lighting. Expertly Installed
-          </h1>
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animation-fade-in"
+              aria-label="Beautiful Permanent Outdoor Lighting For Your Home"
+            >
+              {heroTitle}
+            </h1>
+          </EditableArea>
 
-          <p
-            className="text-xl text-gray-200 mb-8"
-            aria-label="Year-round custom lighting controlled from your phone"
+          <EditableArea
+            editPath={contentEditPath("home", "hero_subtitle")}
+            label="Hero Subtitle"
           >
-            Year-round custom lighting. No hassle or ugly wires. All controlled
-            from your phone. Installed by Govee lighting experts.
-          </p>
+            <p
+              className="text-xl text-gray-200 mb-8"
+              aria-label="Year-round custom lighting controlled from your phone"
+            >
+              {heroSubtitle}
+            </p>
+          </EditableArea>
 
           <div className="flex flex-col gap-4 sm:max-w-md w-full mx-auto sm:pb-6">
             <Link

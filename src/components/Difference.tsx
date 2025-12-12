@@ -6,9 +6,18 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { usePageContent } from "../hooks/useContent";
+import { EditableArea, contentEditPath } from "./EditableArea";
 
 export const Difference = () => {
   const [showPainPoints, setShowPainPoints] = useState(false);
+
+  // Fetch content from database
+  const { content } = usePageContent("home");
+
+  // Get content from database with fallbacks
+  const differenceTitle = content.difference_title || "Why Choose LivelyLightingCo";
+  const differenceDescription = content.difference_description || "Don't let a bad installation ruin your investment. We bring unmatched expertise to every project.";
 
   return (
     <section
@@ -17,13 +26,22 @@ export const Difference = () => {
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Why Choose LivelyLightingCo
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't let a bad installation ruin your investment. We bring
-            unmatched expertise to every project.
-          </p>
+          <EditableArea
+            editPath={contentEditPath("home", "difference_title")}
+            label="Why Choose Us Title"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {differenceTitle}
+            </h2>
+          </EditableArea>
+          <EditableArea
+            editPath={contentEditPath("home", "difference_description")}
+            label="Why Choose Us Description"
+          >
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {differenceDescription}
+            </p>
+          </EditableArea>
         </div>
 
         <div className="max-w-3xl mx-auto">

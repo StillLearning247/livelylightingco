@@ -9,14 +9,17 @@ import cld from "../lib/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
 import ModalPortal from "./ModalPortal";
+import { useGallery } from "../hooks/useGallery";
+import { usePageContent } from "../hooks/useContent";
+import { EditableArea, contentEditPath } from "./EditableArea";
 
 type GalleryProps = {
   /** Enables admin-only UI in the gallery (optional) */
   adminMode?: boolean;
 };
 
-// Define the type for gallery images
-interface GalleryImage {
+// Define the type for gallery images (for carousel)
+interface GalleryImageDisplay {
   publicId: string;
   title: string;
   hiResUrl: string;
@@ -27,7 +30,7 @@ const Slide = ({
   dataIndex,
   setSelectedImage,
 }: {
-  data: GalleryImage[];
+  data: GalleryImageDisplay[];
   dataIndex: number;
   setSelectedImage: (url: string) => void;
 }) => {
@@ -75,6 +78,10 @@ export const Gallery: React.FC<GalleryProps> = ({
   const [isMobile, setIsMobile] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
+  // Fetch gallery images and content from database
+  const { images, loading: imagesLoading } = useGallery();
+  const { content, loading: contentLoading } = usePageContent("home");
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     handleResize();
@@ -92,42 +99,51 @@ export const Gallery: React.FC<GalleryProps> = ({
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const galleryImages: GalleryImage[] = [
-    { publicId: "House1_upqaeq", title: "", hiResUrl: "House1_phnaes" },
-    { publicId: "House3_800_zjggld", title: "", hiResUrl: "House3_oeyopl" },
-    { publicId: "House4_800_wrgrqf", title: "", hiResUrl: "House4_wt2d0m" },
-    { publicId: "House5_ltz96r", title: "", hiResUrl: "House5_2400_v7p3an" },
-    { publicId: "House6_800_kdubrl", title: "", hiResUrl: "House6_kmwq4e" },
-    {
-      publicId: "Daytime_Browntrack_850_jad2il",
-      title: "",
-      hiResUrl: "Daytime_Browntrack_vr2o7q",
-    },
-    {
-      publicId: "Daytime_Govee_with_tracks_1000_msetko",
-      title: "",
-      hiResUrl: "Daytime_Govee_with_tracks_hjzvd0",
-    },
-    {
-      publicId: "uplcose_tracks_1000_ierp3c",
-      title: "",
-      hiResUrl: "Uplcose_Tracks_HIFI_qto8wx",
-    },
-  ];
+  // Transform database images to carousel format
+  const galleryImages: GalleryImageDisplay[] = images.map((img) => ({
+    publicId: img.cloudinary_public_id,
+    title: img.title || "",
+    hiResUrl: img.cloudinary_hires_id || img.cloudinary_public_id,
+  }));
+
+  // Get content from database with fallbacks
+  const galleryTitle = content.gallery_title || "Our Work";
+  const galleryDescription = content.gallery_description || "Browse our gallery of beautiful lighting installations. Each project is custom designed to complement the home's architecture.";
+
+  // Show loading state while fetching
+  if (imagesLoading || contentLoading || galleryImages.length === 0) {
+    return (
+      <section id="gallery" className="py-12 bg-white overflow-hidden">
+        <div className="text-center py-20">
+          <Loader2 className="h-10 w-10 text-gray-400 animate-spin mx-auto" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="gallery" className="py-12 bg-white overflow-hidden">
       <div className="px-0 md:px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Work</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Browse our gallery of beautiful lighting installations. Each project
-            is custom designed to complement the home's architecture.
-          </p>
+          <EditableArea
+            editPath={contentEditPath("home", "gallery_title")}
+            label="Gallery Title"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{galleryTitle}</h2>
+          </EditableArea>
+          <EditableArea
+            editPath={contentEditPath("home", "gallery_description")}
+            label="Gallery Description"
+          >
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {galleryDescription}
+            </p>
+          </EditableArea>
         </div>
 
-        <div className="relative w-full">
-          <div className="relative bg-gray-100">
+        <EditableArea editPath="/admin/gallery" label="Gallery Images">
+          <div className="relative w-full">
+            <div className="relative bg-gray-100">
             <ResponsiveContainer
               carouselRef={ref}
               render={(width: number, carouselRef: React.Ref<any>) => (
@@ -172,7 +188,7 @@ export const Gallery: React.FC<GalleryProps> = ({
                 const active = i === centerIndex;
                 return (
                   <button
-                    key={i}
+                    key={`gallery-dot-${i}`}
                     type="button"
                     aria-label={`Go to slide ${i + 1}`}
                     aria-current={active ? "true" : undefined}
@@ -197,7 +213,8 @@ export const Gallery: React.FC<GalleryProps> = ({
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
-        </div>
+          </div>
+        </EditableArea>
 
         {selectedImage && (
           <ModalPortal>

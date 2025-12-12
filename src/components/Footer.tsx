@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Facebook, Instagram, Youtube, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Facebook, Youtube, Mail, LogOut, User } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { AdminLogin } from "./AdminLogin";
-import { PrivacyPolicy } from "./PrivacyPolicy"; // <-- your corrected PrivacyPolicy that accepts props
+import { PrivacyPolicy } from "./PrivacyPolicy";
+import { useAdmin } from "./AdminProvider";
 
 export const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const { admin, signOut } = useAdmin();
+  const location = useLocation();
+
+  // Hide footer on admin pages
+  if (location.pathname.startsWith("/admin")) return null;
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -58,20 +64,12 @@ export const Footer = () => {
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },
                 { to: "/contact", label: "Contact" },
-                {
-                  to: "/",
-                  label: "Gallery",
-                  onClick: () => {
-                    const element = document.getElementById("gallery");
-                    element?.scrollIntoView({ behavior: "smooth" });
-                  },
-                },
+                { to: "/#gallery", label: "Gallery" },
                 { to: "/#difference", label: "Why Choose Us" },
               ].map((link) => (
-                <li key={link.to}>
+                <li key={link.label}>
                   <Link
                     to={link.to}
-                    onClick={link.onClick}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -109,13 +107,29 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} LivelyLightingCo. All rights
             reserved.
           </p>
-          <div className="flex space-x-6">
+          <div className="flex items-center space-x-6">
             <PrivacyPolicy
               isOpen={isPrivacyOpen}
               onOpen={() => setIsPrivacyOpen(true)}
               onClose={() => setIsPrivacyOpen(false)}
             />
-            <AdminLogin />
+            {admin ? (
+              <div className="flex items-center gap-3">
+                <span className="text-gray-400 text-sm flex items-center gap-1">
+                  <User className="h-4 w-4" />
+                  Logged in as: <span className="text-white">{admin.username || admin.email || "Admin"}</span>
+                </span>
+                <button
+                  onClick={signOut}
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-sm"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <AdminLogin />
+            )}
           </div>
         </div>
       </div>

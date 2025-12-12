@@ -16,52 +16,56 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { AdminRoute } from "./components/AdminRoute";
-import { AdminHome } from "./pages/AdminHome"; // mirrored homepage
 import { AdminProvider } from "./components/AdminProvider";
 
-// Handles redirecting after auth changes AND on first load
+// Admin pages
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import { AdminOverview } from "./pages/admin/AdminOverview";
+import { AdminGallery } from "./pages/admin/AdminGallery";
+import { AdminContent } from "./pages/admin/AdminContent";
+import { AdminTestimonials } from "./pages/admin/AdminTestimonials";
+
+// Helper to get session directly from localStorage (avoids hanging Supabase client)
+function getSessionFromStorage(): { userId: string; email: string; accessToken: string } | null {
+  try {
+    const keys = Object.keys(localStorage);
+    const authKey = keys.find((k) => k.startsWith("sb-") && k.endsWith("-auth-token"));
+    if (!authKey) return null;
+
+    const data = JSON.parse(localStorage.getItem(authKey) || "null");
+    if (!data?.user?.id || !data?.access_token) return null;
+
+    return {
+      userId: data.user.id,
+      email: data.user.email,
+      accessToken: data.access_token,
+    };
+  } catch {
+    return null;
+  }
+}
+
+// Handles redirecting after sign-out only (admins can freely browse the site while logged in)
 function AuthRedirector() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    // Initial session check (covers page refresh / direct load)
-    (async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
-        const { data: isAdmin, error } = await supabase.rpc("is_admin");
-        if (!error && isAdmin && !location.pathname.startsWith("/admin")) {
-          navigate("/admin", { replace: true });
-        }
+    // Only redirect on sign-out - let AdminLogin handle redirect after login
+    const { data: sub } = supabase.auth.onAuthStateChange((evt) => {
+      if (evt === "SIGNED_OUT") {
+        navigate("/", { replace: true });
       }
-    })();
-
-    // Listen for sign-in/sign-out events
-    const { data: sub } = supabase.auth.onAuthStateChange(
-      async (evt, session) => {
-        if (evt === "SIGNED_IN" && session) {
-          const { data: isAdmin, error } = await supabase.rpc("is_admin");
-          if (!error && isAdmin) {
-            navigate("/admin", { replace: true });
-          }
-        }
-        if (evt === "SIGNED_OUT") {
-          navigate("/", { replace: true });
-        }
-      }
-    );
+    });
 
     return () => sub.subscription.unsubscribe();
-  }, [navigate, location.pathname]);
+  }, [navigate]);
 
   return null;
 }
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AdminProvider>
         <ScrollToTop />
         {/* lives inside Router so it can navigate */}
@@ -74,15 +78,20 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
 
-            {/* Guarded admin mirror homepage */}
+            {/* Admin Dashboard with nested routes */}
             <Route
               path="/admin"
               element={
                 <AdminRoute>
-                  <AdminHome />
+                  <AdminDashboard />
                 </AdminRoute>
               }
-            />
+            >
+              <Route index element={<AdminOverview />} />
+              <Route path="gallery" element={<AdminGallery />} />
+              <Route path="content" element={<AdminContent />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
+            </Route>
 
             {/* Optional: 404 */}
             {/* <Route path="*" element={<NotFound />} /> */}
