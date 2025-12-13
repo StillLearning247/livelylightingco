@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "./EditableArea";
+import { stripHtml } from "../lib/stripHtml";
 
 export const Difference = () => {
   const [showPainPoints, setShowPainPoints] = useState(false);
@@ -15,9 +16,9 @@ export const Difference = () => {
   // Fetch content from database
   const { content } = usePageContent("home");
 
-  // Get content from database with fallbacks
-  const differenceTitle = content.difference_title || "Why Choose LivelyLightingCo";
-  const differenceDescription = content.difference_description || "Don't let a bad installation ruin your investment. We bring unmatched expertise to every project.";
+  // Get content from database with fallbacks (strip HTML tags)
+  const differenceTitle = stripHtml(content.difference_title || "Why Choose LivelyLightingCo");
+  const differenceDescription = stripHtml(content.difference_description || "Don't let a bad installation ruin your investment. We bring unmatched expertise to every project.");
 
   return (
     <section

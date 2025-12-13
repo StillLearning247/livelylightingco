@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTestimonials } from "../hooks/useTestimonials";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "./EditableArea";
+import { stripHtml } from "../lib/stripHtml";
 
 export const Testimonials = () => {
   // Fetch testimonials and content from database
@@ -46,9 +47,9 @@ export const Testimonials = () => {
     touchStartX.current = null;
   };
 
-  // Get content from database with fallbacks
-  const testimonialsTitle = content.testimonials_title || "What Our Customers Say";
-  const testimonialsDescription = content.testimonials_description || "Don't just take our word for it. Here's what homeowners think about our service.";
+  // Get content from database with fallbacks (strip HTML tags)
+  const testimonialsTitle = stripHtml(content.testimonials_title || "What Our Customers Say");
+  const testimonialsDescription = stripHtml(content.testimonials_description || "Don't just take our word for it. Here's what homeowners think about our service.");
 
   // Framer Motion variants for slide/fade
   const variants = {

@@ -12,6 +12,7 @@ import ModalPortal from "./ModalPortal";
 import { useGallery } from "../hooks/useGallery";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "./EditableArea";
+import { stripHtml } from "../lib/stripHtml";
 
 type GalleryProps = {
   /** Enables admin-only UI in the gallery (optional) */
@@ -106,9 +107,9 @@ export const Gallery: React.FC<GalleryProps> = ({
     hiResUrl: img.cloudinary_hires_id || img.cloudinary_public_id,
   }));
 
-  // Get content from database with fallbacks
-  const galleryTitle = content.gallery_title || "Our Work";
-  const galleryDescription = content.gallery_description || "Browse our gallery of beautiful lighting installations. Each project is custom designed to complement the home's architecture.";
+  // Get content from database with fallbacks (strip HTML tags)
+  const galleryTitle = stripHtml(content.gallery_title || "Our Work");
+  const galleryDescription = stripHtml(content.gallery_description || "Browse our gallery of beautiful lighting installations. Each project is custom designed to complement the home's architecture.");
 
   // Show loading state while fetching
   if (imagesLoading || contentLoading || galleryImages.length === 0) {

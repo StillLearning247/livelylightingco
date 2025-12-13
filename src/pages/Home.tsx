@@ -8,13 +8,14 @@ import { useLocation } from "react-router-dom";
 import FloatingBanner from "../components/FloatingBanner";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "../components/EditableArea";
+import { stripHtml } from "../lib/stripHtml";
 
 const Home = () => {
   const location = useLocation();
   const { content } = usePageContent("home");
 
-  // Get floating banner content from database with fallback
-  const bannerMessage = content.floating_banner || "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).";
+  // Get floating banner content from database with fallback (strip HTML tags)
+  const bannerMessage = stripHtml(content.floating_banner || "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).");
 
   useEffect(() => {
     const scrollToGallery = () => {

@@ -7,6 +7,7 @@ import { quality } from "@cloudinary/url-gen/actions/delivery";
 import YouTubeLite from "./YouTubeLite";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "./EditableArea";
+import { stripHtml } from "../lib/stripHtml";
 
 type HeroProps = {
   adminMode?: boolean;
@@ -18,9 +19,9 @@ export const Hero: React.FC<HeroProps> = ({
   // Fetch content from database
   const { content } = usePageContent("home");
 
-  // Get content from database with fallbacks
-  const heroTitle = content.hero_title || "Govee Permanent Outdoor Lighting. Expertly Installed";
-  const heroSubtitle = content.hero_subtitle || "Year-round custom lighting. No hassle or ugly wires. All controlled from your phone. Installed by Govee lighting experts.";
+  // Get content from database with fallbacks (strip HTML tags from rich text)
+  const heroTitle = stripHtml(content.hero_title || "Govee Permanent Outdoor Lighting. Expertly Installed");
+  const heroSubtitle = stripHtml(content.hero_subtitle || "Year-round custom lighting. No hassle or ugly wires. All controlled from your phone. Installed by Govee lighting experts.");
   const heroImage = cld.image("House6_kmwq4e");
   heroImage
     .format("auto")
