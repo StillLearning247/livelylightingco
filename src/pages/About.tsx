@@ -1,18 +1,33 @@
 import { Users, Award, PenTool as Tool } from "lucide-react";
+import { usePageContent } from "../hooks/useContent";
+import { stripHtml } from "../lib/stripHtml";
+import { EditableArea, contentEditPath } from "../components/EditableArea";
 
 const About = () => {
+  const { content } = usePageContent("about");
+
+  // Get content from database with fallbacks (strip HTML tags)
+  const pageTitle = stripHtml(content.page_title || "About LivelyLightingCo");
+  const pageSubtitle = stripHtml(content.page_subtitle || "Austin's Premier Govee Permanent Lighting Installers");
+  const missionTitle = stripHtml(content.mission_title || "Our Mission");
+  const missionText = stripHtml(content.mission_text || "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.");
+  const serviceAreaTitle = stripHtml(content.service_area_title || "Service Area");
+  const serviceAreaIntro = stripHtml(content.service_area_intro || "We proudly serve Austin, Cedar Park, Round Rock, Houston and surrounding areas in Central Texas.");
+
   return (
     <main className="pt-20">
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            About LivelyLightingCo
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We're Austin's premier Govee lighting installation experts,
-            dedicated to transforming homes with beautiful, permanent outdoor
-            lighting solutions.
-          </p>
+          <EditableArea editPath={contentEditPath("about", "page_title")} label="Page Title">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              {pageTitle}
+            </h1>
+          </EditableArea>
+          <EditableArea editPath={contentEditPath("about", "page_subtitle")} label="Page Subtitle">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {pageSubtitle}
+            </p>
+          </EditableArea>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
@@ -53,23 +68,29 @@ const About = () => {
         </div>
 
         <div className="bg-indigo-50 rounded-2xl p-12 mb-20">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            Our Mission
-          </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto text-center">
-            To provide homeowners with beautiful, permanent lighting solutions
-            that enhance their homes year-round, installed with expert
-            craftsmanship at an affordable price.
-          </p>
+          <EditableArea editPath={contentEditPath("about", "mission_title")} label="Mission Title">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+              {missionTitle}
+            </h2>
+          </EditableArea>
+          <EditableArea editPath={contentEditPath("about", "mission_text")} label="Mission Text">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto text-center">
+              {missionText}
+            </p>
+          </EditableArea>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            Service Area
-          </h2>
-          <p className="text-lg text-gray-600 mb-4">
-            We proudly serve the greater Austin area, including:
-          </p>
+          <EditableArea editPath={contentEditPath("about", "service_area_title")} label="Service Area Title">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              {serviceAreaTitle}
+            </h2>
+          </EditableArea>
+          <EditableArea editPath={contentEditPath("about", "service_area_intro")} label="Service Area Introduction">
+            <p className="text-lg text-gray-600 mb-4">
+              {serviceAreaIntro}
+            </p>
+          </EditableArea>
           <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-700">
             <li>• Austin</li>
             <li>• Round Rock</li>
