@@ -2,6 +2,7 @@ import { Users, Award, PenTool as Tool } from "lucide-react";
 import { usePageContent } from "../hooks/useContent";
 import { stripHtml } from "../lib/stripHtml";
 import { EditableArea, contentEditPath } from "../components/EditableArea";
+import { SEO } from "../components/SEO";
 
 const About = () => {
   const { content } = usePageContent("about");
@@ -13,9 +14,18 @@ const About = () => {
   const missionText = stripHtml(content.mission_text || "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.");
   const serviceAreaTitle = stripHtml(content.service_area_title || "Service Area");
   const serviceAreaIntro = stripHtml(content.service_area_intro || "We proudly serve Austin, Cedar Park, Round Rock, Houston and surrounding areas in Central Texas.");
+  const serviceAreasList = stripHtml(content.service_areas_list || "Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander, Buda, Kyle, Lakeway");
+
+  // Parse the comma-separated list into an array
+  const serviceAreas = serviceAreasList.split(",").map(city => city.trim()).filter(Boolean);
 
   return (
     <main className="pt-20">
+      <SEO
+        canonical="/about"
+        title="About Us - Austin's Premier Govee Lighting Installers"
+        description="Meet LivelyLightingCo - Austin's expert Govee permanent outdoor lighting installers. Led by Jakob Rowe, we serve Cedar Park, Round Rock, Georgetown, Houston & Central Texas. 3-year warranty."
+      />
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <EditableArea editPath={contentEditPath("about", "page_title")} label="Page Title">
@@ -91,17 +101,13 @@ const About = () => {
               {serviceAreaIntro}
             </p>
           </EditableArea>
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-700">
-            <li>• Austin</li>
-            <li>• Round Rock</li>
-            <li>• Cedar Park</li>
-            <li>• Georgetown</li>
-            <li>• Pflugerville</li>
-            <li>• Leander</li>
-            <li>• Buda</li>
-            <li>• Kyle</li>
-            <li>• Lakeway</li>
-          </ul>
+          <EditableArea editPath={contentEditPath("about", "service_areas_list")} label="Service Areas List">
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-700">
+              {serviceAreas.map((city, index) => (
+                <li key={index}>• {city}</li>
+              ))}
+            </ul>
+          </EditableArea>
         </div>
       </div>
     </main>

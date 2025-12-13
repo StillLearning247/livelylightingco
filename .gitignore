@@ -34,3 +34,9 @@ dist-ssr
 
 # Testing docs
 TESTING_ISSUES.md
+
+# Playwright
+test-results/
+playwright-report/
+.playwright/
+tests/screenshots/

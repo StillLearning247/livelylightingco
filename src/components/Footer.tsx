@@ -4,11 +4,24 @@ import { Link, useLocation } from "react-router-dom";
 import { AdminLogin } from "./AdminLogin";
 import { PrivacyPolicy } from "./PrivacyPolicy";
 import { useAdmin } from "./AdminProvider";
+import { usePageContent } from "../hooks/useContent";
+import { stripHtml } from "../lib/stripHtml";
+import { EditableArea, contentEditPath } from "./EditableArea";
 
 export const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const { admin, signOut } = useAdmin();
   const location = useLocation();
+  const { content } = usePageContent("footer");
+
+  // Get content from CMS with fallbacks
+  const tagline = stripHtml(content.tagline || "Experience Govee Light Installations at an Affordable Price.");
+  const phone = stripHtml(content.phone || "(512)-809-7323");
+  const email = stripHtml(content.email || "contact@livelylightingco.com");
+  const hours = stripHtml(content.hours || "Mon-Fri: 9am-6pm");
+  const serviceArea = stripHtml(content.service_area || "Austin, TX and surrounding areas");
+  const facebookUrl = stripHtml(content.facebook_url || "https://facebook.com/livelylightingco");
+  const youtubeUrl = stripHtml(content.youtube_url || "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ");
 
   // Hide footer on admin pages
   if (location.pathname.startsWith("/admin")) return null;
@@ -24,12 +37,14 @@ export const Footer = () => {
               alt="LivelyLightingCo Logo"
               className="h-12 w-auto mb-4"
             />
-            <p className="text-gray-400 mb-6">
-              Experience Govee Light Installations at an Affordable Price.
-            </p>
+            <EditableArea editPath={contentEditPath("footer", "tagline")} label="Tagline">
+              <p className="text-gray-400 mb-6">
+                {tagline}
+              </p>
+            </EditableArea>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com/livelylightingco"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit our Facebook page"
@@ -38,7 +53,7 @@ export const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
+                href={youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Subscribe to our YouTube channel"
@@ -47,7 +62,7 @@ export const Footer = () => {
                 <Youtube className="h-5 w-5" />
               </a>
               <a
-                href="mailto:contact@livelylightingco.com"
+                href={`mailto:${email}`}
                 aria-label="Email us"
                 className="text-gray-400 hover:text-white transition-colors"
               >
@@ -83,20 +98,26 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">
-                <strong className="text-white">Phone:</strong> (512)-809-7323
-              </li>
-              <li className="text-gray-400">
-                <strong className="text-white">Email:</strong>{" "}
-                contact@livelylightingco.com
-              </li>
-              <li className="text-gray-400">
-                <strong className="text-white">Hours:</strong> Mon-Fri: 9am-6pm
-              </li>
-              <li className="text-gray-400">
-                <strong className="text-white">Service Area:</strong> Austin, TX
-                and surrounding areas
-              </li>
+              <EditableArea editPath={contentEditPath("footer", "phone")} label="Phone">
+                <li className="text-gray-400">
+                  <strong className="text-white">Phone:</strong> {phone}
+                </li>
+              </EditableArea>
+              <EditableArea editPath={contentEditPath("footer", "email")} label="Email">
+                <li className="text-gray-400">
+                  <strong className="text-white">Email:</strong> {email}
+                </li>
+              </EditableArea>
+              <EditableArea editPath={contentEditPath("footer", "hours")} label="Hours">
+                <li className="text-gray-400">
+                  <strong className="text-white">Hours:</strong> {hours}
+                </li>
+              </EditableArea>
+              <EditableArea editPath={contentEditPath("footer", "service_area")} label="Service Area">
+                <li className="text-gray-400">
+                  <strong className="text-white">Service Area:</strong> {serviceArea}
+                </li>
+              </EditableArea>
             </ul>
           </div>
         </div>

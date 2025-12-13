@@ -66,6 +66,39 @@ INSERT INTO site_content (page, section, content, updated_at) VALUES
 ('about', 'service_area_intro', 'We proudly serve Austin, Cedar Park, Round Rock, and surrounding areas in Central Texas.', NOW())
 ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
 
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('about', 'service_areas_list', 'Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander, Buda, Kyle, Lakeway', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+-- Footer
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'tagline', 'Experience Govee Light Installations at an Affordable Price.', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'phone', '(512)-809-7323', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'email', 'contact@livelylightingco.com', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'hours', 'Mon-Fri: 9am-6pm', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'service_area', 'Austin, TX and surrounding areas', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'facebook_url', 'https://facebook.com/livelylightingco', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
+INSERT INTO site_content (page, section, content, updated_at) VALUES
+('footer', 'youtube_url', 'https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ', NOW())
+ON CONFLICT (page, section) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW();
+
 -- Contact Page
 INSERT INTO site_content (page, section, content, updated_at) VALUES
 ('contact', 'form_title', 'Request a Free Quote', NOW())

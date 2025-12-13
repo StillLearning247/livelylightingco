@@ -29,11 +29,21 @@ const PAGE_SECTIONS: Record<string, ContentSection[]> = {
     { key: "mission_text", label: "Mission Text" },
     { key: "service_area_title", label: "Service Area Title" },
     { key: "service_area_intro", label: "Service Area Introduction" },
+    { key: "service_areas_list", label: "Service Areas List", description: "Comma-separated list of cities (e.g., Austin, Round Rock, Cedar Park)" },
   ],
   contact: [
     { key: "form_title", label: "Form Title" },
     { key: "consultation_title", label: "Consultation Title" },
     { key: "consultation_description", label: "Consultation Description" },
+  ],
+  footer: [
+    { key: "tagline", label: "Company Tagline", description: "Short description under the logo" },
+    { key: "phone", label: "Phone Number" },
+    { key: "email", label: "Email Address" },
+    { key: "hours", label: "Business Hours" },
+    { key: "service_area", label: "Service Area", description: "e.g., Austin, TX and surrounding areas" },
+    { key: "facebook_url", label: "Facebook URL" },
+    { key: "youtube_url", label: "YouTube URL" },
   ],
 };
 
@@ -41,7 +51,46 @@ const PAGES = [
   { id: "home", label: "Home Page" },
   { id: "about", label: "About Page" },
   { id: "contact", label: "Contact Page" },
+  { id: "footer", label: "Footer" },
 ];
+
+// Default content values (shown when database doesn't have the value yet)
+const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
+  home: {
+    hero_title: "Govee Permanent Outdoor Lighting. Expertly Installed",
+    hero_subtitle: "Year-round custom lighting. No hassle or ugly wires. All controlled from your phone. Installed by Govee lighting experts.",
+    floating_banner: "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).",
+    gallery_title: "Our Work",
+    gallery_description: "Browse our gallery of beautiful lighting installations. Each project is custom designed to complement the home's architecture.",
+    testimonials_title: "What Our Customers Say",
+    testimonials_description: "Don't just take our word for it. Here's what homeowners think about our service.",
+    difference_title: "Why Choose LivelyLightingCo",
+    difference_description: "Don't let a bad installation ruin your investment. We bring unmatched expertise to every project.",
+  },
+  about: {
+    page_title: "About LivelyLightingCo",
+    page_subtitle: "Austin's Premier Govee Permanent Lighting Installers",
+    mission_title: "Our Mission",
+    mission_text: "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.",
+    service_area_title: "Service Area",
+    service_area_intro: "We proudly serve Austin, Cedar Park, Round Rock, and surrounding areas in Central Texas.",
+    service_areas_list: "Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander, Buda, Kyle, Lakeway",
+  },
+  contact: {
+    form_title: "Request a Free Quote",
+    consultation_title: "Get Your Free Consultation",
+    consultation_description: "Fill out the form and we'll get back to you within 24 hours to schedule your free in-home consultation.",
+  },
+  footer: {
+    tagline: "Experience Govee Light Installations at an Affordable Price.",
+    phone: "(512)-809-7323",
+    email: "contact@livelylightingco.com",
+    hours: "Mon-Fri: 9am-6pm",
+    service_area: "Austin, TX and surrounding areas",
+    facebook_url: "https://facebook.com/livelylightingco",
+    youtube_url: "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ",
+  },
+};
 
 export const AdminContent = () => {
   const { content, loading, updateContent } = useAllContent();
@@ -51,10 +100,12 @@ export const AdminContent = () => {
   const [editValue, setEditValue] = useState("");
   const [saving, setSaving] = useState(false);
 
-  // Get content value for a specific page/section
+  // Get content value for a specific page/section (with fallback to defaults)
   const getContentValue = (page: string, section: string): string => {
     const item = content.find((c) => c.page === page && c.section === section);
-    return item?.content || "";
+    if (item?.content) return item.content;
+    // Return default value if database doesn't have this content yet
+    return DEFAULT_CONTENT[page]?.[section] || "";
   };
 
   // Handle URL query params to auto-open editor
@@ -64,7 +115,7 @@ export const AdminContent = () => {
 
     if (pageParam && sectionParam && content.length > 0) {
       // Set active page tab
-      if (["home", "about", "contact"].includes(pageParam)) {
+      if (["home", "about", "contact", "footer"].includes(pageParam)) {
         setActivePage(pageParam);
       }
       // Open editor for this section

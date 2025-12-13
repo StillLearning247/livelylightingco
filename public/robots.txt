@@ -1,0 +1,13 @@
+# robots.txt for LivelyLightingCo
+User-agent: *
+Allow: /
+
+# Block admin pages from indexing
+Disallow: /admin
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://livelylightingco.com/sitemap.xml
+
+# Crawl delay (optional, helps prevent overloading)
+Crawl-delay: 1

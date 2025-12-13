@@ -9,6 +9,7 @@ import FloatingBanner from "../components/FloatingBanner";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "../components/EditableArea";
 import { stripHtml } from "../lib/stripHtml";
+import { SEO } from "../components/SEO";
 
 const Home = () => {
   const location = useLocation();
@@ -43,7 +44,11 @@ const Home = () => {
   }, [location]);
   return (
     <main className="bg-neutral-950">
-      {" "}
+      <SEO
+        canonical="/"
+        title="Govee Permanent Outdoor Lighting Installation"
+        description="Professional Govee permanent outdoor lighting installation in Austin, Cedar Park, Round Rock & Houston TX. Expert installers, 3-year warranty. Best price guarantee - we beat competitors!"
+      />
       {/* optional, keeps any tiny gaps dark */}
       <EditableArea
         editPath={contentEditPath("home", "floating_banner")}

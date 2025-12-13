@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { useTestimonials } from "../hooks/useTestimonials";
 import { usePageContent } from "../hooks/useContent";
 import { EditableArea, contentEditPath } from "./EditableArea";
@@ -71,8 +72,47 @@ export const Testimonials = () => {
 
   const active = testimonials[index];
 
+  // Calculate aggregate rating for structured data
+  const avgRating = testimonials.length > 0
+    ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1)
+    : "5.0";
+
+  // Generate AggregateRating schema
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://livelylightingco.com/#business",
+    "name": "LivelyLightingCo",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": avgRating,
+      "reviewCount": testimonials.length,
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": testimonials.map((t) => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": t.name
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": t.rating,
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": t.quote
+    }))
+  };
+
   return (
     <section className="py-20 bg-indigo-900 text-white">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(reviewSchema)}
+        </script>
+      </Helmet>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <EditableArea

@@ -22,8 +22,12 @@
         Smart LED Lighting Round Rock, Smart LED Lighting Austin,
         Govee lighting near me, outdoor LED lights, Govee installation near me,"
       />
-      <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://livelylightingco.netlify.app" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <link rel="canonical" href="https://livelylightingco.com/" />
+      <meta name="geo.region" content="US-TX" />
+      <meta name="geo.placename" content="Cedar Park, Texas" />
+      <meta name="geo.position" content="30.5052;-97.8203" />
+      <meta name="ICBM" content="30.5052, -97.8203" />
 
       <!-- Open Graph (Facebook, LinkedIn, etc.) -->
       <meta property="og:type" content="website" />
@@ -82,15 +86,24 @@
       <noscript>
         <link rel="stylesheet" href="/src/index.css" />
       </noscript>
+      <!-- LocalBusiness Schema -->
       <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
+        "@id": "https://livelylightingco.com/#business",
         "name": "LivelyLightingCo",
-        "description": "Professional Govee permanent outdoor lighting installation in Cedar Park, Round Rock, and Austin, TX.",
-        "image": "https://livelylightingco.com/images/House4.jpg",
+        "alternateName": "Lively Lighting Co",
+        "description": "Professional Govee permanent outdoor lighting installation in Cedar Park, Round Rock, Austin, and Houston TX. Expert LED lighting installers with 3-year warranty.",
+        "image": [
+          "https://res.cloudinary.com/dhmijpfiy/image/upload/v1/House4.jpg",
+          "https://res.cloudinary.com/dhmijpfiy/image/upload/v1/House6_kmwq4e"
+        ],
         "url": "https://livelylightingco.com",
-        "logo": "public/images/lively-logo.jpg",
+        "logo": "https://livelylightingco.com/images/lively-logo.jpg",
+        "telephone": "+1-512-809-7323",
+        "email": "contact@livelylightingco.com",
+        "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Cedar Park",
@@ -98,24 +111,146 @@
           "postalCode": "78613",
           "addressCountry": "US"
         },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 30.5052,
+          "longitude": -97.8203
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
         "areaServed": [
-          {
-            "@type": "Place",
-            "name": "Austin TX"
-          },
-          {
-            "@type": "Place",
-            "name": "Cedar Park TX"
-          },
-          {
-            "@type": "Place",
-            "name": "Round Rock TX"
-          }
+          {"@type": "City", "name": "Austin", "sameAs": "https://en.wikipedia.org/wiki/Austin,_Texas"},
+          {"@type": "City", "name": "Cedar Park"},
+          {"@type": "City", "name": "Round Rock"},
+          {"@type": "City", "name": "Georgetown"},
+          {"@type": "City", "name": "Pflugerville"},
+          {"@type": "City", "name": "Leander"},
+          {"@type": "City", "name": "Lakeway"},
+          {"@type": "City", "name": "Buda"},
+          {"@type": "City", "name": "Kyle"},
+          {"@type": "City", "name": "Houston", "sameAs": "https://en.wikipedia.org/wiki/Houston"}
         ],
         "sameAs": [
           "https://www.instagram.com/livelylightingco",
-          "https://www.facebook.com/livelylightingco"
+          "https://www.facebook.com/livelylightingco",
+          "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Govee Lighting Installation Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Govee Permanent Outdoor Lighting Installation",
+                "description": "Professional installation of Govee permanent LED outdoor lighting with premium track mounting system"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Smart LED Lighting Setup",
+                "description": "Complete setup and configuration of app-controlled smart LED lighting systems"
+              }
+            }
+          ]
+        }
+      }
+      </script>
+
+      <!-- Service Schema -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Outdoor Lighting Installation",
+        "name": "Govee Permanent Outdoor Lighting Installation",
+        "description": "Professional installation of Govee permanent outdoor LED lighting. Includes premium track mounting system, weatherproofing, and app setup. 3-year warranty included.",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://livelylightingco.com/#business"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Texas"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Installation Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Free Consultation",
+                "description": "Free in-home consultation to assess your lighting needs"
+              }
+            }
+          ]
+        }
+      }
+      </script>
+
+      <!-- FAQ Schema -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Govee permanent outdoor lighting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Govee permanent outdoor lighting is a smart LED lighting system that stays installed year-round. Unlike temporary holiday lights, these lights use a premium track mounting system for a clean, professional look and can be controlled via smartphone app to display any color or pattern."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What areas do you serve?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We serve the greater Austin area including Cedar Park, Round Rock, Georgetown, Pflugerville, Leander, Lakeway, Buda, Kyle, and Houston, Texas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer a warranty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we offer a comprehensive 3-year warranty on all our installations, covering craftsmanship and ensuring your lights perform perfectly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does Govee permanent lighting installation cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pricing varies based on your home's size and complexity. We offer free consultations and will beat any quote from competitors like Jellyfish, Trimlight, Oelo, or Gemstone (Astoria). Contact us for a free quote."
+            }
+          }
         ]
+      }
+      </script>
+
+      <!-- WebSite Schema for Sitelinks Search -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "LivelyLightingCo",
+        "url": "https://livelylightingco.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://livelylightingco.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
       </script>
     </head>

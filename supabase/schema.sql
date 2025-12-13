@@ -180,6 +180,7 @@ INSERT INTO site_content (page, section, content) VALUES
   ('about', 'mission_text', 'To provide homeowners with beautiful, permanent lighting solutions that enhance their homes year-round, installed with expert craftsmanship at an affordable price.'),
   ('about', 'service_area_title', 'Service Area'),
   ('about', 'service_area_intro', 'We proudly serve the greater Austin area, including:'),
+  ('about', 'service_areas_list', 'Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander, Buda, Kyle, Lakeway'),
 
   -- Contact page
   ('contact', 'form_title', 'Request a Free Quote'),
