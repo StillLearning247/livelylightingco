@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { usePromoSettings } from "../hooks/usePromoSettings";
+import { useActivePromo } from "../hooks/usePromoSettings";
 
 const PROMO_DISMISSED_KEY = "promo_popup_dismissed";
 
 export const PromoPopup = () => {
-  const { settings, loading } = usePromoSettings();
+  const { promo, loading } = useActivePromo();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     // Check if popup should be shown
     if (loading) return;
 
-    // Don't show if settings not loaded or promo is disabled
-    if (!settings?.enabled) return;
+    // Don't show if no active promo
+    if (!promo) return;
 
     // Check if user has already dismissed this session
     const dismissed = sessionStorage.getItem(PROMO_DISMISSED_KEY);
@@ -26,7 +26,7 @@ export const PromoPopup = () => {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [settings, loading]);
+  }, [promo, loading]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -52,7 +52,7 @@ export const PromoPopup = () => {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isVisible]);
 
-  if (!isVisible || !settings?.image_url) {
+  if (!isVisible || !promo?.image_url) {
     return null;
   }
 
@@ -77,8 +77,8 @@ export const PromoPopup = () => {
         {/* Promo image */}
         <div className="rounded-xl overflow-hidden shadow-2xl bg-white">
           <img
-            src={settings.image_url}
-            alt="Special promotion"
+            src={promo.image_url}
+            alt={promo.name || "Special promotion"}
             className="w-full h-auto"
           />
         </div>

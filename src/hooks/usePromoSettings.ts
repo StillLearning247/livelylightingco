@@ -1,9 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 
-interface PromoSettings {
-  id?: string;
-  enabled: boolean;
+export interface ScheduledPromo {
+  id: string;
+  name: string;
   image_url: string;
+  start_date: string | null;
+  end_date: string | null;
+  is_active: boolean;
+  priority: number;
+  created_at?: string;
   updated_at?: string;
 }
 
@@ -70,118 +75,161 @@ async function supabaseRest<T>(
 }
 
 /**
- * Hook to fetch promo settings (public - for displaying popup)
+ * Check if a promo is currently active based on its schedule
  */
-export const usePromoSettings = () => {
-  const [settings, setSettings] = useState<PromoSettings | null>(null);
+function isPromoCurrentlyActive(promo: ScheduledPromo): boolean {
+  if (!promo.is_active) return false;
+
+  const now = new Date();
+
+  // If no start date, it's always valid from the start
+  if (promo.start_date) {
+    const startDate = new Date(promo.start_date);
+    if (now < startDate) return false;
+  }
+
+  // If no end date, it runs indefinitely
+  if (promo.end_date) {
+    const endDate = new Date(promo.end_date);
+    if (now > endDate) return false;
+  }
+
+  return true;
+}
+
+/**
+ * Hook to fetch the currently active promo (public - for displaying popup)
+ * Returns the highest priority active promo that's within its scheduled dates
+ */
+export const useActivePromo = () => {
+  const [promo, setPromo] = useState<ScheduledPromo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchSettings = async () => {
+    const fetchActivePromo = async () => {
       setLoading(true);
-      const { data, error } = await supabaseRest<PromoSettings[]>(
-        "promo_settings?limit=1"
+      // Fetch all active promos, ordered by priority (highest first)
+      const { data, error } = await supabaseRest<ScheduledPromo[]>(
+        "scheduled_promos?is_active=eq.true&order=priority.desc,created_at.desc"
       );
 
       if (error) {
-        console.error("Error fetching promo settings:", error);
+        console.error("Error fetching promos:", error);
         setError(error);
       } else {
-        setSettings(data?.[0] || null);
+        // Find the first promo that's currently within its scheduled dates
+        const activePromo = data?.find(isPromoCurrentlyActive) || null;
+        setPromo(activePromo);
       }
       setLoading(false);
     };
 
-    fetchSettings();
+    fetchActivePromo();
   }, []);
 
-  return { settings, loading, error };
+  return { promo, loading, error };
 };
 
 /**
- * Hook for admin to manage promo settings
+ * Hook for admin to manage all scheduled promos
  */
-export const useAdminPromoSettings = () => {
-  const [settings, setSettings] = useState<PromoSettings | null>(null);
+export const useAdminPromos = () => {
+  const [promos, setPromos] = useState<ScheduledPromo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSettings = useCallback(async () => {
+  const fetchPromos = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await supabaseRest<PromoSettings[]>(
-      "promo_settings?limit=1",
+    const { data, error } = await supabaseRest<ScheduledPromo[]>(
+      "scheduled_promos?order=priority.desc,created_at.desc",
       { requireAuth: true }
     );
 
     if (error) {
       setError(error);
     } else {
-      setSettings(data?.[0] || { enabled: false, image_url: "/images/NewYears flyer2026.png" });
+      setPromos(data || []);
     }
     setLoading(false);
   }, []);
 
   useEffect(() => {
-    fetchSettings();
-  }, [fetchSettings]);
+    fetchPromos();
+  }, [fetchPromos]);
 
-  const updateSettings = async (newSettings: Partial<PromoSettings>) => {
-    if (settings?.id) {
-      // Update existing - don't include id in body
-      const { error } = await supabaseRest(
-        `promo_settings?id=eq.${settings.id}`,
-        {
-          method: "PATCH",
-          requireAuth: true,
-          body: {
-            enabled: newSettings.enabled ?? settings.enabled,
-            image_url: newSettings.image_url ?? settings.image_url,
-            updated_at: new Date().toISOString(),
-          },
-        }
-      );
+  const addPromo = async (promo: Omit<ScheduledPromo, "id" | "created_at" | "updated_at">) => {
+    const { error } = await supabaseRest("scheduled_promos", {
+      method: "POST",
+      requireAuth: true,
+      body: {
+        ...promo,
+        updated_at: new Date().toISOString(),
+      },
+    });
 
-      if (error) {
-        console.error("Error updating promo settings:", error);
-        throw new Error(error);
-      }
-    } else {
-      // Insert new
-      const { error } = await supabaseRest("promo_settings", {
-        method: "POST",
-        requireAuth: true,
-        body: {
-          enabled: newSettings.enabled ?? false,
-          image_url: newSettings.image_url ?? "/images/NewYears flyer2026.png",
-          updated_at: new Date().toISOString(),
-        },
-      });
-
-      if (error) {
-        console.error("Error inserting promo settings:", error);
-        throw new Error(error);
-      }
+    if (error) {
+      console.error("Error adding promo:", error);
+      throw new Error(error);
     }
 
-    await fetchSettings();
+    await fetchPromos();
   };
 
-  const toggleEnabled = async () => {
-    await updateSettings({ enabled: !settings?.enabled });
+  const updatePromo = async (id: string, updates: Partial<ScheduledPromo>) => {
+    const { error } = await supabaseRest(
+      `scheduled_promos?id=eq.${id}`,
+      {
+        method: "PATCH",
+        requireAuth: true,
+        body: {
+          ...updates,
+          updated_at: new Date().toISOString(),
+        },
+      }
+    );
+
+    if (error) {
+      console.error("Error updating promo:", error);
+      throw new Error(error);
+    }
+
+    await fetchPromos();
   };
 
-  const updateImageUrl = async (imageUrl: string) => {
-    await updateSettings({ image_url: imageUrl });
+  const deletePromo = async (id: string) => {
+    const { error } = await supabaseRest(
+      `scheduled_promos?id=eq.${id}`,
+      {
+        method: "DELETE",
+        requireAuth: true,
+      }
+    );
+
+    if (error) {
+      console.error("Error deleting promo:", error);
+      throw new Error(error);
+    }
+
+    await fetchPromos();
+  };
+
+  const toggleActive = async (id: string, currentActive: boolean) => {
+    await updatePromo(id, { is_active: !currentActive });
   };
 
   return {
-    settings,
+    promos,
     loading,
     error,
-    updateSettings,
-    toggleEnabled,
-    updateImageUrl,
-    refetch: fetchSettings,
+    addPromo,
+    updatePromo,
+    deletePromo,
+    toggleActive,
+    refetch: fetchPromos,
+    isPromoCurrentlyActive,
   };
 };
+
+// Legacy exports for backwards compatibility
+export const usePromoSettings = useActivePromo;

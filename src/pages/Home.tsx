@@ -2,7 +2,7 @@ import { Hero } from "../components/Hero";
 import { Gallery } from "../components/Gallery";
 import { Difference } from "../components/Difference";
 import { Testimonials } from "../components/Testimonials";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import FloatingBanner from "../components/FloatingBanner";
@@ -11,9 +11,19 @@ import { EditableArea, contentEditPath } from "../components/EditableArea";
 import { stripHtml } from "../lib/stripHtml";
 import { SEO } from "../components/SEO";
 
+const BANNER_DISMISSED_KEY = "floating_banner_dismissed";
+
 const Home = () => {
   const location = useLocation();
   const { content } = usePageContent("home");
+  const [bannerVisible, setBannerVisible] = useState(() => {
+    return !sessionStorage.getItem(BANNER_DISMISSED_KEY);
+  });
+
+  const handleCloseBanner = () => {
+    setBannerVisible(false);
+    sessionStorage.setItem(BANNER_DISMISSED_KEY, "true");
+  };
 
   // Get floating banner content from database with fallback (strip HTML tags)
   const bannerMessage = stripHtml(content.floating_banner || "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).");
@@ -50,21 +60,24 @@ const Home = () => {
         description="Professional Govee permanent outdoor lighting installation in Austin, Cedar Park, Round Rock & Houston TX. Expert installers, 3-year warranty. Best price guarantee - we beat competitors!"
       />
       {/* optional, keeps any tiny gaps dark */}
-      <EditableArea
-        editPath={contentEditPath("home", "floating_banner")}
-        label="Banner Text"
-      >
-        <FloatingBanner
-          message={bannerMessage}
-          variant="marquee"
-          tone="brand"
-          duration={60000}
-          stickyTop="top-20 sm:top-24"
-          className="z-40"
-          reserveSpace
-          reserveGapPx={8}
-        />
-      </EditableArea>
+      {bannerVisible && (
+        <EditableArea
+          editPath={contentEditPath("home", "floating_banner")}
+          label="Banner Text"
+        >
+          <FloatingBanner
+            message={bannerMessage}
+            variant="marquee"
+            tone="brand"
+            duration={60000}
+            stickyTop="top-20 sm:top-24"
+            className="z-40"
+            reserveSpace
+            reserveGapPx={8}
+            onClose={handleCloseBanner}
+          />
+        </EditableArea>
+      )}
       <section
         id="home"
         className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-40 xl:scroll-mt-44"
