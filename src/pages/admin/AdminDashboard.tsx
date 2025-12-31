@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { AdminSidebar } from "../../components/admin/AdminSidebar";
 
@@ -26,14 +26,12 @@ export const AdminDashboard = () => {
               <Menu className="h-6 w-6" />
             </button>
             <div className="hidden lg:block" />
-            <a
-              href="/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/"
               className="text-sm text-indigo-600 hover:text-indigo-800"
             >
               View Live Site &rarr;
-            </a>
+            </Link>
           </div>
         </header>
 
