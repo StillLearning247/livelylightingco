@@ -11,6 +11,7 @@ import { supabase } from "./lib/supabase";
 
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { PromoPopup } from "./components/PromoPopup";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -24,6 +25,7 @@ import { AdminOverview } from "./pages/admin/AdminOverview";
 import { AdminGallery } from "./pages/admin/AdminGallery";
 import { AdminContent } from "./pages/admin/AdminContent";
 import { AdminTestimonials } from "./pages/admin/AdminTestimonials";
+import { AdminPromo } from "./pages/admin/AdminPromo";
 
 // Helper to get session directly from localStorage (avoids hanging Supabase client)
 function getSessionFromStorage(): { userId: string; email: string; accessToken: string } | null {
@@ -73,6 +75,7 @@ function App() {
 
         <div className="min-h-screen bg-gray-50">
           <Navbar />
+          <PromoPopup />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -91,6 +94,7 @@ function App() {
               <Route path="gallery" element={<AdminGallery />} />
               <Route path="content" element={<AdminContent />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="promo" element={<AdminPromo />} />
             </Route>
 
             {/* Optional: 404 */}

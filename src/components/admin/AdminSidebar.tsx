@@ -4,6 +4,7 @@ import {
   Image,
   FileText,
   MessageSquareQuote,
+  Megaphone,
   LogOut,
   X,
 } from "lucide-react";
@@ -19,6 +20,7 @@ const navItems = [
   { to: "/admin/gallery", icon: Image, label: "Gallery" },
   { to: "/admin/content", icon: FileText, label: "Page Content" },
   { to: "/admin/testimonials", icon: MessageSquareQuote, label: "Testimonials" },
+  { to: "/admin/promo", icon: Megaphone, label: "Promo Popup" },
 ];
 
 export const AdminSidebar = ({ isOpen, onClose }: AdminSidebarProps) => {
