@@ -75,7 +75,6 @@ export const Gallery: React.FC<GalleryProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [centerIndex, setCenterIndex] = useState(0); // ← track active slide
   const ref = React.useRef<any>(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -163,8 +162,6 @@ export const Gallery: React.FC<GalleryProps> = ({
                   swipeThreshold={0}
                   disableSwipe={isMobile}
                   transitionSpeed={8}
-                  onDragStart={() => setIsDragging(true)}
-                  onDragEnd={() => setIsDragging(false)}
                   customScales={[1, 0.9, 0.8, 0.7]}
                   transitionTime={450}
                   onActiveSlideChange={setCenterIndex} // ← update active index

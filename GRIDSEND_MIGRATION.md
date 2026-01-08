@@ -52,9 +52,9 @@ Email delivered directly to business owner
 - [ ] Monitor for any issues over a few submissions
 
 ### Phase 3: Switch Over
-- [ ] **USER ACTION:** Turn off Zapier automation
-- [ ] Test that SendGrid emails still arrive
-- [ ] Confirm vCita client creation still works (for CRM purposes)
+- [x] **USER ACTION:** Turn off Zapier automation (DONE 2026-01-08)
+- [x] Test that SendGrid emails still arrive
+- [x] Confirm vCita client creation still works (for CRM purposes)
 
 ### Phase 4: Cleanup (Optional)
 - [ ] Decide if vCita integration is still needed

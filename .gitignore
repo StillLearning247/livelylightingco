@@ -40,3 +40,12 @@ test-results/
 playwright-report/
 .playwright/
 tests/screenshots/
+
+# Supabase temp files
+supabase/.temp/
+
+# Vite temp files
+vite.config.ts.timestamp-*
+
+# Windows artifacts
+nul
