@@ -63,6 +63,21 @@ export const Consultation = () => {
         throw new Error(errorData.error || "Failed to create lead in vCita");
       }
 
+      // SendGrid email notification (runs alongside Zapier during migration)
+      try {
+        await fetch(`${SUPABASE_URL}/functions/v1/send-email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify(formData),
+        });
+      } catch (emailError) {
+        // Log but don't fail - Zapier is still active as backup
+        console.error("SendGrid email error (non-fatal):", emailError);
+      }
+
       setStatus("success");
     } catch (error) {
       console.error("Error submitting form:", error);
