@@ -1,4 +1,10 @@
-/// <reference no-default-lib="true" />
+// Deno type declarations for Supabase Edge Functions
+declare const Deno: {
+  env: {
+    get(key: string): string | undefined;
+  };
+  serve(handler: (req: Request) => Response | Promise<Response>): void;
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -81,7 +87,7 @@ const buildEmailText = (data: FormPayload): string => {
   return text;
 };
 
-Deno.serve(async (req) => {
+Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -90,7 +96,7 @@ Deno.serve(async (req) => {
     // Parse JSON safely
     let payload: FormPayload;
     try {
-      payload = await req.json();
+      payload = await req.json() as FormPayload;
     } catch {
       return new Response(JSON.stringify({ error: "Invalid JSON payload" }), {
         status: 400,
@@ -198,10 +204,11 @@ Deno.serve(async (req) => {
     throw new Error(
       `SendGrid API Error: ${sendGridResponse.status} - ${JSON.stringify(errorData)}`
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Function error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return new Response(
-      JSON.stringify({ error: error.message, details: error.stack }),
+      JSON.stringify({ error: errorMessage }),
       {
         status: 400,
         headers: {
