@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Loader2,
   Plus,
@@ -12,8 +12,12 @@ import {
   ChevronUp,
   Check,
   X,
+  Upload,
 } from "lucide-react";
 import { useAdminPromos, ScheduledPromo } from "../../hooks/usePromoSettings";
+import cld from "../../lib/cloudinary";
+import { scale } from "@cloudinary/url-gen/actions/resize";
+import { quality } from "@cloudinary/url-gen/actions/delivery";
 
 // Helper to format date for datetime-local input
 const formatDateForInput = (dateString: string | null): string => {
@@ -81,6 +85,16 @@ const emptyFormData: PromoFormData = {
   is_active: true,
 };
 
+// Helper to get optimized Cloudinary URL for promo images
+const getCloudinaryUrl = (publicId: string): string => {
+  const cldImage = cld.image(publicId);
+  cldImage
+    .format("auto")
+    .delivery(quality("auto"))
+    .resize(scale().width(800));
+  return cldImage.toURL();
+};
+
 export const AdminPromo = () => {
   const {
     promos,
@@ -99,6 +113,9 @@ export const AdminPromo = () => {
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleAddNew = () => {
     setFormData(emptyFormData);
@@ -180,6 +197,84 @@ export const AdminPromo = () => {
     }
   };
 
+  // Upload file to Cloudinary
+  const uploadToCloudinary = async (file: File) => {
+    const cloudName = "dydz0lw6e";
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "ml_default";
+
+    const formDataUpload = new FormData();
+    formDataUpload.append("file", file);
+    formDataUpload.append("upload_preset", uploadPreset);
+    formDataUpload.append("folder", "livelylighting/promos");
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "POST",
+        body: formDataUpload,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Upload failed");
+    }
+
+    return response.json();
+  };
+
+  const handleFileUpload = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload an image file");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const result = await uploadToCloudinary(file);
+      const imageUrl = getCloudinaryUrl(result.public_id);
+      setFormData({ ...formData, image_url: imageUrl });
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("Failed to upload image. Please try again.");
+    }
+    setUploading(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const handleBrowseClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleRemoveImage = () => {
+    setFormData({ ...formData, image_url: "" });
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -249,37 +344,89 @@ export const AdminPromo = () => {
                 />
               </div>
 
-              {/* Image URL */}
+              {/* Image Upload */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Image Path *
+                  Promo Image *
                 </label>
-                <input
-                  type="text"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  placeholder="/images/your-promo.png"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  required
-                />
-                <p className="mt-1 text-xs text-slate-500">
-                  Path to image in public folder or full URL
-                </p>
-              </div>
 
-              {/* Image Preview */}
-              {formData.image_url && (
-                <div className="border border-slate-200 rounded-lg overflow-hidden bg-slate-50">
-                  <img
-                    src={formData.image_url}
-                    alt="Preview"
-                    className="w-full h-auto max-h-48 object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </div>
-              )}
+                {/* Hidden file input */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileInputChange}
+                  className="hidden"
+                />
+
+                {formData.image_url ? (
+                  /* Image Preview with remove option */
+                  <div className="relative border border-slate-200 rounded-lg overflow-hidden bg-slate-50">
+                    <img
+                      src={formData.image_url}
+                      alt="Preview"
+                      className="w-full h-auto max-h-48 object-contain"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                    <div className="absolute top-2 right-2 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={handleBrowseClick}
+                        className="p-2 bg-white/90 text-slate-700 rounded-lg hover:bg-white transition-colors shadow-sm"
+                        title="Replace image"
+                      >
+                        <Upload className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleRemoveImage}
+                        className="p-2 bg-red-500/90 text-white rounded-lg hover:bg-red-600 transition-colors shadow-sm"
+                        title="Remove image"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  /* Drag and Drop Zone */
+                  <div
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onClick={handleBrowseClick}
+                    className={`relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
+                      isDragOver
+                        ? "border-indigo-500 bg-indigo-50"
+                        : "border-slate-300 hover:border-indigo-400 hover:bg-slate-50"
+                    } ${uploading ? "pointer-events-none opacity-60" : ""}`}
+                  >
+                    {uploading ? (
+                      <div className="flex flex-col items-center">
+                        <Loader2 className="h-10 w-10 text-indigo-500 animate-spin mb-3" />
+                        <p className="text-sm text-slate-600">Uploading image...</p>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center">
+                        <div className={`p-3 rounded-full mb-3 ${
+                          isDragOver ? "bg-indigo-100" : "bg-slate-100"
+                        }`}>
+                          <Upload className={`h-6 w-6 ${
+                            isDragOver ? "text-indigo-600" : "text-slate-400"
+                          }`} />
+                        </div>
+                        <p className="text-sm font-medium text-slate-700 mb-1">
+                          {isDragOver ? "Drop image here" : "Drag & drop an image"}
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          or click to browse
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
 
               {/* Start Date */}
               <div>
