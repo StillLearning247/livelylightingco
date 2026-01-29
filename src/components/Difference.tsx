@@ -23,7 +23,7 @@ export const Difference = () => {
   return (
     <section
       id="difference"
-      className="py-20 bg-gradient-to-br from-indigo-50 to-white"
+      className="py-20 bg-gradient-to-b from-indigo-50 to-white"
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
