@@ -10,6 +10,18 @@ html {
     sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(135deg, #E84388, #A64AC9, #5B6BBF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -25,19 +37,27 @@ html {
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Lightbox animations */
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightboxScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-lightbox-fade-in {
+  animation: lightboxFadeIn 0.25s ease-out forwards;
+}
+
+.animate-lightbox-scale-in {
+  animation: lightboxScaleIn 0.3s ease-out forwards;
 }
 
 /* Custom styling for form elements */
@@ -142,7 +162,7 @@ button:focus {
 
 .carousel-container .carousel .thumb.selected,
 .carousel-container .carousel .thumb:hover {
-  @apply border-indigo-500;
+  border-color: #2DECCC;
 }
 
 .carousel-container .carousel .thumbs-wrapper {
