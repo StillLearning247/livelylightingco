@@ -27,7 +27,10 @@ export const Footer = () => {
   if (location.pathname.startsWith("/admin")) return null;
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-surface-950 text-white">
+      {/* Gradient top border */}
+      <div className="h-px bg-brand-gradient-r w-full" />
+
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -38,7 +41,7 @@ export const Footer = () => {
               className="h-12 w-auto mb-4"
             />
             <EditableArea editPath={contentEditPath("footer", "tagline")} label="Tagline">
-              <p className="text-gray-400 mb-6">
+              <p className="text-surface-400 mb-6">
                 {tagline}
               </p>
             </EditableArea>
@@ -48,7 +51,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit our Facebook page"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-surface-400 hover:text-brand-300 transition-colors"
               >
                 <Facebook className="h-5 w-5" />
               </a>
@@ -57,14 +60,14 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Subscribe to our YouTube channel"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-surface-400 hover:text-brand-300 transition-colors"
               >
                 <Youtube className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${email}`}
                 aria-label="Email us"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-surface-400 hover:text-brand-300 transition-colors"
               >
                 <Mail className="h-5 w-5" />
               </a>
@@ -73,7 +76,7 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-heading text-lg font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {[
                 { to: "/", label: "Home" },
@@ -85,7 +88,7 @@ export const Footer = () => {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-surface-400 hover:text-brand-300 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -96,25 +99,25 @@ export const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="font-heading text-lg font-semibold text-white mb-4">Contact Us</h3>
             <ul className="space-y-2">
               <EditableArea editPath={contentEditPath("footer", "phone")} label="Phone">
-                <li className="text-gray-400">
+                <li className="text-surface-400">
                   <strong className="text-white">Phone:</strong> {phone}
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "email")} label="Email">
-                <li className="text-gray-400">
+                <li className="text-surface-400">
                   <strong className="text-white">Email:</strong> {email}
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "hours")} label="Hours">
-                <li className="text-gray-400">
+                <li className="text-surface-400">
                   <strong className="text-white">Hours:</strong> {hours}
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "service_area")} label="Service Area">
-                <li className="text-gray-400">
+                <li className="text-surface-400">
                   <strong className="text-white">Service Area:</strong> {serviceArea}
                 </li>
               </EditableArea>
@@ -123,8 +126,8 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
+        <div className="border-t border-surface-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-surface-400 text-sm mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} LivelyLightingCo. All rights
             reserved.
           </p>
@@ -136,13 +139,13 @@ export const Footer = () => {
             />
             {admin ? (
               <div className="flex items-center gap-3">
-                <span className="text-gray-400 text-sm flex items-center gap-1">
+                <span className="text-surface-400 text-sm flex items-center gap-1">
                   <User className="h-4 w-4" />
                   Logged in as: <span className="text-white">{admin.username || admin.email || "Admin"}</span>
                 </span>
                 <button
                   onClick={signOut}
-                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-sm"
+                  className="text-surface-400 hover:text-brand-300 transition-colors flex items-center gap-1 text-sm"
                 >
                   <LogOut className="h-4 w-4" />
                   Logout

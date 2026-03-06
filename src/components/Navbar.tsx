@@ -28,12 +28,29 @@ export const Navbar = () => {
   // Hide navbar on admin pages (admin has its own layout)
   if (isAdminPage) return null;
 
+  const navLinkBase = "font-heading text-sm font-semibold tracking-wide uppercase transition-colors px-3 py-1.5 rounded-md";
+
+  const navLinkClass = (path: string) => {
+    if (isActive(path))
+      return `${navLinkBase} text-brand-300 border-b-2 border-brand-300`;
+    if (isHomePage && !isScrolled)
+      return `${navLinkBase} text-white hover:text-brand-300`;
+    return `${navLinkBase} text-surface-200 hover:text-brand-300`;
+  };
+
+  // For gallery link (no active state match)
+  const galleryLinkClass = () => {
+    if (isHomePage && !isScrolled)
+      return `${navLinkBase} text-white hover:text-brand-300`;
+    return `${navLinkBase} text-surface-200 hover:text-brand-300`;
+  };
+
   return (
     <nav
       className={`fixed w-full z-[80] transition-all duration-300 ${
         isHomePage && !isScrolled
           ? "bg-transparent py-4"
-          : "bg-white shadow-md py-2"
+          : "bg-surface-900/95 backdrop-blur-md shadow-lg py-2"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -46,38 +63,16 @@ export const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link
-            to="/"
-            className={`text-sm font-medium transition-colors ${
-              isActive("/")
-                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
-                : isHomePage && !isScrolled
-                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
-                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
-            } hover:text-indigo-500`}
-          >
+          <Link to="/" className={navLinkClass("/")}>
             Home
           </Link>
-          <Link
-            to="/about"
-            className={`text-sm font-medium transition-colors ${
-              isActive("/about")
-                ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-1.5 rounded-md relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600"
-                : isHomePage && !isScrolled
-                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
-                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
-            } hover:text-indigo-500`}
-          >
+          <Link to="/about" className={navLinkClass("/about")}>
             About
           </Link>
           <Link
             to="/#gallery"
             onClick={() => setIsMenuOpen(false)}
-            className={`text-sm font-medium transition-colors ${
-              isHomePage && !isScrolled
-                ? "text-white hover:bg-white/10 px-3 py-1.5 rounded-md"
-                : "text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-md"
-            } hover:text-indigo-500`}
+            className={galleryLinkClass()}
           >
             Gallery
           </Link>
@@ -85,20 +80,20 @@ export const Navbar = () => {
             href="https://goveelightinstallers.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+            className="px-5 py-2.5 text-sm font-heading font-semibold rounded-md border border-white/30 text-white hover:bg-white/10 transition-colors"
           >
             Book Online
           </a>
           <Link
             to="/contact"
-            className="px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg"
+            className="px-5 py-2.5 text-sm font-heading font-bold rounded-md bg-accent-400 text-surface-900 hover:bg-accent-500 transition-colors shadow-md hover:shadow-lg"
           >
             Get Free Quote
           </Link>
           {admin && (
             <Link
               to="/admin"
-              className="p-2.5 rounded-lg bg-slate-700 text-white hover:bg-slate-800 transition-colors shadow-md"
+              className="p-2.5 rounded-lg bg-surface-700 text-white hover:bg-surface-600 transition-colors shadow-md"
               title="Admin Panel"
             >
               <Settings className="h-5 w-5" />
@@ -111,15 +106,11 @@ export const Navbar = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
-            <X
-              className={`h-6 w-6 ${
-                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
-              }`}
-            />
+            <X className="h-6 w-6 text-white" />
           ) : (
             <Menu
               className={`h-6 w-6 ${
-                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
+                isHomePage && !isScrolled ? "text-white" : "text-white"
               }`}
             />
           )}
@@ -136,15 +127,15 @@ export const Navbar = () => {
             className="md:hidden fixed inset-0 z-[75] bg-black/40 backdrop-blur-sm"
           />
 
-          {/* Panel sits below the navbar (adjust top-* if your navbar is taller) */}
-          <div className="md:hidden fixed top-16 left-0 right-0 z-[80] bg-white shadow-xl rounded-b-xl">
+          {/* Panel sits below the navbar */}
+          <div className="md:hidden fixed top-16 left-0 right-0 z-[80] bg-surface-900 shadow-xl rounded-b-xl border-t border-white/10">
             <div className="px-6 py-4 space-y-3">
               <Link
                 to="/"
-                className={`block transition-colors ${
+                className={`block font-heading text-sm font-semibold tracking-wide uppercase transition-colors px-3 py-2 rounded-md ${
                   isActive("/")
-                    ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
-                    : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
+                    ? "text-brand-300 bg-brand-300/10"
+                    : "text-surface-200 hover:text-brand-300 hover:bg-white/5"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -153,10 +144,10 @@ export const Navbar = () => {
 
               <Link
                 to="/about"
-                className={`block transition-colors ${
+                className={`block font-heading text-sm font-semibold tracking-wide uppercase transition-colors px-3 py-2 rounded-md ${
                   isActive("/about")
-                    ? "text-indigo-600 font-semibold bg-indigo-50 px-3 py-2 rounded-md"
-                    : "text-gray-700 hover:bg-gray-50 px-3 py-2 rounded-md"
+                    ? "text-brand-300 bg-brand-300/10"
+                    : "text-surface-200 hover:text-brand-300 hover:bg-white/5"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -166,7 +157,7 @@ export const Navbar = () => {
               <Link
                 to="/#gallery"
                 onClick={() => setIsMenuOpen(false)}
-                className="block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
+                className="block font-heading text-sm font-semibold tracking-wide uppercase text-surface-200 hover:text-brand-300 hover:bg-white/5 px-3 py-2 rounded-md transition-colors"
               >
                 Gallery
               </Link>
@@ -175,7 +166,7 @@ export const Navbar = () => {
                 href="https://goveelightinstallers.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
+                className="block px-5 py-2.5 text-sm font-heading font-semibold rounded-md border border-white/30 text-white hover:bg-white/10 transition-colors w-full text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Book Online
@@ -183,15 +174,15 @@ export const Navbar = () => {
 
               <Link
                 to="/contact"
-                className="block px-5 py-2.5 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg w-full text-center"
+                className="block px-5 py-2.5 text-sm font-heading font-bold rounded-md bg-accent-400 text-surface-900 hover:bg-accent-500 transition-colors shadow-md w-full text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Free Quote/Contact
+                Get Free Quote
               </Link>
               {admin && (
                 <Link
                   to="/admin"
-                  className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg bg-slate-700 text-white hover:bg-slate-800 transition-colors shadow-md w-full"
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-heading font-semibold rounded-md bg-surface-700 text-white hover:bg-surface-600 transition-colors shadow-md w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Settings className="h-4 w-4" />

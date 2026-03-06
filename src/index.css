@@ -41,25 +41,6 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-/* Lightbox animations */
-@keyframes lightboxFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes lightboxScaleIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.animate-lightbox-fade-in {
-  animation: lightboxFadeIn 0.25s ease-out forwards;
-}
-
-.animate-lightbox-scale-in {
-  animation: lightboxScaleIn 0.3s ease-out forwards;
-}
-
 /* Custom styling for form elements */
 input,
 textarea {
@@ -135,36 +116,3 @@ button:focus {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Carousel customization */
-.carousel-container {
-  @apply relative;
-}
-
-.carousel-container .carousel .control-arrow {
-  @apply opacity-0 transition-opacity duration-300 bg-black/20 hover:bg-black/40 backdrop-blur-sm;
-}
-
-.carousel-container:hover .carousel .control-arrow {
-  @apply opacity-100;
-}
-
-.carousel-container .carousel .control-dots {
-  @apply bottom-4;
-}
-
-.carousel-container .carousel .control-dots .dot {
-  @apply bg-white/70 hover:bg-white transition-colors;
-}
-
-.carousel-container .carousel .thumb {
-  @apply border-2 border-transparent transition-colors;
-}
-
-.carousel-container .carousel .thumb.selected,
-.carousel-container .carousel .thumb:hover {
-  border-color: #2DECCC;
-}
-
-.carousel-container .carousel .thumbs-wrapper {
-  @apply mx-2 mt-4;
-}

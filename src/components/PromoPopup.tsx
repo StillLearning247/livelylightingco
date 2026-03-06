@@ -68,10 +68,10 @@ export const PromoPopup = () => {
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors group"
+          className="absolute -top-3 -right-3 z-10 bg-surface-900/80 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-surface-800 transition-colors group"
           aria-label="Close promotional popup"
         >
-          <X className="h-6 w-6 text-gray-600 group-hover:text-gray-900" />
+          <X className="h-6 w-6 text-white/80 group-hover:text-white" />
         </button>
 
         {/* Promo image */}

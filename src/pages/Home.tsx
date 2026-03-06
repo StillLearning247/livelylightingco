@@ -53,13 +53,12 @@ const Home = () => {
     }
   }, [location]);
   return (
-    <main className="bg-neutral-950">
+    <main className="bg-surface-950">
       <SEO
         canonical="/"
         title="Govee Permanent Outdoor Lighting Installation"
         description="Professional Govee permanent outdoor lighting installation in Austin, Cedar Park, Round Rock & Houston TX. Expert installers, 3-year warranty. Best price guarantee - we beat competitors!"
       />
-      {/* optional, keeps any tiny gaps dark */}
       {bannerVisible && (
         <EditableArea
           editPath={contentEditPath("home", "floating_banner")}
@@ -91,22 +90,18 @@ const Home = () => {
           </Suspense>
         </div>
       </section>
-      <section className="relative">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
-        <Suspense
-          fallback={<div className="text-center py-12">Loading...</div>}
-        >
-          <Testimonials />
-        </Suspense>
-      </section>
-      <section className="relative">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/10 to-transparent"></div>
-        <Suspense
-          fallback={<div className="text-center py-12">Loading...</div>}
-        >
-          <Difference />
-        </Suspense>
-      </section>
+      <Suspense
+        fallback={<div className="text-center py-12">Loading...</div>}
+      >
+        <Testimonials />
+      </Suspense>
+      {/* Smooth transition spacer from dark testimonials to light Difference */}
+      <div className="h-16 bg-gradient-to-b from-surface-950 to-surface-50" />
+      <Suspense
+        fallback={<div className="text-center py-12">Loading...</div>}
+      >
+        <Difference />
+      </Suspense>
     </main>
   );
 };
