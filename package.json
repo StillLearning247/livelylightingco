@@ -5,7 +5,8 @@
   "type": "module",
   "overrides": {
     "esbuild": ">=0.25.0",
-    "@remix-run/router": ">=1.23.2"
+    "@remix-run/router": ">=1.23.2",
+    "serialize-javascript": ">=7.0.3"
   },
   "scripts": {
     "dev": "vite",
