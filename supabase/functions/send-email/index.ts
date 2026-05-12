@@ -23,6 +23,8 @@ interface FormPayload {
   phone: string;
   address?: string;
   message?: string;
+  lead_source?: string;
+  sales_code?: string;
   website?: string; // honeypot field
 }
 
@@ -60,6 +62,20 @@ const buildEmailHtml = (data: FormPayload): string => {
           <td style="padding: 10px; border-bottom: 1px solid #eee;">${sanitize(data.address)}</td>
         </tr>
         ` : ''}
+        ${data.lead_source ? `
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">How they heard about us:</td>
+          <td style="padding: 10px; border-bottom: 1px solid #eee;">${sanitize(data.lead_source)}</td>
+        </tr>
+        ` : ''}
+        ${data.sales_code ? `
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Sales Code:</td>
+          <td style="padding: 10px; border-bottom: 1px solid #eee;">
+            <span style="display: inline-block; padding: 4px 10px; background: #fff7d6; border: 1px solid #f0c419; border-radius: 4px; font-family: monospace; font-weight: bold; letter-spacing: 1px; color: #8a6d00;">${sanitize(data.sales_code).toUpperCase()}</span>
+          </td>
+        </tr>
+        ` : ''}
         ${data.message ? `
         <tr>
           <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Message:</td>
@@ -82,6 +98,8 @@ const buildEmailText = (data: FormPayload): string => {
   text += `Email: ${sanitize(data.email)}\n`;
   text += `Phone: ${sanitize(data.phone)}\n`;
   if (data.address) text += `Address: ${sanitize(data.address)}\n`;
+  if (data.lead_source) text += `How they heard about us: ${sanitize(data.lead_source)}\n`;
+  if (data.sales_code) text += `Sales Code: ${sanitize(data.sales_code).toUpperCase()}\n`;
   if (data.message) text += `\nMessage:\n${sanitize(data.message)}\n`;
   text += `\n---\nSubmitted via Lively Lighting website`;
   return text;

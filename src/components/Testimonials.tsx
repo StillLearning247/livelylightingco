@@ -62,9 +62,9 @@ export const Testimonials = () => {
   // Show loading state while fetching
   if (testimonialsLoading || contentLoading || testimonials.length === 0) {
     return (
-      <section className="py-20 bg-indigo-900 text-white">
+      <section className="py-20 bg-surface-950 text-white">
         <div className="text-center py-20">
-          <Loader2 className="h-10 w-10 text-indigo-300 animate-spin mx-auto" />
+          <Loader2 className="h-10 w-10 text-surface-400 animate-spin mx-auto" />
         </div>
       </section>
     );
@@ -107,7 +107,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 bg-indigo-900 text-white">
+    <section className="py-20 bg-surface-950 text-white">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(reviewSchema)}
@@ -115,17 +115,19 @@ export const Testimonials = () => {
       </Helmet>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
+          {/* Gradient accent line */}
+          <div className="w-16 h-1 bg-brand-gradient-r mx-auto mb-6 rounded-full" />
           <EditableArea
             editPath={contentEditPath("home", "testimonials_title")}
             label="Testimonials Title"
           >
-            <h2 className="text-3xl font-bold mb-4">{testimonialsTitle}</h2>
+            <h2 className="font-heading text-3xl font-bold mb-4">{testimonialsTitle}</h2>
           </EditableArea>
           <EditableArea
             editPath={contentEditPath("home", "testimonials_description")}
             label="Testimonials Description"
           >
-            <p className="text-xl text-indigo-200 max-w-3xl mx-auto">
+            <p className="text-xl text-surface-400 max-w-3xl mx-auto">
               {testimonialsDescription}
             </p>
           </EditableArea>
@@ -137,44 +139,49 @@ export const Testimonials = () => {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            {/* Card with animated content */}
-            <div className="relative bg-indigo-800 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={index}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.28, ease: "easeOut" }}
-              >
-                <div className="flex mb-4">
-                  {[...Array(active.rating)].map((_, i) => (
-                    <Star
-                      key={`star-${i}`}
-                      className="w-5 h-5 text-yellow-400 fill-yellow-400"
-                    />
-                  ))}
-                </div>
+            {/* Decorative gradient glow blob */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-brand-gradient rounded-3xl blur-2xl opacity-10" />
 
-                <p className="text-lg italic mb-6">"{active.quote}"</p>
+              {/* Frosted glass card */}
+              <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={index}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.28, ease: "easeOut" }}
+                >
+                  <div className="flex mb-4">
+                    {[...Array(active.rating)].map((_, i) => (
+                      <Star
+                        key={`star-${i}`}
+                        className="w-5 h-5 text-accent-400 fill-accent-400"
+                      />
+                    ))}
+                  </div>
 
-                <div>
-                  <p className="font-semibold">{active.name}</p>
-                  <p className="text-indigo-300">{active.location}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  <p className="text-lg italic mb-6 text-surface-200">"{active.quote}"</p>
 
-          {/* Control bar: chevrons + dots (like gallery) */}
+                  <div>
+                    <p className="font-semibold text-white">{active.name}</p>
+                    <p className="text-brand-300">{active.location}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            </div>
+
+          {/* Control bar: chevrons + dots */}
           <div className="mt-6 flex w-full items-center justify-center gap-4">
             <button
               type="button"
               aria-label="Previous testimonial"
               onClick={prev}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 text-white bg-white/10 hover:bg-white/15 hover:ring-white/50 transition"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/20 text-white bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:ring-white/30 transition"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -192,7 +199,7 @@ export const Testimonials = () => {
                     className={[
                       "h-2.5 rounded-full transition-all",
                       isActive
-                        ? "w-6 bg-white"
+                        ? "w-6 bg-brand-300"
                         : "w-2.5 bg-white/30 hover:bg-white/50",
                     ].join(" ")}
                   />
@@ -204,7 +211,7 @@ export const Testimonials = () => {
               type="button"
               aria-label="Next testimonial"
               onClick={next}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 text-white bg-white/10 hover:bg-white/15 hover:ring-white/50 transition"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/20 text-white bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:ring-white/30 transition"
             >
               <ChevronRight className="h-5 w-5" />
             </button>

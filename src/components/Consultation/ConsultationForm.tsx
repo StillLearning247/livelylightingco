@@ -1,5 +1,18 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useRef } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { trackEvent } from "../../lib/analytics";
+
+// Edit this list to add/remove referral source options.
+export const LEAD_SOURCES = [
+  "Home Show",
+  "Google Search",
+  "Facebook",
+  "Instagram",
+  "TikTok",
+  "Referral / Word of Mouth",
+  "Drove By / Saw Sign",
+  "Other",
+] as const;
 
 interface FormState {
   first_name: string;
@@ -8,6 +21,8 @@ interface FormState {
   phone: string;
   address: string;
   message: string;
+  lead_source: string;
+  sales_code: string;
   website: string;
 }
 
@@ -15,16 +30,13 @@ interface ConsultationFormProps {
   onSubmit: (formData: FormState) => Promise<void>;
   status: "idle" | "submitting" | "success" | "error";
   errorMessage: string;
-  onPrivacyClick: () => void;
 }
 
 export const ConsultationForm = ({
   onSubmit,
   status,
   errorMessage,
-  onPrivacyClick,
 }: ConsultationFormProps) => {
-  // 🟢 Correctly use useState INSIDE the component
   const [formState, setFormState] = useState<FormState>({
     first_name: "",
     last_name: "",
@@ -32,13 +44,21 @@ export const ConsultationForm = ({
     phone: "",
     address: "",
     message: "",
+    lead_source: "",
+    sales_code: "",
     website: "",
   });
 
+  const formStartedRef = useRef(false);
+
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    if (!formStartedRef.current && name !== "website") {
+      formStartedRef.current = true;
+      trackEvent("form_start", "/contact");
+    }
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -51,7 +71,7 @@ export const ConsultationForm = ({
     <form onSubmit={handleSubmit} className="space-y-6">
       <h3
         id="contact-form"
-        className="text-xl font-semibold text-gray-900 mb-4"
+        className="font-heading text-xl font-semibold text-surface-900 mb-4"
       >
         Request a Free Quote
       </h3>
@@ -61,7 +81,7 @@ export const ConsultationForm = ({
         <div>
           <label
             htmlFor="first_name"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-surface-700 mb-1"
           >
             First Name *
           </label>
@@ -72,7 +92,7 @@ export const ConsultationForm = ({
             required
             value={formState.first_name}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300"
             disabled={status === "submitting"}
           />
         </div>
@@ -81,7 +101,7 @@ export const ConsultationForm = ({
         <div>
           <label
             htmlFor="last_name"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-surface-700 mb-1"
           >
             Last Name *
           </label>
@@ -92,7 +112,7 @@ export const ConsultationForm = ({
             required
             value={formState.last_name}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300"
             disabled={status === "submitting"}
           />
         </div>
@@ -102,7 +122,7 @@ export const ConsultationForm = ({
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-surface-700 mb-1"
         >
           Email Address *
         </label>
@@ -115,10 +135,10 @@ export const ConsultationForm = ({
           required
           value={formState.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 ${
             status === "error" && errorMessage.includes("email")
               ? "border-red-500 bg-red-50"
-              : "border-gray-300"
+              : "border-surface-300"
           }`}
           disabled={status === "submitting"}
         />
@@ -129,7 +149,7 @@ export const ConsultationForm = ({
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-surface-700 mb-1"
           >
             Phone Number *
           </label>
@@ -140,7 +160,7 @@ export const ConsultationForm = ({
             required
             value={formState.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300"
             disabled={status === "submitting"}
           />
         </div>
@@ -149,7 +169,7 @@ export const ConsultationForm = ({
         <div>
           <label
             htmlFor="address"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-surface-700 mb-1"
           >
             Address
           </label>
@@ -159,8 +179,56 @@ export const ConsultationForm = ({
             name="address"
             value={formState.address}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300"
             placeholder="City/neighborhood is fine"
+            disabled={status === "submitting"}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* How did you hear about us? */}
+        <div>
+          <label
+            htmlFor="lead_source"
+            className="block text-sm font-medium text-surface-700 mb-1"
+          >
+            How did you hear about us?
+          </label>
+          <select
+            id="lead_source"
+            name="lead_source"
+            value={formState.lead_source}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 bg-white"
+            disabled={status === "submitting"}
+          >
+            <option value="">Select an option…</option>
+            {LEAD_SOURCES.map((source) => (
+              <option key={source} value={source}>
+                {source}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Sales Code (optional) */}
+        <div>
+          <label
+            htmlFor="sales_code"
+            className="block text-sm font-medium text-surface-700 mb-1"
+          >
+            Sales Code <span className="text-surface-400 font-normal">(optional)</span>
+          </label>
+          <input
+            type="text"
+            id="sales_code"
+            name="sales_code"
+            value={formState.sales_code}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 uppercase tracking-wider"
+            placeholder="e.g. SAVE250"
+            maxLength={32}
             disabled={status === "submitting"}
           />
         </div>
@@ -189,7 +257,7 @@ export const ConsultationForm = ({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full px-6 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg flex items-center justify-center group disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full px-6 py-4 bg-accent-400 text-surface-900 font-heading font-bold rounded-md hover:bg-accent-500 transition-colors shadow-md hover:shadow-lg flex items-center justify-center group disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {status === "submitting" ? (
           <>
@@ -203,18 +271,6 @@ export const ConsultationForm = ({
           </>
         )}
       </button>
-
-      {/* Privacy Policy */}
-      <p className="text-sm text-gray-500 mt-4">
-        By submitting, you agree to our{" "}
-        <button
-          type="button"
-          onClick={onPrivacyClick}
-          className="text-indigo-600 hover:underline cursor-pointer"
-        >
-          Privacy Policy
-        </button>
-      </p>
     </form>
   );
 };

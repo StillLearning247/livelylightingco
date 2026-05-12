@@ -100,9 +100,9 @@ const PrivacyContent = () => (
       </p>
       <div className="mt-2 text-gray-600">
         <p>Lively Lighting Co.</p>
-        <p>Serving Austin, Round Rock, Cedar Park, and nearby areas</p>
-        <p>Email: contact@livelylightingco.com</p>
-        <p>Phone: (512) 809-7323</p>
+        <p>Proudly serving Texas and Oklahoma</p>
+        <p>Email: installs@livelylightingco.com</p>
+        <p>Phone: (737) 423-7246</p>
       </div>
     </section>
   </div>
@@ -159,7 +159,7 @@ export const PrivacyPolicy = ({
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl max-h-[90vh] relative overflow-y-auto"
+        className="bg-white rounded-lg shadow-xl p-6 pt-12 sm:pt-6 w-full max-w-4xl max-h-[90vh] relative overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button

@@ -20,7 +20,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 
 const tones = {
   brand:
-    "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white",
+    "bg-gradient-to-r from-glow-rose via-glow-purple to-glow-blue text-white",
   success:
     "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white",
   warning:

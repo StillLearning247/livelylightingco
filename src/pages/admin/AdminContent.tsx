@@ -57,7 +57,7 @@ const PAGES = [
 // Default content values (shown when database doesn't have the value yet)
 const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
   home: {
-    hero_title: "Govee Permanent Outdoor Lighting. Expertly Installed",
+    hero_title: "Permanent Outdoor Lighting. Expertly Installed",
     hero_subtitle: "Year-round custom lighting. No hassle or ugly wires. All controlled from your phone. Installed by Govee lighting experts.",
     floating_banner: "*BEST PRICE GUARANTEE* We will beat any quote from Jellyfish, Trimlight, Oelo or Gemstone (Astoria).",
     gallery_title: "Our Work",
@@ -73,8 +73,8 @@ const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
     mission_title: "Our Mission",
     mission_text: "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.",
     service_area_title: "Service Area",
-    service_area_intro: "We proudly serve Austin, Cedar Park, Round Rock, and surrounding areas in Central Texas.",
-    service_areas_list: "Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander, Buda, Kyle, Lakeway",
+    service_area_intro: "Proudly serving Texas and Oklahoma — from the Hill Country to the Plains, we bring premium Govee lighting installations to homeowners across both states.",
+    service_areas_list: "Greater Austin, Dallas–Fort Worth, Greater Houston, San Antonio, Oklahoma City Metro, Tulsa Metro",
   },
   contact: {
     form_title: "Request a Free Quote",
@@ -82,11 +82,11 @@ const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
     consultation_description: "Fill out the form and we'll get back to you within 24 hours to schedule your free in-home consultation.",
   },
   footer: {
-    tagline: "Experience Govee Light Installations at an Affordable Price.",
-    phone: "(512)-809-7323",
-    email: "contact@livelylightingco.com",
+    tagline: "Experience Permanent Light Installations at an Affordable Price. Govee, Asahom, Eufy and Enbrighten.",
+    phone: "(737)-423-7246",
+    email: "installs@livelylightingco.com",
     hours: "Mon-Fri: 9am-6pm",
-    service_area: "Austin, TX and surrounding areas",
+    service_area: "Proudly serving Texas and Oklahoma",
     facebook_url: "https://facebook.com/livelylightingco",
     youtube_url: "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ",
   },

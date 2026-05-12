@@ -10,6 +10,18 @@ html {
     sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(135deg, #E84388, #A64AC9, #5B6BBF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -23,17 +35,6 @@ html {
 
 .animation-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .animate-fade-in {
@@ -115,36 +116,17 @@ button:focus {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Carousel customization */
-.carousel-container {
-  @apply relative;
+/* Swipe-teach gesture for the mobile Compare carousel.
+   Plays twice when the section scrolls into view, then stops. */
+@keyframes swipeTease {
+  0%   { transform: translate3d(0, 0, 0); }
+  22%  { transform: translate3d(-46px, 0, 0); }
+  44%  { transform: translate3d(-46px, 0, 0); }
+  66%  { transform: translate3d(4px, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
-.carousel-container .carousel .control-arrow {
-  @apply opacity-0 transition-opacity duration-300 bg-black/20 hover:bg-black/40 backdrop-blur-sm;
+.animate-swipe-tease {
+  animation: swipeTease 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s 2 both;
 }
 
-.carousel-container:hover .carousel .control-arrow {
-  @apply opacity-100;
-}
-
-.carousel-container .carousel .control-dots {
-  @apply bottom-4;
-}
-
-.carousel-container .carousel .control-dots .dot {
-  @apply bg-white/70 hover:bg-white transition-colors;
-}
-
-.carousel-container .carousel .thumb {
-  @apply border-2 border-transparent transition-colors;
-}
-
-.carousel-container .carousel .thumb.selected,
-.carousel-container .carousel .thumb:hover {
-  @apply border-indigo-500;
-}
-
-.carousel-container .carousel .thumbs-wrapper {
-  @apply mx-2 mt-4;
-}
