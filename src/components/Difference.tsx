@@ -49,7 +49,7 @@ export const Difference = () => {
           <div className="relative mb-8">
             <div className="absolute -inset-2 bg-brand-gradient rounded-2xl blur opacity-20"></div>
             <div className="relative bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="p-8">
+              <div className="p-5 sm:p-8">
                 <div className="flex items-center gap-2 mb-6">
                   <h3 className="font-heading text-2xl font-semibold text-surface-800">
                     The LivelyLightingCo Difference
@@ -96,11 +96,12 @@ export const Difference = () => {
                     <CheckCircle2 className="h-6 w-6 text-brand-300 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-surface-800 font-medium">
-                        3-Year Warranty
+                        Lifetime PermTrack + 5-Year Install Warranty
                       </p>
                       <p className="text-surface-500">
-                        Peace of mind with our comprehensive craftsmanship
-                        warranty
+                        Industry-leading coverage: lifetime warranty on our
+                        PermTrack mounting hardware and a 5-year warranty on
+                        your installation
                       </p>
                     </div>
                   </li>
@@ -134,7 +135,7 @@ export const Difference = () => {
 
             {showPainPoints && (
               <div className="mt-4 bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in">
-                <div className="p-8">
+                <div className="p-5 sm:p-8">
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
                       <XCircle className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5" />

@@ -15,6 +15,7 @@ import { PromoPopup } from "./components/PromoPopup";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Compare from "./pages/Compare";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminProvider } from "./components/AdminProvider";
@@ -26,6 +27,7 @@ import { AdminGallery } from "./pages/admin/AdminGallery";
 import { AdminContent } from "./pages/admin/AdminContent";
 import { AdminTestimonials } from "./pages/admin/AdminTestimonials";
 import { AdminPromo } from "./pages/admin/AdminPromo";
+import { AdminAnalytics } from "./pages/admin/AdminAnalytics";
 
 // Helper to get session directly from localStorage (avoids hanging Supabase client)
 function getSessionFromStorage(): { userId: string; email: string; accessToken: string } | null {
@@ -80,6 +82,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/compare" element={<Compare />} />
 
             {/* Admin Dashboard with nested routes */}
             <Route
@@ -95,6 +98,7 @@ function App() {
               <Route path="content" element={<AdminContent />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="promo" element={<AdminPromo />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
             </Route>
 
             {/* Optional: 404 */}

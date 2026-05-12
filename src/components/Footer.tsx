@@ -15,11 +15,11 @@ export const Footer = () => {
   const { content } = usePageContent("footer");
 
   // Get content from CMS with fallbacks
-  const tagline = stripHtml(content.tagline || "Experience Govee Light Installations at an Affordable Price.");
-  const phone = stripHtml(content.phone || "(512)-809-7323");
-  const email = stripHtml(content.email || "contact@livelylightingco.com");
+  const tagline = stripHtml(content.tagline || "Experience Permanent Light Installations at an Affordable Price. Govee, Asahom, Eufy and Enbrighten.");
+  const phone = stripHtml(content.phone || "(737)-423-7246");
+  const email = stripHtml(content.email || "installs@livelylightingco.com");
   const hours = stripHtml(content.hours || "Mon-Fri: 9am-6pm");
-  const serviceArea = stripHtml(content.service_area || "Austin, TX and surrounding areas");
+  const serviceArea = stripHtml(content.service_area || "Proudly serving Texas and Oklahoma");
   const facebookUrl = stripHtml(content.facebook_url || "https://facebook.com/livelylightingco");
   const youtubeUrl = stripHtml(content.youtube_url || "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ");
 
@@ -107,7 +107,7 @@ export const Footer = () => {
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "email")} label="Email">
-                <li className="text-surface-400">
+                <li className="text-surface-400 break-all">
                   <strong className="text-white">Email:</strong> {email}
                 </li>
               </EditableArea>
@@ -131,17 +131,17 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} LivelyLightingCo. All rights
             reserved.
           </p>
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <PrivacyPolicy
               isOpen={isPrivacyOpen}
               onOpen={() => setIsPrivacyOpen(true)}
               onClose={() => setIsPrivacyOpen(false)}
             />
             {admin ? (
-              <div className="flex items-center gap-3">
-                <span className="text-surface-400 text-sm flex items-center gap-1">
-                  <User className="h-4 w-4" />
-                  Logged in as: <span className="text-white">{admin.username || admin.email || "Admin"}</span>
+              <div className="flex flex-wrap items-center gap-3 max-w-full">
+                <span className="text-surface-400 text-sm flex items-center gap-1 min-w-0">
+                  <User className="h-4 w-4 flex-shrink-0" />
+                  Logged in as: <span className="text-white break-all">{admin.username || admin.email || "Admin"}</span>
                 </span>
                 <button
                   onClick={signOut}

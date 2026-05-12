@@ -76,6 +76,9 @@ export const Navbar = () => {
           >
             Gallery
           </Link>
+          <Link to="/compare" className={navLinkClass("/compare")}>
+            Compare
+          </Link>
           <a
             href="https://goveelightinstallers.com"
             target="_blank"
@@ -128,7 +131,7 @@ export const Navbar = () => {
           />
 
           {/* Panel sits below the navbar */}
-          <div className="md:hidden fixed top-16 left-0 right-0 z-[80] bg-surface-900 shadow-xl rounded-b-xl border-t border-white/10">
+          <div className="md:hidden fixed top-20 left-0 right-0 z-[80] bg-surface-900 shadow-xl rounded-b-xl border-t border-white/10">
             <div className="px-6 py-4 space-y-3">
               <Link
                 to="/"
@@ -160,6 +163,18 @@ export const Navbar = () => {
                 className="block font-heading text-sm font-semibold tracking-wide uppercase text-surface-200 hover:text-brand-300 hover:bg-white/5 px-3 py-2 rounded-md transition-colors"
               >
                 Gallery
+              </Link>
+
+              <Link
+                to="/compare"
+                className={`block font-heading text-sm font-semibold tracking-wide uppercase transition-colors px-3 py-2 rounded-md ${
+                  isActive("/compare")
+                    ? "text-brand-300 bg-brand-300/10"
+                    : "text-surface-200 hover:text-brand-300 hover:bg-white/5"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Compare
               </Link>
 
               <a

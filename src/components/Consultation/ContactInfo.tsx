@@ -11,11 +11,11 @@ export const ContactInfo = () => {
           <h3 className="text-lg font-medium text-surface-900">Phone</h3>
           <p className="text-surface-500">
             <a
-              href="tel:+15128097323"
-              aria-label="Call us at (512) 809-7323"
+              href="tel:+17374237246"
+              aria-label="Call us at (737) 423-7246"
               className="hover:text-brand-400 transition-colors"
             >
-              (512)-809-7323
+              (737)-423-7246
             </a>
           </p>
         </div>
@@ -29,11 +29,11 @@ export const ContactInfo = () => {
           <h3 className="text-lg font-medium text-surface-900">Email</h3>
           <p className="text-surface-500">
             <a
-              href="mailto:contact@livelylightingco.com"
-              aria-label="Email us at contact@livelylightingco.com"
-              className="hover:text-brand-400 transition-colors"
+              href="mailto:installs@livelylightingco.com"
+              aria-label="Email us at installs@livelylightingco.com"
+              className="hover:text-brand-400 transition-colors break-all"
             >
-              contact@livelylightingco.com
+              installs@livelylightingco.com
             </a>
           </p>
         </div>
@@ -46,7 +46,7 @@ export const ContactInfo = () => {
         <div>
           <h3 className="text-lg font-medium text-surface-900">Service Area</h3>
           <p className="text-surface-500">
-            Austin, Round Rock, Cedar Park, and surrounding areas
+            Proudly serving Texas and Oklahoma
           </p>
         </div>
       </div>

@@ -23,10 +23,10 @@ export const SEO = ({
 }: SEOProps) => {
   const fullTitle = title
     ? `${title} | ${SITE_NAME}`
-    : `Govee Permanent Outdoor Lighting | Cedar Park, Round Rock, Austin TX`;
+    : `Permanent Outdoor Lighting Installers | Govee, Asahom, Eufy, Enbrighten | Texas & Oklahoma`;
 
   const metaDescription = description ||
-    "Enhance your home with Govee permanent outdoor lighting. Professional installation in Cedar Park, Round Rock, and the Austin area. Beautiful, smart, and customizable LED lighting solutions.";
+    "Premium permanent outdoor lighting installation across Texas and Oklahoma. Certified installers of Govee, Asahom, Eufy, and Enbrighten smart LED systems. Serving Austin, Dallas-Fort Worth, Houston, San Antonio, Oklahoma City & Tulsa metros. Lifetime PermTrack warranty + 5-year install warranty.";
 
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
 

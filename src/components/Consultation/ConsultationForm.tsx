@@ -1,5 +1,18 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useRef } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { trackEvent } from "../../lib/analytics";
+
+// Edit this list to add/remove referral source options.
+export const LEAD_SOURCES = [
+  "Home Show",
+  "Google Search",
+  "Facebook",
+  "Instagram",
+  "TikTok",
+  "Referral / Word of Mouth",
+  "Drove By / Saw Sign",
+  "Other",
+] as const;
 
 interface FormState {
   first_name: string;
@@ -8,6 +21,8 @@ interface FormState {
   phone: string;
   address: string;
   message: string;
+  lead_source: string;
+  sales_code: string;
   website: string;
 }
 
@@ -15,14 +30,12 @@ interface ConsultationFormProps {
   onSubmit: (formData: FormState) => Promise<void>;
   status: "idle" | "submitting" | "success" | "error";
   errorMessage: string;
-  onPrivacyClick: () => void;
 }
 
 export const ConsultationForm = ({
   onSubmit,
   status,
   errorMessage,
-  onPrivacyClick,
 }: ConsultationFormProps) => {
   const [formState, setFormState] = useState<FormState>({
     first_name: "",
@@ -31,13 +44,21 @@ export const ConsultationForm = ({
     phone: "",
     address: "",
     message: "",
+    lead_source: "",
+    sales_code: "",
     website: "",
   });
 
+  const formStartedRef = useRef(false);
+
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    if (!formStartedRef.current && name !== "website") {
+      formStartedRef.current = true;
+      trackEvent("form_start", "/contact");
+    }
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -165,6 +186,54 @@ export const ConsultationForm = ({
         </div>
       </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* How did you hear about us? */}
+        <div>
+          <label
+            htmlFor="lead_source"
+            className="block text-sm font-medium text-surface-700 mb-1"
+          >
+            How did you hear about us?
+          </label>
+          <select
+            id="lead_source"
+            name="lead_source"
+            value={formState.lead_source}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 bg-white"
+            disabled={status === "submitting"}
+          >
+            <option value="">Select an option…</option>
+            {LEAD_SOURCES.map((source) => (
+              <option key={source} value={source}>
+                {source}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Sales Code (optional) */}
+        <div>
+          <label
+            htmlFor="sales_code"
+            className="block text-sm font-medium text-surface-700 mb-1"
+          >
+            Sales Code <span className="text-surface-400 font-normal">(optional)</span>
+          </label>
+          <input
+            type="text"
+            id="sales_code"
+            name="sales_code"
+            value={formState.sales_code}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 uppercase tracking-wider"
+            placeholder="e.g. SAVE250"
+            maxLength={32}
+            disabled={status === "submitting"}
+          />
+        </div>
+      </div>
+
       {/* Honeypot field - hidden from real users */}
       <div className="absolute opacity-0 -z-10 select-none pointer-events-none">
         <label htmlFor="website">Website</label>
@@ -202,18 +271,6 @@ export const ConsultationForm = ({
           </>
         )}
       </button>
-
-      {/* Privacy Policy */}
-      <p className="text-sm text-surface-500 mt-4">
-        By submitting, you agree to our{" "}
-        <button
-          type="button"
-          onClick={onPrivacyClick}
-          className="text-brand-400 hover:underline cursor-pointer"
-        >
-          Privacy Policy
-        </button>
-      </p>
     </form>
   );
 };
