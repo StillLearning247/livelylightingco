@@ -42,8 +42,8 @@ const FEATURES: FeatureRow[] = [
     values: ["Per brand mfr**", "Lifetime LEDs†", "5-Year parts†", "Lifetime LEDs†", "5–7 Years*†", "1–3 Years (mfr)"],
   },
   {
-    label: "Install / Labor Warranty",
-    description: "Coverage on the actual installation craftsmanship",
+    label: "Workmanship Warranty",
+    description: "Coverage on every clip, connection, and run we install",
     values: ["5 Years", "1 Year", "1 Year", "3 Years", "5–7 Years*", false],
   },
   {
@@ -120,9 +120,9 @@ export const ComparisonTable = () => {
           </h2>
           <p className="text-lg text-surface-500">
             We pair your choice of premium smart LEDs — Govee, Asahom, Eufy, or
-            Enbrighten — with our PermTrack mounting system, an industry-leading
-            5-year install warranty, and a lifetime hardware warranty on
-            PermTrack.
+            Enbrighten — with our PermTrack mounting system, a lifetime hardware
+            warranty on PermTrack, and an industry-leading 5-year workmanship
+            warranty on every install.
           </p>
         </div>
 

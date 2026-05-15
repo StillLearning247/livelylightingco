@@ -13,8 +13,8 @@ const About = () => {
   const missionTitle = stripHtml(content.mission_title || "Our Mission");
   const missionText = stripHtml(content.mission_text || "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.");
   const serviceAreaTitle = stripHtml(content.service_area_title || "Service Area");
-  const serviceAreaIntro = stripHtml(content.service_area_intro || "Proudly serving Texas and Oklahoma — from the Hill Country to the Plains, we bring premium Govee lighting installations to homeowners across both states.");
-  const serviceAreasList = stripHtml(content.service_areas_list || "Greater Austin, Dallas–Fort Worth, Greater Houston, San Antonio, Oklahoma City Metro, Tulsa Metro");
+  const serviceAreaIntro = stripHtml(content.service_area_intro || "Founded in Cedar Park, our core service area is the greater Austin metro. We are actively expanding across Texas and Oklahoma — ask about your area.");
+  const serviceAreasList = stripHtml(content.service_areas_list || "Cedar Park, Round Rock, Leander, Liberty Hill, Georgetown, Lakeway, Bee Cave, West Lake Hills, Pflugerville, North Austin");
 
   // Parse the comma-separated list into an array
   const serviceAreas = serviceAreasList.split(",").map(city => city.trim()).filter(Boolean);
@@ -23,8 +23,8 @@ const About = () => {
     <main className="pt-20 bg-white">
       <SEO
         canonical="/about"
-        title="About Us — Premier Permanent Lighting Installers in Texas & Oklahoma"
-        description="Meet LivelyLightingCo — expert installers of Govee, Asahom, Eufy, and Enbrighten permanent outdoor lighting across Texas and Oklahoma. Led by Jakob Rowe, we install across Austin, Dallas-Fort Worth, Houston, San Antonio, Oklahoma City, and Tulsa. Lifetime PermTrack warranty + 5-year install warranty on every project."
+        title="About — Cedar Park, TX"
+        description="Founded in Cedar Park, Texas. We design and install PermTrack permanent outdoor LED lighting for homes across the Austin metro. Lifetime PermTrack hardware warranty plus 5-year workmanship warranty."
       />
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
@@ -58,7 +58,7 @@ const About = () => {
             </div>
             <h3 className="font-heading text-xl font-semibold mb-2 text-surface-900">Quality Service</h3>
             <p className="text-surface-500">
-              Lifetime PermTrack hardware warranty plus a 5-year install
+              Lifetime PermTrack hardware warranty plus a 5-year workmanship
               warranty for true peace of mind.
             </p>
           </div>

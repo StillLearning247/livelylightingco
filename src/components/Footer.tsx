@@ -19,7 +19,7 @@ export const Footer = () => {
   const phone = stripHtml(content.phone || "(737)-423-7246");
   const email = stripHtml(content.email || "installs@livelylightingco.com");
   const hours = stripHtml(content.hours || "Mon-Fri: 9am-6pm");
-  const serviceArea = stripHtml(content.service_area || "Proudly serving Texas and Oklahoma");
+  const serviceArea = stripHtml(content.service_area || "Proudly serving the Austin, TX metro — expanding across Texas and Oklahoma");
   const facebookUrl = stripHtml(content.facebook_url || "https://facebook.com/livelylightingco");
   const youtubeUrl = stripHtml(content.youtube_url || "https://www.youtube.com/channel/UChIr1JGEiGCqtX_2fl1gfNQ");
 

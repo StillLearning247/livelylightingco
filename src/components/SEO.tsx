@@ -23,10 +23,10 @@ export const SEO = ({
 }: SEOProps) => {
   const fullTitle = title
     ? `${title} | ${SITE_NAME}`
-    : `Permanent Outdoor Lighting Installers | Govee, Asahom, Eufy, Enbrighten | Texas & Oklahoma`;
+    : `Permanent Outdoor Lighting in Texas & Oklahoma | ${SITE_NAME}`;
 
   const metaDescription = description ||
-    "Premium permanent outdoor lighting installation across Texas and Oklahoma. Certified installers of Govee, Asahom, Eufy, and Enbrighten smart LED systems. Serving Austin, Dallas-Fort Worth, Houston, San Antonio, Oklahoma City & Tulsa metros. Lifetime PermTrack warranty + 5-year install warranty.";
+    "PermTrack permanent LED lighting installed by certified pros in the Austin metro and beyond. Lifetime PermTrack hardware warranty + 5-year workmanship warranty.";
 
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
 
