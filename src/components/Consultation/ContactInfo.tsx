@@ -46,7 +46,7 @@ export const ContactInfo = () => {
         <div>
           <h3 className="text-lg font-medium text-surface-900">Service Area</h3>
           <p className="text-surface-500">
-            Proudly serving Texas and Oklahoma
+            Proudly serving the Austin, TX metro — expanding across Texas and Oklahoma
           </p>
         </div>
       </div>

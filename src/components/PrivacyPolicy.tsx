@@ -100,7 +100,7 @@ const PrivacyContent = () => (
       </p>
       <div className="mt-2 text-gray-600">
         <p>Lively Lighting Co.</p>
-        <p>Proudly serving Texas and Oklahoma</p>
+        <p>Proudly serving the Austin, TX metro — expanding across Texas and Oklahoma</p>
         <p>Email: installs@livelylightingco.com</p>
         <p>Phone: (737) 423-7246</p>
       </div>

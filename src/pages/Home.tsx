@@ -56,8 +56,8 @@ const Home = () => {
     <main className="bg-surface-950">
       <SEO
         canonical="/"
-        title="Permanent Outdoor Lighting Installation | Govee, Asahom, Eufy & Enbrighten | Texas & Oklahoma"
-        description="Premium permanent outdoor lighting installation across Texas and Oklahoma. Certified Govee, Asahom, Eufy, and Enbrighten installers. Serving Austin, Dallas-Fort Worth, Houston, San Antonio, Oklahoma City & Tulsa metros. Lifetime PermTrack warranty + 5-year install warranty. We beat any quote from Jellyfish, Trimlight, Oelo, or Gemstone."
+        title="Permanent Outdoor Lighting in Texas & Oklahoma"
+        description="PermTrack permanent LED lighting installed by certified pros across the Austin metro. Lifetime PermTrack hardware warranty plus 5-year workmanship warranty."
       />
       {bannerVisible && (
         <EditableArea

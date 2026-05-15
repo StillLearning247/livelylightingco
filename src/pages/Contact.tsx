@@ -12,8 +12,8 @@ const Contact = () => {
     <main className="pt-20">
       <SEO
         canonical="/contact"
-        title="Get a Free Quote - Contact LivelyLightingCo"
-        description="Request your free permanent outdoor lighting consultation. Contact LivelyLightingCo at (737) 423-7246. Certified installers of Govee, Asahom, Eufy, and Enbrighten across Texas and Oklahoma — Austin, Dallas-Fort Worth, Houston, San Antonio, Oklahoma City & Tulsa metros."
+        title="Get a Free Quote"
+        description="Request a free quote for permanent outdoor lighting installation in the Austin, TX metro. Local installers, lifetime PermTrack hardware warranty, 5-year workmanship warranty."
       />
       <Consultation />
     </main>

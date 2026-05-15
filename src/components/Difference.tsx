@@ -96,12 +96,12 @@ export const Difference = () => {
                     <CheckCircle2 className="h-6 w-6 text-brand-300 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-surface-800 font-medium">
-                        Lifetime PermTrack + 5-Year Install Warranty
+                        Lifetime PermTrack + 5-Year Workmanship Warranty
                       </p>
                       <p className="text-surface-500">
-                        Industry-leading coverage: lifetime warranty on our
-                        PermTrack mounting hardware and a 5-year warranty on
-                        your installation
+                        Industry-leading coverage: a lifetime warranty on our
+                        PermTrack mounting hardware and a 5-year workmanship
+                        warranty on every clip, connection, and run we install
                       </p>
                     </div>
                   </li>
