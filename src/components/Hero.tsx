@@ -47,9 +47,8 @@ export const Hero: React.FC<HeroProps> = ({
         <AdvancedImage
           cldImg={heroImage}
           plugins={[responsive()]}
-          alt="Govee permanent outdoor lights PRO with permtrack"
+          alt="Home with permanent outdoor LED roofline lighting installed by LivelyLightingCo, lit in warm white at dusk"
           className="w-full h-full object-cover object-center"
-          fetchPriority="eager"
         />
       </div>
 

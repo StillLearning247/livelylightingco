@@ -80,7 +80,7 @@ const GridItem: React.FC<{
         src={cloudinarySrcUrl(image.publicId, 600)}
         srcSet={srcSet}
         sizes="(max-width: 399px) 100vw, (max-width: 767px) 50vw, (max-width: 1279px) 33vw, 25vw"
-        alt={image.title}
+        alt={image.title || "Permanent outdoor LED lighting installation by LivelyLightingCo"}
         loading="lazy"
         draggable={false}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 active:scale-[0.98]"
@@ -308,7 +308,8 @@ export const Gallery: React.FC<GalleryProps> = ({
                     key={selectedIndex}
                     src={getHiResUrl(galleryImages[selectedIndex].hiResUrl)}
                     alt={
-                      galleryImages[selectedIndex].title || "Enlarged view"
+                      galleryImages[selectedIndex].title ||
+                      "Permanent outdoor LED lighting installation by LivelyLightingCo"
                     }
                     className="max-h-[85vh] max-w-full object-contain rounded-xl ring-1 ring-white/10 shadow-2xl touch-pan-y"
                     drag="x"
