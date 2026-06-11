@@ -82,6 +82,7 @@ export const Footer = () => {
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },
                 { to: "/locations", label: "Service Areas" },
+                { to: "/faq", label: "FAQ" },
                 { to: "/contact", label: "Contact" },
                 { to: "/#gallery", label: "Gallery" },
                 { to: "/#difference", label: "Why Choose Us" },

@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import Compare from "./pages/Compare";
 import Locations from "./pages/Locations";
 import LocationPage from "./pages/LocationPage";
+import Faq from "./pages/Faq";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminProvider } from "./components/AdminProvider";
@@ -87,6 +88,7 @@ function App() {
             <Route path="/compare" element={<Compare />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/locations/:slug" element={<LocationPage />} />
+            <Route path="/faq" element={<Faq />} />
 
             {/* Admin Dashboard with nested routes */}
             <Route
