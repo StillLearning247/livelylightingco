@@ -10,7 +10,8 @@ interface SEOProps {
 }
 
 const BASE_URL = "https://livelylightingco.com";
-const DEFAULT_IMAGE = "https://res.cloudinary.com/dhmijpfiy/image/upload/v1/House6_kmwq4e";
+const DEFAULT_IMAGE =
+  "https://res.cloudinary.com/dydz0lw6e/image/upload/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/House6_kmwq4e";
 const SITE_NAME = "LivelyLightingCo";
 
 export const SEO = ({
