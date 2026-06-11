@@ -69,7 +69,7 @@ const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
   },
   about: {
     page_title: "About LivelyLightingCo",
-    page_subtitle: "Austin's Premier Govee Permanent Lighting Installers",
+    page_subtitle: "Govee-certified permanent outdoor lighting installers serving Texas and Oklahoma",
     mission_title: "Our Mission",
     mission_text: "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.",
     service_area_title: "Service Area",
@@ -82,7 +82,7 @@ const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
     consultation_description: "Fill out the form and we'll get back to you within 24 hours to schedule your free in-home consultation.",
   },
   footer: {
-    tagline: "Experience Permanent Light Installations at an Affordable Price. Govee, Asahom, Eufy and Enbrighten.",
+    tagline: "Experience Permanent Light Installations at an Affordable Price. Govee Pro, Govee Prism, Asahom, Eufy and Enbrighten.",
     phone: "(737)-423-7246",
     email: "installs@livelylightingco.com",
     hours: "Mon-Fri: 9am-6pm",

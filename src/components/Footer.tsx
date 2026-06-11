@@ -15,7 +15,7 @@ export const Footer = () => {
   const { content } = usePageContent("footer");
 
   // Get content from CMS with fallbacks
-  const tagline = stripHtml(content.tagline || "Experience Permanent Light Installations at an Affordable Price. Govee, Asahom, Eufy and Enbrighten.");
+  const tagline = stripHtml(content.tagline || "Experience Permanent Light Installations at an Affordable Price. Govee Pro, Govee Prism, Asahom, Eufy and Enbrighten.");
   const phone = stripHtml(content.phone || "(737)-423-7246");
   const email = stripHtml(content.email || "installs@livelylightingco.com");
   const hours = stripHtml(content.hours || "Mon-Fri: 9am-6pm");

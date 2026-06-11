@@ -17,7 +17,7 @@ interface FeatureRow {
 }
 
 const COMPETITORS: Competitor[] = [
-  { name: "Lively + PermTrack", tagline: "Govee, Asahom, Eufy or Enbrighten — premium install", highlight: true },
+  { name: "Lively + PermTrack", tagline: "Govee Pro/Prism, Asahom, Eufy or Enbrighten — premium install", highlight: true },
   { name: "Trimlight", tagline: "Legacy permanent lighting" },
   { name: "Jellyfish", tagline: "Eave-mounted system" },
   { name: "Gemstone / Astoria", tagline: "Premium-priced track system" },
@@ -29,7 +29,7 @@ const FEATURES: FeatureRow[] = [
   {
     label: "LED Brand Choice",
     description: "Pick the system that fits your home, budget, and smart-home setup",
-    values: ["4 brands", "Trimlight only", "Jellyfish only", "Gemstone only", "Oelo only", "Buy any"],
+    values: ["5 brands", "Trimlight only", "Jellyfish only", "Gemstone only", "Oelo only", "Buy any"],
   },
   {
     label: "Track / Hardware Warranty",
@@ -119,10 +119,10 @@ export const ComparisonTable = () => {
             How Lively + PermTrack stacks up
           </h1>
           <p className="text-lg text-surface-500">
-            We pair your choice of premium smart LEDs — Govee, Asahom, Eufy, or
-            Enbrighten — with our PermTrack mounting system, a lifetime hardware
-            warranty on PermTrack, and an industry-leading 5-year workmanship
-            warranty on every install.
+            We pair your choice of premium smart LEDs — Govee Pro, Govee Prism,
+            Asahom, Eufy, or Enbrighten — with our PermTrack mounting system, a
+            lifetime warranty on the PermTrack mounting hardware, and an
+            industry-leading 5-year workmanship warranty on every install.
           </p>
         </div>
 
@@ -235,8 +235,8 @@ export const ComparisonTable = () => {
           </p>
           <p>
             <strong>**LED warranty for Lively installs</strong> is provided by
-            the LED brand manufacturer at time of purchase: Govee 3yr, Asahom
-            3yr, Eufy 2yr, Enbrighten lifetime LEDs.
+            the LED brand manufacturer at time of purchase: Govee Pro/Prism 3yr,
+            Asahom 3yr, Eufy 2yr, Enbrighten lifetime LEDs.
           </p>
           <p>
             <strong>†Trimlight, Jellyfish, Gemstone, and Oelo</strong> bundle
