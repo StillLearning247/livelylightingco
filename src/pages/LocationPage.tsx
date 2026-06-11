@@ -14,7 +14,11 @@ const LocationPage = () => {
   if (!loc) return <Navigate to="/locations" replace />;
 
   const canonical = `/locations/${loc.slug}`;
-  const title = `Permanent Outdoor Lighting in ${loc.city}, ${loc.stateAbbr}`;
+  const isState = loc.areaScope === "state";
+  const title = isState
+    ? `Permanent Outdoor Lighting in ${loc.state}`
+    : `Permanent Outdoor Lighting in ${loc.city}, ${loc.stateAbbr}`;
+  const breadcrumbLabel = isState ? loc.state : `${loc.city}, ${loc.stateAbbr}`;
 
   // Per-city Service schema (areaServed scoped to this city) + local FAQPage.
   const serviceSchema = {
@@ -24,11 +28,13 @@ const LocationPage = () => {
     name: `Permanent Outdoor Lighting Installation in ${loc.city}, ${loc.stateAbbr}`,
     description: loc.metaDescription,
     provider: { "@id": `${BASE_URL}/#business` },
-    areaServed: {
-      "@type": "City",
-      name: loc.city,
-      containedInPlace: { "@type": "State", name: loc.state },
-    },
+    areaServed: isState
+      ? { "@type": "State", name: loc.state }
+      : {
+          "@type": "City",
+          name: loc.city,
+          containedInPlace: { "@type": "State", name: loc.state },
+        },
     url: `${BASE_URL}${canonical}`,
   };
 
@@ -57,7 +63,7 @@ const LocationPage = () => {
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Service Areas", path: "/locations" },
-          { name: `${loc.city}, ${loc.stateAbbr}`, path: canonical },
+          { name: breadcrumbLabel, path: canonical },
         ]}
       />
       <Helmet>
@@ -70,7 +76,7 @@ const LocationPage = () => {
         <div className="max-w-3xl">
           <p className="flex items-center gap-2 text-brand-400 font-medium mb-3">
             <MapPin className="h-5 w-5" />
-            {loc.city}, {loc.state}
+            {isState ? loc.state : `${loc.city}, ${loc.state}`}
           </p>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-surface-900 mb-6">
             {loc.h1}
@@ -109,7 +115,9 @@ const LocationPage = () => {
         {loc.nearbyAreas.length > 0 && (
           <div className="max-w-3xl mt-16">
             <h2 className="font-heading text-2xl font-bold text-surface-900 mb-4">
-              Areas we serve near {loc.city}
+              {isState
+                ? `Cities we serve in ${loc.state}`
+                : `Areas we serve near ${loc.city}`}
             </h2>
             <div className="flex flex-wrap gap-3">
               {loc.nearbyAreas.map((area) => {
