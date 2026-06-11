@@ -103,12 +103,24 @@ export const Footer = () => {
             <ul className="space-y-2">
               <EditableArea editPath={contentEditPath("footer", "phone")} label="Phone">
                 <li className="text-surface-400">
-                  <strong className="text-white">Phone:</strong> {phone}
+                  <strong className="text-white">Phone:</strong>{" "}
+                  <a
+                    href={`tel:+1${phone.replace(/\D/g, "")}`}
+                    className="hover:text-brand-300 transition-colors"
+                  >
+                    {phone}
+                  </a>
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "email")} label="Email">
                 <li className="text-surface-400 break-all">
-                  <strong className="text-white">Email:</strong> {email}
+                  <strong className="text-white">Email:</strong>{" "}
+                  <a
+                    href={`mailto:${email}`}
+                    className="hover:text-brand-300 transition-colors"
+                  >
+                    {email}
+                  </a>
                 </li>
               </EditableArea>
               <EditableArea editPath={contentEditPath("footer", "hours")} label="Hours">
