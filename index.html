@@ -5,14 +5,14 @@
       <link rel="icon" type="image/svg+xml" href="/vite.svg" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <!-- SEO Meta Tags -->
+      <!-- SEO Meta Tags.
+           Per-route <title>, meta description, canonical, Open Graph and Twitter
+           tags are owned by src/components/SEO.tsx (react-helmet-async) and baked
+           into each page by the prerender step — kept in ONE place to avoid the
+           duplicate/conflicting tags you get when both static and runtime set them.
+           Only a generic fallback <title>, robots, and geo tags stay static here. -->
       <title>Permanent Outdoor Lighting in Texas & Oklahoma | LivelyLightingCo</title>
-      <meta
-        name="description"
-        content="PermTrack permanent LED lighting installed by certified pros in the Austin metro and beyond. Lifetime PermTrack hardware warranty + 5-year workmanship warranty."
-      />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <link rel="canonical" href="https://livelylightingco.com/" />
       <meta name="geo.region" content="US-TX" />
       <meta name="geo.placename" content="Cedar Park, Texas" />
       <meta name="geo.position" content="30.5052;-97.8203" />
@@ -21,36 +21,8 @@
       <meta name="distribution" content="local" />
       <meta name="target" content="all" />
 
-      <!-- Open Graph (Facebook, LinkedIn, etc.) -->
-      <meta property="og:type" content="website" />
-      <meta
-        property="og:title"
-        content="Permanent Outdoor Lighting in Texas & Oklahoma | LivelyLightingCo"
-      />
-      <meta
-        property="og:description"
-        content="PermTrack permanent LED lighting installed by certified pros in the Austin metro and beyond. Lifetime PermTrack hardware warranty + 5-year workmanship warranty."
-      />
-      <meta
-        property="og:image"
-        content="https://livelylightingco.com/images/House4.jpg"
-      />
-      <meta property="og:url" content="https://livelylightingco.com" />
-
-      <!-- Twitter Card -->
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content="Permanent Outdoor Lighting in Texas & Oklahoma | LivelyLightingCo"
-      />
-      <meta
-        name="twitter:description"
-        content="PermTrack permanent LED lighting installed by certified pros in the Austin metro and beyond. Lifetime PermTrack hardware warranty + 5-year workmanship warranty."
-      />
-      <meta
-        name="twitter:image"
-        content="https://livelylightingco.com/images/House4.jpg"
-      />
+      <!-- Open Graph + Twitter tags are emitted per-route by src/components/SEO.tsx
+           (react-helmet-async) and baked in by the prerender step. -->
 
       <!-- Fonts Preconnect & Preload -->
       <link rel="preconnect" href="https://fonts.googleapis.com" />
