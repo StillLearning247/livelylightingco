@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { getLocation, LOCATIONS } from "../data/locations";
 
@@ -72,6 +72,15 @@ const LocationPage = () => {
       </Helmet>
 
       <div className="container mx-auto px-6 py-16">
+        {/* Back to the locations hub */}
+        <Link
+          to="/locations"
+          className="inline-flex items-center gap-1.5 text-surface-500 hover:text-brand-500 transition-colors mb-8 text-sm font-medium"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          All Service Areas
+        </Link>
+
         {/* Hero */}
         <div className="max-w-3xl">
           <p className="flex items-center gap-2 text-brand-400 font-medium mb-3">
