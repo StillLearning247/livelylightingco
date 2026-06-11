@@ -7,6 +7,8 @@ interface SEOProps {
   ogType?: string;
   ogImage?: string;
   noIndex?: boolean;
+  /** Breadcrumb trail (root → current). Emits BreadcrumbList JSON-LD. */
+  breadcrumbs?: { name: string; path: string }[];
 }
 
 const BASE_URL = "https://livelylightingco.com";
@@ -21,6 +23,7 @@ export const SEO = ({
   ogType = "website",
   ogImage = DEFAULT_IMAGE,
   noIndex = false,
+  breadcrumbs,
 }: SEOProps) => {
   const fullTitle = title
     ? `${title} | ${SITE_NAME}`
@@ -53,6 +56,22 @@ export const SEO = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImage} />
+
+      {/* Breadcrumb structured data */}
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs.map((b, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: b.name,
+              item: `${BASE_URL}${b.path}`,
+            })),
+          })}
+        </script>
+      )}
     </Helmet>
   );
 };

@@ -14,6 +14,10 @@ const Contact = () => {
         canonical="/contact"
         title="Get a Free Quote"
         description="Request a free quote for permanent outdoor lighting installation in the Austin, TX metro. Local installers, lifetime PermTrack hardware warranty, 5-year workmanship warranty."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
       />
       <section className="bg-gray-50 pt-12 pb-2">
         <div className="container mx-auto px-6 text-center">
