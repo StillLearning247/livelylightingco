@@ -18,11 +18,11 @@ const comparisonJsonLd = {
         "@type": "Service",
         name: "Lively + PermTrack",
         description:
-          "PermTrack mounting system paired with your choice of Govee, Asahom, Eufy, or Enbrighten smart LEDs. Professionally installed.",
+          "PermTrack mounting system paired with your choice of Govee Pro, Govee Prism, Asahom, Eufy, or Enbrighten smart LEDs. Professionally installed.",
         provider: { "@id": "https://livelylightingco.com/#business" },
         areaServed: { "@type": "City", name: "Austin", containedInPlace: { "@type": "State", name: "Texas" } },
         additionalProperty: [
-          { "@type": "PropertyValue", name: "LED Brand Choice", value: "4 brands (Govee, Asahom, Eufy, Enbrighten)" },
+          { "@type": "PropertyValue", name: "LED Brand Choice", value: "5 brands (Govee Pro, Govee Prism, Asahom, Eufy, Enbrighten)" },
           { "@type": "PropertyValue", name: "Track / Hardware Warranty", value: "Lifetime PermTrack" },
           { "@type": "PropertyValue", name: "LED Warranty", value: "Per LED brand manufacturer warranty" },
           { "@type": "PropertyValue", name: "Workmanship Warranty", value: "5 years" },
@@ -156,6 +156,10 @@ const Compare = () => {
         canonical="/compare"
         title="Compare: Lively vs Trimlight, Jellyfish, Gemstone, Oelo"
         description="Side-by-side comparison of PermTrack permanent outdoor lighting versus Trimlight, Jellyfish, Gemstone (Astoria), and Oelo on price, smart features, color, and warranty."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Compare", path: "/compare" },
+        ]}
       />
       <Helmet>
         <script type="application/ld+json">

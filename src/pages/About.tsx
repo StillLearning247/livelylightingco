@@ -9,7 +9,7 @@ const About = () => {
 
   // Get content from database with fallbacks (strip HTML tags)
   const pageTitle = stripHtml(content.page_title || "About LivelyLightingCo");
-  const pageSubtitle = stripHtml(content.page_subtitle || "Austin's Premier Govee Permanent Lighting Installers");
+  const pageSubtitle = stripHtml(content.page_subtitle || "Govee-certified permanent outdoor lighting installers serving Texas and Oklahoma");
   const missionTitle = stripHtml(content.mission_title || "Our Mission");
   const missionText = stripHtml(content.mission_text || "To provide homeowners with beautiful, professional permanent lighting installations that enhance their homes year-round.");
   const serviceAreaTitle = stripHtml(content.service_area_title || "Service Area");
@@ -25,6 +25,10 @@ const About = () => {
         canonical="/about"
         title="About — Cedar Park, TX"
         description="Founded in Cedar Park, Texas. We design and install PermTrack permanent outdoor LED lighting for homes across the Austin metro. Lifetime PermTrack hardware warranty plus 5-year workmanship warranty."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
       />
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
