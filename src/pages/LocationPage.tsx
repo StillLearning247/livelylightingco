@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, Sun } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { getLocation, LOCATIONS } from "../data/locations";
 
@@ -108,8 +108,26 @@ const LocationPage = () => {
           </div>
         </div>
 
+        {/* UV-resistance emphasis — a core differentiator */}
+        <div className="max-w-3xl mt-10 flex items-start gap-4 rounded-2xl border border-brand-200 bg-brand-50 p-6">
+          <Sun className="h-8 w-8 text-brand-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="font-heading font-bold text-lg text-surface-900 mb-1">
+              Built to stand up to {loc.state} UV
+            </p>
+            <p className="text-surface-700">
+              The PermTrack mounting track is{" "}
+              <strong>rigid, UV-resistant PVC — the same kind of material used in
+              the vinyl window frames homeowners already trust to take decades of
+              sun</strong>. Intense {loc.state} UV won't yellow it, fade it, or
+              make it brittle the way it destroys temporary clip-on lights, so your
+              roofline stays clean and bright year after year.
+            </p>
+          </div>
+        </div>
+
         {/* Body sections */}
-        <div className="max-w-3xl mt-16 space-y-12">
+        <div className="max-w-3xl mt-12 space-y-12">
           {loc.sections.map((s) => (
             <section key={s.heading}>
               <h2 className="font-heading text-2xl font-bold text-surface-900 mb-3">

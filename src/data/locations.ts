@@ -193,7 +193,7 @@ export const LOCATIONS: LocationContent[] = [
       },
       {
         heading: "Built for Central Texas weather",
-        body: "Intense summer sun, high UV, and the odd hailstorm are hard on temporary lights. Permanent outdoor lighting is built to live outside through all of it — sealed, weather-rated LEDs in a rigid PVC PermTrack channel that's fastened to the home, not clipped on.",
+        body: "Intense summer sun, high UV, and the odd hailstorm are hard on temporary lights. Permanent outdoor lighting is built to live outside through all of it — sealed, weather-rated LEDs in a UV-resistant rigid PVC PermTrack channel that's fastened to the home, not clipped on.",
       },
     ],
     nearbyAreas: ["Cedar Park", "Liberty Hill", "Georgetown", "Round Rock"],
@@ -329,7 +329,7 @@ export const LOCATIONS: LocationContent[] = [
     sections: [
       {
         heading: "Built for Dallas weather — heat and ice",
-        body: "Dallas swings from triple-digit summers to winter ice storms, and both are brutal on temporary lights. Permanent outdoor lighting is engineered to stay put through it: sealed, weather-rated LEDs in a rigid PVC PermTrack channel that's mechanically fastened to the fascia, not clipped on.",
+        body: "Dallas swings from triple-digit summers to winter ice storms, and both are brutal on temporary lights. Permanent outdoor lighting is engineered to stay put through it: sealed, weather-rated LEDs in a UV-resistant rigid PVC PermTrack channel that's mechanically fastened to the fascia, not clipped on.",
       },
       {
         heading: "One install, every season",
@@ -368,7 +368,7 @@ export const LOCATIONS: LocationContent[] = [
       },
       {
         heading: "Built for North Texas weather",
-        body: "Fort Worth shares Dallas's swing from intense summer heat to winter ice. Permanent outdoor lighting uses sealed, weather-rated LEDs in a rigid PVC PermTrack channel fastened to the home, built to hold up where seasonal lights tear loose and fail.",
+        body: "Fort Worth shares Dallas's swing from intense summer heat to winter ice. Permanent outdoor lighting uses sealed, weather-rated LEDs in a UV-resistant rigid PVC PermTrack channel fastened to the home, built to hold up where seasonal lights tear loose and fail.",
       },
     ],
     nearbyAreas: ["Dallas", "Arlington", "Keller", "Southlake", "Mansfield"],
@@ -399,7 +399,7 @@ export const LOCATIONS: LocationContent[] = [
     sections: [
       {
         heading: "Built for the Gulf Coast",
-        body: "Houston's heat, humidity, heavy rain, and storm season are demanding on anything outdoors. Permanent outdoor lighting is sealed and weather-rated for exactly this, with a rigid PVC PermTrack channel fastened to the fascia so it stays put when temporary lights would sag, corrode, or blow loose.",
+        body: "Houston's heat, humidity, heavy rain, and storm season are demanding on anything outdoors. Permanent outdoor lighting is sealed and weather-rated for exactly this, with a UV-resistant rigid PVC PermTrack channel fastened to the fascia so it stays put when temporary lights would sag, corrode, or blow loose.",
       },
       {
         heading: "One install, every season",
@@ -434,7 +434,7 @@ export const LOCATIONS: LocationContent[] = [
     sections: [
       {
         heading: "Built for South Texas sun",
-        body: "San Antonio's long, hot season and strong UV quickly fade and brittle the plastic of seasonal lights. Permanent outdoor lighting uses sealed, UV-rated LEDs in a rigid PVC PermTrack channel color-matched to your trim, built to stay outside and keep looking clean year-round.",
+        body: "San Antonio's long, hot season and strong UV quickly fade and brittle the plastic of seasonal lights. Permanent outdoor lighting uses sealed, UV-rated LEDs in a UV-resistant rigid PVC PermTrack channel color-matched to your trim, built to stay outside and keep looking clean year-round.",
       },
       {
         heading: "From Stone Oak to the Hill Country edge",
@@ -508,7 +508,7 @@ export const LOCATIONS: LocationContent[] = [
       },
       {
         heading: "Built for Oklahoma weather",
-        body: "Norman's plains weather brings wind, storms, heat, and winter ice. Permanent outdoor lighting uses sealed, weather-rated LEDs in a rigid PVC PermTrack channel fastened to the home, built to hold up where temporary lights tear loose.",
+        body: "Norman's plains weather brings wind, storms, heat, and winter ice. Permanent outdoor lighting uses sealed, weather-rated LEDs in a UV-resistant rigid PVC PermTrack channel fastened to the home, built to hold up where temporary lights tear loose.",
       },
     ],
     nearbyAreas: ["Moore", "Oklahoma City", "Noble", "Newcastle"],
@@ -610,7 +610,7 @@ export const LOCATIONS: LocationContent[] = [
     sections: [
       {
         heading: "Built for Oklahoma weather",
-        body: "Oklahoma asks a lot of anything mounted outdoors — high winds, severe spring storms, summer heat, and winter ice. Permanent outdoor lighting is engineered to stay put and keep working: weather-sealed LEDs in a rigid PVC PermTrack channel that's fastened to the fascia, not clipped on.",
+        body: "Oklahoma asks a lot of anything mounted outdoors — high winds, severe spring storms, summer heat, and winter ice. Permanent outdoor lighting is engineered to stay put and keep working: weather-sealed LEDs in a UV-resistant rigid PVC PermTrack channel that's fastened to the fascia, not clipped on.",
       },
       {
         heading: "Expanding across the state",
