@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import cld from "../lib/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from "@cloudinary/url-gen/actions/delivery";
@@ -42,14 +42,14 @@ function getHiResUrl(publicId: string): string {
 
 /* ── Framer Motion variants ── */
 
-const gridContainerVariants = {
+const gridContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.06 },
   },
 };
 
-const gridItemVariants = {
+const gridItemVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.97 },
   visible: {
     opacity: 1,
