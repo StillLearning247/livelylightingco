@@ -115,9 +115,9 @@ export const ComparisonTable = () => {
     <section className="py-20 bg-surface-50 overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 max-w-3xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-surface-900 mb-4">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-surface-900 mb-4">
             How Lively + PermTrack stacks up
-          </h2>
+          </h1>
           <p className="text-lg text-surface-500">
             We pair your choice of premium smart LEDs — Govee, Asahom, Eufy, or
             Enbrighten — with our PermTrack mounting system, a lifetime hardware
