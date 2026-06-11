@@ -15,14 +15,22 @@ export const Testimonials = () => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
 
+  const len = testimonials.length;
+  // The global keydown listener below fires ArrowLeft/ArrowRight even while
+  // testimonials are still loading (len 0) — e.g. when the gallery lightbox is
+  // open. That previously made goTo compute a NaN index and crash on
+  // `active.rating`. safeIndex always resolves to a real item once data exists.
+  const safeIndex =
+    Number.isInteger(index) && index >= 0 && index < len ? index : 0;
+
   const goTo = (i: number, dir: 1 | -1 = 1) => {
+    if (len === 0) return; // nothing to navigate yet — avoids a NaN index
     setDirection(dir);
-    const len = testimonials.length;
     setIndex(((i % len) + len) % len); // safe modulo
   };
 
-  const next = () => goTo(index + 1, 1);
-  const prev = () => goTo(index - 1, -1);
+  const next = () => goTo(safeIndex + 1, 1);
+  const prev = () => goTo(safeIndex - 1, -1);
 
   // Keyboard nav: ← / →
   useEffect(() => {
@@ -70,7 +78,7 @@ export const Testimonials = () => {
     );
   }
 
-  const active = testimonials[index];
+  const active = testimonials[safeIndex];
 
   // Calculate aggregate rating for structured data
   const avgRating = testimonials.length > 0
@@ -147,7 +155,7 @@ export const Testimonials = () => {
               <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-xl p-8 md:p-10 min-h-[260px]">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
-                  key={index}
+                  key={safeIndex}
                   custom={direction}
                   variants={variants}
                   initial="enter"
@@ -188,7 +196,7 @@ export const Testimonials = () => {
 
             <div className="flex items-center gap-2">
               {testimonials.map((_, i) => {
-                const isActive = i === index;
+                const isActive = i === safeIndex;
                 return (
                   <button
                     key={`testimonial-dot-${i}`}
