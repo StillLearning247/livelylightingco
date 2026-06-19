@@ -34,8 +34,26 @@ we drop the vCita push and this becomes the only CRM destination.
 
 ## Activation steps
 
+### 0. Pre-flight (verify before activating)
+- [ ] **Prod parity** — confirmed live (2026-06-19): an unauthenticated probe of
+      `POST https://trellicrm.com/api/v1/leads` returns the exact `Missing API key`
+      message from this repo's `api-middleware.ts`, and the route's commit is on the
+      deployed `origin/master`. Re-verify only if Trelli prod diverges from master.
+- [ ] **`RESEND_FROM_EMAIL` is set in Trelli's Vercel _production_ env.** This is the
+      single point of failure for the admin email. If unset, `config.ts` falls back to
+      `onboarding@resend.dev` (Resend's shared sandbox → near-certain spam/block), and
+      because the send is in a never-throwing try/catch the failure is invisible. It's
+      set in Trelli's `.env.local`, so it's likely set in prod too — but local ≠ prod;
+      confirm in the Vercel dashboard (or `vercel env ls production`) before trusting
+      the smoke test. Note: the org-admin notification path does NOT have the hardcoded
+      `contact@trellicrm.com` fallback that some other Trelli senders use, so it's more
+      fragile than emails you've seen work.
+
 ### 1. In Trelli (one-time, UI only — no code change)
 - [ ] Sign in to `trellicrm.com` as the LivelyLighting org admin.
+- [ ] **Create the key under the correct org (LivelyLighting, NOT NiceAndClean).**
+      Leads and the admin notification land in whichever tenant owns the key — wrong
+      org = leads silently route into the wrong pipeline.
 - [ ] Settings → API keys → create a key named e.g. `LivelyLighting Website`.
 - [ ] Grant **only** the `leads:write` scope.
 - [ ] Copy the key (shown once) — it looks like `trelli_…`.
