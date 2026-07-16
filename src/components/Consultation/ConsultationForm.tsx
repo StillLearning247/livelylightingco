@@ -1,16 +1,17 @@
 import { useState, FormEvent, ChangeEvent, useRef } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { trackEvent } from "../../lib/analytics";
+import { AddressAutocomplete } from "./AddressAutocomplete";
 
 // Edit this list to add/remove referral source options.
 export const LEAD_SOURCES = [
-  "Home Show",
   "Google Search",
   "Facebook",
   "Instagram",
   "TikTok",
+  "YouTube",
   "Referral / Word of Mouth",
-  "Drove By / Saw Sign",
+  "Door Hanger / Flyer",
   "Other",
 ] as const;
 
@@ -51,15 +52,20 @@ export const ConsultationForm = ({
 
   const formStartedRef = useRef(false);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
+  // Central setter so both native fields and the address autocomplete share the
+  // same "form_start" analytics gate.
+  const setField = (name: keyof FormState, value: string) => {
     if (!formStartedRef.current && name !== "website") {
       formStartedRef.current = true;
       trackEvent("form_start", "/contact");
     }
     setFormState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setField(e.target.name as keyof FormState, e.target.value);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -171,16 +177,16 @@ export const ConsultationForm = ({
             htmlFor="address"
             className="block text-sm font-medium text-surface-700 mb-1"
           >
-            Address
+            Address *
           </label>
-          <input
-            type="text"
+          <AddressAutocomplete
             id="address"
             name="address"
+            required
             value={formState.address}
-            onChange={handleChange}
+            onValueChange={(value) => setField("address", value)}
             className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300"
-            placeholder="City/neighborhood is fine"
+            placeholder="Start typing your address…"
             disabled={status === "submitting"}
           />
         </div>
@@ -193,11 +199,12 @@ export const ConsultationForm = ({
             htmlFor="lead_source"
             className="block text-sm font-medium text-surface-700 mb-1"
           >
-            How did you hear about us?
+            How did you hear about us? *
           </label>
           <select
             id="lead_source"
             name="lead_source"
+            required
             value={formState.lead_source}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-brand-300 focus:border-brand-300 bg-white"
