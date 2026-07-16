@@ -6,7 +6,7 @@ import { loadPlacesLibrary } from "../../lib/googleMaps";
 // get results. Region is hard-limited to the US.
 const LOCATION_BIAS = {
   center: { lat: 30.2672, lng: -97.7431 },
-  radius: 80000, // meters (~50 mi)
+  radius: 50000, // meters (~31 mi) — the Places API caps circle radius at 50 km
 };
 const MIN_CHARS = 3;
 const DEBOUNCE_MS = 250;
