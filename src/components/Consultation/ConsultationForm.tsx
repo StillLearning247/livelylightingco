@@ -6,12 +6,12 @@ import { AddressAutocomplete } from "./AddressAutocomplete";
 // Edit this list to add/remove referral source options.
 export const LEAD_SOURCES = [
   "Google Search",
+  "YouTube",
   "Facebook",
+  "Door Hanger / Flyer",
   "Instagram",
   "TikTok",
-  "YouTube",
   "Referral / Word of Mouth",
-  "Door Hanger / Flyer",
   "Other",
 ] as const;
 
