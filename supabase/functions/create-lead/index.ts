@@ -59,7 +59,7 @@ const pushToTrelli = async (payload: LeadPayload): Promise<void> => {
     lastName: sanitize(payload.last_name),
     email: sanitize(payload.email),
     phone: sanitize(payload.phone),
-    source: "livelylighting.com",
+    source: "livelylightingco.com",
     notes: notes || undefined,
   };
 
@@ -127,7 +127,7 @@ Deno.serve(async (req) => {
       !payload.phone
     ) {
       throw new Error(
-        "Missing required fields: first name, last name, email, and phone are required"
+        "Missing required fields: first name, last name, email, and phone are required",
       );
     }
 
@@ -202,7 +202,7 @@ Deno.serve(async (req) => {
           "Content-Type": "application/json",
           ...corsHeaders,
         },
-      }
+      },
     );
   }
 });
