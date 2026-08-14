@@ -107,8 +107,8 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="w-full mx-auto flex justify-center">
           <div className="w-full max-w-[min(960px,90vw)]">
             <YouTubeLite
-              id="Q-BZ2rjHZgE"
-              title="Lively Lighting Co — Featured Install"
+              id="hc7M8_mRlXc"
+              title="PermTrack v2: Smarter, Easier, Faster Installs"
               ratio="16 / 9"
               className="w-full mt-1 mb-8"
             />
