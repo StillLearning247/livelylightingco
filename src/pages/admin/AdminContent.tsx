@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Save, Loader2, Check, FileText, Edit2, X } from "lucide-react";
+import { Loader2, Check, FileText, Edit2, X } from "lucide-react";
 import { useAllContent } from "../../hooks/useContent";
 import { RichTextEditor } from "../../components/admin/RichTextEditor";
 

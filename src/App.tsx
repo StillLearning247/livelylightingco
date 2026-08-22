@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
   useNavigate,
 } from "react-router-dom";
 import { useEffect } from "react";
@@ -31,26 +30,6 @@ import { AdminContent } from "./pages/admin/AdminContent";
 import { AdminTestimonials } from "./pages/admin/AdminTestimonials";
 import { AdminPromo } from "./pages/admin/AdminPromo";
 import { AdminAnalytics } from "./pages/admin/AdminAnalytics";
-
-// Helper to get session directly from localStorage (avoids hanging Supabase client)
-function getSessionFromStorage(): { userId: string; email: string; accessToken: string } | null {
-  try {
-    const keys = Object.keys(localStorage);
-    const authKey = keys.find((k) => k.startsWith("sb-") && k.endsWith("-auth-token"));
-    if (!authKey) return null;
-
-    const data = JSON.parse(localStorage.getItem(authKey) || "null");
-    if (!data?.user?.id || !data?.access_token) return null;
-
-    return {
-      userId: data.user.id,
-      email: data.user.email,
-      accessToken: data.access_token,
-    };
-  } catch {
-    return null;
-  }
-}
 
 // Handles redirecting after sign-out only (admins can freely browse the site while logged in)
 function AuthRedirector() {

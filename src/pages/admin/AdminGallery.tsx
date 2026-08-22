@@ -19,9 +19,9 @@ export const AdminGallery = () => {
   const displayImages = localImages || images;
 
   const handleUpload = () => {
-    // @ts-ignore - Cloudinary widget
+    // @ts-expect-error - Cloudinary widget
     if (window.cloudinary) {
-      // @ts-ignore
+      // @ts-expect-error - Cloudinary widget is loaded via script tag, not typed
       window.cloudinary.openUploadWidget(
         {
           cloudName: "dydz0lw6e",

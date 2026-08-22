@@ -126,7 +126,7 @@ test.describe('Gallery Admin Reordering', () => {
         const firstCard = cards[0] as HTMLElement;
         const secondCard = cards[1] as HTMLElement;
 
-        const createDragEvent = (type: string, target: Element) => {
+        const createDragEvent = (type: string, _target: Element) => {
           const event = new DragEvent(type, {
             bubbles: true,
             cancelable: true,
