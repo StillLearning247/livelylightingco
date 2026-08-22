@@ -78,8 +78,8 @@ export default function FloatingBanner({
       setSpacerH(el.getBoundingClientRect().height + reserveGapPx);
     update();
     let ro: ResizeObserver | undefined;
-    if ((window as any).ResizeObserver) {
-      ro = new (window as any).ResizeObserver(update);
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(update);
       if (ro) {
         ro.observe(el);
       }
@@ -221,7 +221,7 @@ function Marquee({
       className="group relative flex-1 overflow-hidden marquee-mask"
       style={
         { "--marquee-duration": `${duration}ms` } as React.CSSProperties &
-          Record<string, any>
+          Record<string, string>
       }
     >
       <div className="marquee-track group-hover:marquee-paused">

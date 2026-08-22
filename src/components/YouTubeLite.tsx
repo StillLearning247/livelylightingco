@@ -28,7 +28,7 @@ const YouTubeLite: React.FC<YouTubeLiteProps> = ({
   return (
     <div
       className={`relative w-full overflow-hidden rounded-xl shadow-lg ${className}`}
-      style={{ aspectRatio: ratio as any }}
+      style={{ aspectRatio: ratio }}
     >
       {playing ? (
         <iframe
