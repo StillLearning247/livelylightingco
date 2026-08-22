@@ -1,0 +1,49 @@
+name: CI
+
+# Runs the checks that `npm run build` cannot: esbuild strips types without
+# checking them, so a type error can reach main (and did - see #23) while every
+# build and deploy stays green.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A new push to a PR makes the in-flight run obsolete; don't pay for both.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: typecheck / lint / build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Matches NODE_VERSION in netlify.toml so CI and production agree.
+          node-version: '20'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # `tsc -b`. Note that a bare `tsc --noEmit` checks zero files here:
+      # tsconfig.json is a solution file ("files": [] plus references).
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Exits 0 with warnings; only errors fail the run.
+      - name: Lint
+        run: npm run lint
+
+      # `build:csr` (vite only), not the full `build`. The prerender step boots
+      # the real app in Chromium, and src/lib/supabase.ts throws at module load
+      # without VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY, which CI has no
+      # business holding. Netlify exercises the prerender on every deploy
+      # preview, so that path is covered where the secrets already live.
+      - name: Build
+        run: npm run build:csr
