@@ -11,14 +11,6 @@
 // fires. This avoids a timing race with `google.maps.importLibrary`, which is
 // not reliably defined at the script's `onload` event.
 
-declare global {
-  interface Window {
-    // Typed loosely on purpose — we don't pull in @types/google.maps.
-    google?: any;
-    [key: string]: any;
-  }
-}
-
 const MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as
   | string
   | undefined;

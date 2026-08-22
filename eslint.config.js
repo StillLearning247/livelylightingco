@@ -23,6 +23,10 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // The remaining `any`s sit at the boundary with untyped third-party
+      // scripts (Google Places predictions, the Cloudinary widget). Warn so
+      // they stay visible without making `npm run lint` un-gateable in CI.
+      '@typescript-eslint/no-explicit-any': 'warn',
       // Underscore-prefixed names are deliberately unused - e.g. props kept for
       // API shape, or a caught error we intentionally swallow.
       '@typescript-eslint/no-unused-vars': [

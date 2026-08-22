@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 // DEV-only: log CSP violations to the console
-if (import.meta.env.DEV && !(window as any).__cspLoggerAdded) {
+if (import.meta.env.DEV && !window.__cspLoggerAdded) {
   window.addEventListener(
     "securitypolicyviolation",
     (e: SecurityPolicyViolationEvent) => {
@@ -24,7 +24,7 @@ if (import.meta.env.DEV && !(window as any).__cspLoggerAdded) {
       console.groupEnd();
     }
   );
-  (window as any).__cspLoggerAdded = true; // avoid duplicates during HMR
+  window.__cspLoggerAdded = true; // avoid duplicates during HMR
 }
 
 createRoot(document.getElementById("root")!).render(

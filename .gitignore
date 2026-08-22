@@ -49,3 +49,6 @@ vite.config.ts.timestamp-*
 
 # Windows artifacts
 nul
+
+# Emitted by `tsc -b` when type-checking the project references
+*.tsbuildinfo
