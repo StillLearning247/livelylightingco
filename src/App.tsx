@@ -72,7 +72,7 @@ function AuthRedirector() {
 
 function App() {
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AdminProvider>
         <ScrollToTop />
         {/* lives inside Router so it can navigate */}
