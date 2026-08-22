@@ -1,0 +1,40 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      # Routine non-breaking bumps: one PR for prod, one for dev, so the
+      # queue stays small instead of one PR per package.
+      production-minor-patch:
+        applies-to: version-updates
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development-minor-patch:
+        applies-to: version-updates
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      # A burst of advisories lands as a single PR rather than one per
+      # package (four separate PRs the first time this was switched on).
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+    ignore:
+      # Majors are opt-in - react-router v6 -> v7 needed a hand-reviewed PR.
+      # This only gates version updates; a security fix that requires a major
+      # is still raised, since that needs "security-update:semver-major".
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
