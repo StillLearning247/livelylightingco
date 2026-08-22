@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -70,7 +70,7 @@ test('debug login process', async ({ page }) => {
     if (authKey) {
       try {
         authData = JSON.parse(localStorage.getItem(authKey) || '{}');
-      } catch (e) {}
+      } catch { /* malformed auth token — treat as absent */ }
     }
     return {
       keys,
