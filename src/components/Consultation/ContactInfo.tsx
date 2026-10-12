@@ -11,11 +11,11 @@ export const ContactInfo = () => {
           <h3 className="text-lg font-medium text-surface-900">Phone</h3>
           <p className="text-surface-500">
             <a
-              href="tel:+17374237246"
-              aria-label="Call us at (737) 423-7246"
+              href="tel:+5126018964"
+              aria-label="Call us at (512) 601-8964"
               className="hover:text-brand-400 transition-colors"
             >
-              (737)-423-7246
+              (512)-601-8964
             </a>
           </p>
         </div>
@@ -46,7 +46,8 @@ export const ContactInfo = () => {
         <div>
           <h3 className="text-lg font-medium text-surface-900">Service Area</h3>
           <p className="text-surface-500">
-            Proudly serving the Austin, TX metro — expanding across Texas and Oklahoma
+            Proudly serving the Austin, TX metro — expanding across Texas and
+            Oklahoma
           </p>
         </div>
       </div>
